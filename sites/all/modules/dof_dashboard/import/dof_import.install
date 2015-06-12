@@ -1,0 +1,160 @@
+<?php
+
+/**
+ * @file dof_import.install
+ *
+ * Handles the install, uninstall and updating of DOF
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function dof_import_schema() {
+  $schema['dof_dashb1_pillar1'] = array(
+    'fields' => array(      
+      'id'		    => array('type' => 'serial', 'unsigned' => TRUE,  'not null' => TRUE,),
+      'year'		    => array('type' => 'varchar', 'length' => 128, 'not null' => TRUE,),      
+      'month'		    => array('type' => 'varchar', 'length' => 128, 'not null' => TRUE,),      
+      'rank'		    => array('type' => 'varchar', 'length' => 128, 'not null' => TRUE,), 
+      'port'		    => array('type' => 'varchar', 'length' => 256,),
+      'category'	    => array('type' => 'varchar', 'length' => 256,),
+      'hs_code'		    => array('type' => 'varchar', 'length' => 256,),
+      'description'	    => array('type' => 'text', 'size' => 'medium', 'not null' => TRUE,),
+      'cif_value'	    => array('type' => 'varchar', 'length' => 256,),
+      'volume'		    => array('type' => 'varchar', 'length' => 256,),
+      'import_entries'	    => array('type' => 'varchar', 'length' => 256,),
+      'total_duties_taxes_collected'	    => array('type' => 'varchar', 'length' => 256,),
+      'collection_cif_value'	    => array('type' => 'varchar', 'length' => 256,),
+    ),
+    'primary key' => array('id'),
+  );
+
+  $schema['dof_dashb2_pillar1'] = array(
+    'fields' => array(      
+      'id'		    => array('type' => 'serial', 'unsigned' => TRUE,  'not null' => TRUE,),
+      'year'		    => array('type' => 'varchar', 'length' => 128, 'not null' => TRUE,),      
+      'month'		    => array('type' => 'varchar', 'length' => 128, 'not null' => TRUE,),            
+      'port'		    => array('type' => 'varchar', 'length' => 256,),
+      'cif_value'	    => array('type' => 'varchar', 'length' => 256,),
+      'distribution'	    => array('type' => 'varchar', 'length' => 256,),      
+      'volume'		    => array('type' => 'varchar', 'length' => 256,),
+      'distribution1'	    => array('type' => 'varchar', 'length' => 256,),
+      'cud_collected'	    => array('type' => 'varchar', 'length' => 256,),
+      'distribution2'	    => array('type' => 'varchar', 'length' => 256,),
+      'import_entries'	    => array('type' => 'varchar', 'length' => 256,),
+      'distribution3'	    => array('type' => 'varchar', 'length' => 256,),
+    ),
+    'primary key' => array('id'),
+  );
+
+
+  $schema['dof_dashb2_pillar1_2'] = array(
+    'fields' => array(      
+      'id'		    => array('type' => 'serial', 'unsigned' => TRUE,  'not null' => TRUE,),
+      'year'		    => array('type' => 'varchar', 'length' => 128, 'not null' => TRUE,),      
+      'month'		    => array('type' => 'varchar', 'length' => 128, 'not null' => TRUE,), 
+      'rank'		    => array('type' => 'int', 'not null' => TRUE, 'default' => 0,),       
+      'port'		    => array('type' => 'varchar', 'length' => 256,),
+      'importer'	    => array('type' => 'varchar', 'length' => 256,),     
+      'cif_value'	    => array('type' => 'int', 'size' => 'big', 'not null' => TRUE, 'default' => 0,),
+      'volume'		    => array('type' => 'int', 'size' => 'big', 'not null' => TRUE, 'default' => 0,),      
+      'cud_paid'	    => array('type' => 'int', 'size' => 'big', 'not null' => TRUE, 'default' => 0,),
+      'cud_as_of_cif_value' => array('type' => 'float', 'not null' => TRUE, 'default' => 0.0,),
+    ),
+    'primary key' => array('id'),
+  );
+
+
+  $schema['dof_dashb2_pillar2'] = array(
+    'fields' => array(      
+      'id'		    => array('type' => 'serial', 'unsigned' => TRUE,  'not null' => TRUE,),
+      'year'		    => array('type' => 'varchar', 'length' => 128, 'not null' => TRUE,),      
+      'month'		    => array('type' => 'varchar', 'length' => 128, 'not null' => TRUE,),            
+      'port'		    => array('type' => 'varchar', 'length' => 256,),
+      'cif_value'	    => array('type' => 'varchar', 'length' => 256,),
+      'distribution'	    => array('type' => 'varchar', 'length' => 256,),      
+      'volume'		    => array('type' => 'varchar', 'length' => 256,),
+      'distribution1'	    => array('type' => 'varchar', 'length' => 256,),
+      'cud_collected'	    => array('type' => 'varchar', 'length' => 256,),
+      'distribution2'	    => array('type' => 'varchar', 'length' => 256,),
+      'import_entries'	    => array('type' => 'varchar', 'length' => 256,),
+      'distribution3'	    => array('type' => 'varchar', 'length' => 256,),
+    ),
+    'primary key' => array('id'),
+  );
+
+  $schema['dof_dashb2_pillar2_2'] = array(
+    'fields' => array(      
+      'id'		    => array('type' => 'serial', 'unsigned' => TRUE,  'not null' => TRUE,),
+      'year'		    => array('type' => 'varchar', 'length' => 128, 'not null' => TRUE,),      
+      'month'		    => array('type' => 'varchar', 'length' => 128, 'not null' => TRUE,),      
+      'rank'		    => array('type' => 'varchar', 'length' => 128, 'not null' => TRUE,),       
+      'hs_code'		    => array('type' => 'varchar', 'length' => 256,),
+      'description'	    => array('type' => 'text', 'size' => 'medium', 'not null' => TRUE,),
+      'cif_value'	    => array('type' => 'varchar', 'length' => 256,),
+      'volume'		    => array('type' => 'varchar', 'length' => 256,),
+      'no_import_entries'   => array('type' => 'varchar', 'length' => 256,),
+      'cud_collected'       => array('type' => 'varchar', 'length' => 256,),      
+      'cud_as_of_cif_value' => array('type' => 'varchar', 'length' => 256,),
+    ),
+    'primary key' => array('id'),
+  );
+
+  $schema['dof_dashb2_pillar2_3'] = array(
+    'fields' => array(      
+      'id'		    => array('type' => 'serial', 'unsigned' => TRUE,  'not null' => TRUE,),
+      'year'		    => array('type' => 'varchar', 'length' => 128, 'not null' => TRUE,),      
+      'month'		    => array('type' => 'varchar', 'length' => 128, 'not null' => TRUE,),      
+      'rank'		    => array('type' => 'varchar', 'length' => 128, 'not null' => TRUE,),       
+      'hs_code_description' => array('type' => 'varchar', 'length' => 256,),
+      'importer'	    => array('type' => 'text', 'size' => 'medium', 'not null' => TRUE,),
+      'cif_value'	    => array('type' => 'varchar', 'length' => 256,),
+      'volume'		    => array('type' => 'varchar', 'length' => 256,),      
+      'cud_paid'       => array('type' => 'varchar', 'length' => 256,),       
+    ),
+    'primary key' => array('id'),
+  );
+
+
+  $schema['dof_dashb3_pillar1'] = array(
+    'fields' => array(      
+      'id'		    => array('type' => 'serial', 'unsigned' => TRUE,  'not null' => TRUE,),
+      'year'		    => array('type' => 'varchar', 'length' => 128, 'not null' => TRUE,),      
+      'month'		    => array('type' => 'varchar', 'length' => 128, 'not null' => TRUE,),            
+      'port'		    => array('type' => 'varchar', 'length' => 256,),
+      'cif_value'	    => array('type' => 'varchar', 'length' => 256,),
+      'distribution'	    => array('type' => 'varchar', 'length' => 256,),      
+      'volume'		    => array('type' => 'varchar', 'length' => 256,),
+      'distribution1'	    => array('type' => 'varchar', 'length' => 256,),
+      'total_duties_taxes_collected'	    => array('type' => 'varchar', 'length' => 256,),
+      'distribution2'	    => array('type' => 'varchar', 'length' => 256,),
+      'import_entries'	    => array('type' => 'varchar', 'length' => 256,),
+      'share_total_import_entries'	    => array('type' => 'varchar', 'length' => 256,),
+    ),
+    'primary key' => array('id'),
+  );
+
+  $schema['dof_dashb4_pillar1'] = array(
+    'fields' => array(      
+      'id'		    => array('type' => 'serial', 'unsigned' => TRUE,  'not null' => TRUE,),
+      'year'		    => array('type' => 'varchar', 'length' => 128, 'not null' => TRUE,),            
+      'category'	    => array('type' => 'varchar', 'length' => 256,),
+      'importers_brokers'   => array('type' => 'varchar', 'length' => 256,),
+      'cif_value'	    => array('type' => 'varchar', 'length' => 256,),      
+      'volume'		    => array('type' => 'varchar', 'length' => 256,),
+      'cud_paid'	    => array('type' => 'varchar', 'length' => 256,),      
+    ),
+    'primary key' => array('id'),
+  );
+
+  return $schema;
+}
+
+
+/**
+ * Implements hook_uninstall().
+ */
+function dof_import_uninstall() {
+  // Drop dof_import tables.
+  drupal_uninstall_schema('dof_import');
+}

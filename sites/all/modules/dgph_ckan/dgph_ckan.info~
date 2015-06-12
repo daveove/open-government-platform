@@ -1,0 +1,8 @@
+name = DGPH CKAN
+description = Drupal - CKAN integration tools for DataGovPh
+core = 7.x
+package = Diginnova
+
+
+stylesheets[all][] = css/dgph_ckan_style.css
+scripts[] = js/dgph_ckan_funcs.js

@@ -1,0 +1,9 @@
+; $Id: ched_import.info,v 1.2 2013/11/03 15:09:12 Sunil Exp $
+name = CHED Dashboard Import
+description = CHED Dashboard import routine.
+core = 7.x
+; Information added by drupal.org packaging script on 2013/11/03
+version = "7.x-1.0"
+core = "7.x"
+project = "CHED Dashboard"
+datestamp = "1251164703"

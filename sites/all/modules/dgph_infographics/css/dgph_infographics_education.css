@@ -1,0 +1,431 @@
+body.page-infographics-education .table-legend {
+    clear: both;
+    margin-top: 20px;
+}
+
+body.page-infographics-education .table-legend p {
+    color: #989898;
+    font-family: 'Roboto',sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+body.page-infographics-education tbody {
+    border-top: none;
+}
+
+body.page-infographics-education .agency {
+    padding: 0 0 0 15px !important;
+}
+
+body.page-infographics-education .agency p {
+    font-family: 'Roboto' !important;
+    font-size: 14px;
+    font-weight: normal;
+    width: 100%;
+}
+
+/** Search */
+
+body.page-infographics-education .search-con {
+    margin: 0;
+}
+
+body.page-infographics-education .search-con h3 {
+    border-bottom: 1px dotted #222222;
+    color: #555555;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 17px;
+    margin-bottom: 13px;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+}
+
+body.page-infographics-education .search-con .search-area {
+    background: none;
+}
+
+body.page-infographics-education .search-con .search-area .clander-search {
+    width: 198px;
+}
+
+body.page-infographics-education .school-con { width:100%; clear:both; float:left; display: none; }
+body.page-infographics-education .school-con span { display:block; width:100%; height:auto; clear:both; float:left; }
+body.page-infographics-education .school-con span a {
+    color: #464646;
+    display: block;
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    font-size: 13px;
+    padding: 15px 10px 15px 65px;
+    text-decoration: none;
+    border-left:1px solid #CCCCCC; border-right:1px solid #CCCCCC; border-bottom:1px solid #CCCCCC;
+    text-transform: uppercase;
+}
+
+body.page-infographics-education .school-con span.schoolId a{ background:url(../images/bid-con-img-2.png) no-repeat 7% 50% #fff; }
+body.page-infographics-education .school-con span.schoolName a{background:url(../images/bid-con-img-1.png) no-repeat 7% 50% #fff; }
+body.page-infographics-education .school-con span.schoolId a:hover{ background:url(../images/bid-con-img-2.png) no-repeat 7% 50% #ebebeb; }
+body.page-infographics-education .school-con span.schoolName a:hover{background:url(../images/bid-con-img-1.png) no-repeat 7% 50% #ebebeb; }
+
+body.page-infographics-education #accordion2 {
+    margin-top: 5px;
+}
+
+body.page-infographics-education ui-accordion .ui-accordion-content {
+    padding: 0;
+    height: inherit;
+}
+
+body.page-infographics-education .sort-title {
+    color: #555555;
+    font-family: 'Roboto',sans-serif;
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 13px;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+    border-bottom: 1px dotted #222222;
+    margin-top: 30px;
+    text-align: center;
+}
+
+body.page-infographics-education .sort-info {
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    font-size: 12px;
+    font-style: italic;
+    margin-top: 50px;
+}
+
+body.page-infographics-education .education-content { 
+    margin-top: 15px;
+}
+
+
+.page-infographics .ui-tooltip {
+    padding: 20px;
+    position: absolute;
+    z-index: 9999;
+    max-width: 160px !important;
+    height: 90px;
+    border: 0 none;
+    box-shadow: none;
+    background:url(../images/tooltip-bg.png) no-repeat !important;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 14px!important;
+    font-family: 'Roboto', sans-serif; 
+    font-weight: normal;
+}
+
+.page-infographics .ui-tooltip-content {
+    max-width: 120px !important;
+}
+
+.infographics-education-year-con{}
+.infographics-education-year-con span { float:right; display:block; font-size:14px; color:#414141; margin:115px 0 0;letter-spacing:1px; padding:0; font-family: 'Roboto', sans-serif !important; font-weight: normal; }
+
+.infographics-education-year-con .year { display:block; clear:both; float:right; } 
+.infographics-education-year-con .year a { background: url("../images/year-icon.png") no-repeat scroll 100% 50% transparent;clear: both;color: #414141;display: block;   float: right; font-size: 50px; margin: 10px 0 0 ; padding: 0 40px 0 0;  text-decoration: none;font-family: 'Roboto Condensed', sans-serif; font-weight: normal;letter-spacing:-2px;}
+
+.enrolment-con{ width:100%; float:left; clear:both; margin:20px 0 0;}
+.enrolment-con2 { margin: 2px 0 0 0px!important;}
+.enrolment-con table tr.enrolment-title{ background:#ffc425;}
+.enrolment-con table tr.enrolment-title   h3{ color:#272727; font-size:16px; font-family: 'Roboto', sans-serif !important; font-weight: bold; margin:0; padding:5px; text-align:center; }
+
+.enrolment-con  table tbody tr:nth-child(2n){ background:none!important;}
+.enrolment-con  table {background: none ;border-bottom: 1px dotted #222222;border-left:0!important;border-right: 0!important;border-top: 0!important;  border-radius:0!important; margin:0!important;}
+	
+.enrolment-con table tr.enrolment-text h2 { color:#272727; font-size:21px;  font-family: 'Roboto Condensed', sans-serif !important; font-weight: normal; margin:5px 0; padding:0; text-align:center;}
+.enrolment-con table tr.enrolment-text h2 a { color:#272727; font-weight: normal; }
+.enrolment-con table tr.enrolment-text h2 a:hover { font-weight: bold !important; }
+.enrolment-con table tr.enrolment-text h2 span{ color: #C2C2C2; font-family: 'Roboto Condensed', sans-serif !important; font-weight: normal; font-size:12px; margin:0; padding:0; text-align:center; display:block; clear:both;}
+.enrolment-con table tr.enrolment-text h2.school_name { font-family: 'Roboto', sans-serif !important;}
+
+.enrolment-con table tr.enrolment-text td{ border-left:1px dotted #222222;}
+.enrolment-con table tr.enrolment-text td.last-col {border-right:1px dotted #222222; }
+ 
+.enrolment-con2 table {border-bottom:0px;}
+.enrolment-con2 table tr.enrolment-title{ background:#272727;   }
+.enrolment-con2 table tr.enrolment-title td{ font-family: 'Roboto', sans-serif !important; font-weight: bold; text-align:center; color:#c2c2c2; text-transform:uppercase; font-size:12px; padding:20px 0; }
+.enrolment-con2 table tr.enrolment-title td span.male {background: url("../images/male.png") no-repeat scroll 0 50% transparent;display: block;margin: 0 auto; width: 65px;}
+.enrolment-con2 table tr.enrolment-title td span.female {background: url("../images/female.png") no-repeat scroll 0 50% transparent;display: block; margin: 0 auto;width: 80px;}
+.enrolment-con2 table tr.enrolment-text  h2{ color:#272727; font-size:26px;  font-family: 'Roboto Condensed', sans-serif !important; font-weight: normal; margin:15px 0; padding:0; text-align:center;font-weight:normal; line-height: 1.1em;}
+.enrolment-con2 table tr.enrolment-text  h2.first { font-size: 26px; }
+.enrolment-con2 table tr.enrolment-text td{ border-bottom:1px dotted #222222;}
+.enrolment-con2 table tr.enrolment-text td.last-col h2 { font-size: 21px; }
+
+.more{ width:100%; float:left; clear:both; margin:15px 0;}
+.more a{ border-top: 1px solid #999999;  background: url("../images/accro1.png") no-repeat scroll 0 60% transparent; text-decoration:none; color:#acacac; font-size:14px; font-weight:normal;font-family: 'Roboto Condensed', sans-serif !important; font-weight: bold; display:block; width:100%; padding:5px 0 0 25px; text-transform:uppercase; }
+
+
+.drop-menu{ margin:0; padding:0; float:left; display:block; width:100%;}
+.drop-menu li{ display:block; float:left; list-style:none;width:100%;}
+.drop-menu li ul{ display:none; width:100%; margin:0; padding:0;}
+.drop-menu li:hover ul{ display:block;}
+
+.enrolment-con3 { width:100%!important; margin: 2px auto 0 !important;}
+
+.enrolment-con3 table tr td h3{ padding:5px 0!important;}
+.enrolment-con3 table tr td { padding:0!important;}
+.enrolment-con3 table tr td table tr.title-table td h2{ font-size:14px; color:#fff; text-align:center; text-transform:uppercase; }
+.enrolment-con3 table tr td table tr.title-table{ background:#272727;}
+
+body.page-infographics-education td.grade-level { 
+    color: #FFFFFF;
+    background:#272727;
+    border-top: 1px dotted #FFFFFF;
+    border-right: 1px dotted #FFFFFF;
+    width: 16.67%;
+}
+
+body.page-infographics-education td.grade-level-first { 
+    border-left: none;
+}
+
+body.page-infographics-education td.grade-level-last { 
+    border-right: none;
+}
+
+.enrolment-con3 table tr td table tr td { text-align:center;}
+.enrolment-con3 table tr td table tr td span{ font-size:14px; padding:5px 0; display:block;}
+
+.enrolment-con3 table tr td table tr td.first-row{ border-left:none!important;}
+.enrolment-con3 table tr td table{ border-bottom:none!important;}
+
+.enrolment-con2 tr td table, .enrolment-con2 tr td table tr td{ margin:0!important; padding:0!important;}
+.enrolment-con2 tr td table tr td span{ margin:10px 0 0!important; display:block;}
+
+.title-con{ border-left: 1px solid #272727; background: none repeat scroll 0 0 #272727!important; }
+.title-con td span{color:#fff!important;}
+.title-con td { border-left:1px dotted #fff!important;}
+.title-con td.last-col { border-right:1px dotted #fff!important; }
+.title-con td .title-table td{ border-left:none!important; border-bottom:1px dotted #fff!important;}
+.sigal_text h2 { margin:22px 0 0!important;}
+.duble_text h2{ margin:15px 0 0!important;}
+.duble_text1 h2{margin:22px 0 0!important;}
+.duble_sigal_text1 h2{margin:15px 0 0!important;}
+.duble_sigal_text2 h2{margin:35px 0 0!important;}
+
+table.count tbody { border-top: none !important; }
+
+table.count tr td{ height:80px!important; border-bottom:none!important;}
+tr.enrolment-title td { border-left: 1px dotted #FFFFFF; }
+tr.enrolment-title td.first { border-left: 1px solid #222222; }
+tr.enrolment-header td { border-left: 1px solid #FFC425; }
+tr.enrolment-text3 td{ border-bottom:1px dotted #222222; margin:0 0 10px!important;  }
+tr.enrolment-text3 td h2{ color:#464646!important; font-size:16px!important;font-family: 'Roboto Condensed', sans-serif !important; font-weight: normal;}
+table.margin-line{ margin:0 0 10px!important;}
+table.margin-line tr td{ border-bottom:none!important; border-top:1px dotted #222222;}
+table.margin-line tr td table tr td{border-top:none!important;}
+
+h4.total{ 
+    color: #272727;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: normal;
+    font-size: 30px;
+    margin: 0px 0px;
+    padding: 0;
+    text-align: center;
+}
+h4.total a{ 
+    color: #272727;
+}
+
+td.last-col h4 {
+    font-size: 21px;
+}
+
+.text-con { width:100%; height:auto; clear:both;}
+.text-con p{font-family: 'Roboto Condensed', sans-serif !important; font-weight: normal; color:#b1b1b1; line-height:16px; font-size:13px;}
+.text-con p a{ text-decoration:none; color:#b1b1b1; line-height:16px; font-size:13px;}
+
+.edu-select-year {
+    position: absolute !important;
+    right: 0;
+    bottom: 0;
+}
+
+.alphabetically{ width:95%; height:auto; clear:both; float:none; padding-top: 15px;}
+.alphabetically h2{ float:left; font-size:16px; color:#272727;font-family: 'Roboto';font-weight: normal; margin:2px 20px 0 0;} 
+.alphabetically ul{ margin:0; padding:0;}
+.alphabetically ul li { display:block; float:left; list-style:none;}
+.alphabetically ul li a{ display:block; font-size:16px; color:#272727;font-family: 'Roboto Condensed', sans-serif !important; font-weight: normal; text-decoration:none; margin:0 5px} 
+.alphabetically ul li a:hover{ text-decoration:underline;}
+.alphabetically ul li a span{ color:#b0b0b0;}
+.alphabetically ul li a span:hover{color:#272727;}
+
+.expandable-item a:link h2 {
+    font-weight: normal;
+}
+
+.expandable-item a:hover h2 {
+    font-weight: bold !important;
+}
+
+.social-title { width:100%; clear:both; float:left; margin: 0px 0 20px 0;} 
+.social-title h2{ font-size:24px; font-weight:normal; color:#414142;font-family: 'Roboto', sans-serif !important; font-weight: bold; margin:0; padding:0; float:left; }
+    
+/** Media specific styles */
+
+
+@media only screen and (min-width: 768px) and (max-width: 1076px) {	
+    .infographics-education {}
+    .infographics-education h2{ font-size:35px; color:#414141; margin:20px 0 0; padding:0; font-family: 'Roboto Condensed', sans-serif !important; font-weight: normal;}
+    .infographics-education h3{ font-size:18px; color:#414141; margin:0 0 20px; padding:0; font-family: 'Roboto Condensed', sans-serif !important; font-weight: bold;}
+    .infographics-education p{ font-size:13px; color:#414141; margin:15px 0 0; padding:0; font-family: 'Roboto Condensed', sans-serif !important; font-weight: normal; line-height:16px; float:left; clear:both;}
+
+    .infographics-education-year-con{ margin:0 20px 0 0;}
+    .infographics-education-year-con span{ float:right; display:block; font-size:13px; color:#414141; margin:115px 0 0;letter-spacing:-1px; padding:0; font-family: 'Roboto Condensed', sans-serif; font-weight: normal; }
+
+    .infographics-education-year-con .year{ display:block; clear:both; float:right; } 
+    .infographics-education-year-con .year a{ background: url("../images/year-icon.png") no-repeat scroll 100% 50% transparent;clear: both;color: #414141;display: block;   float: right; font-size: 40px; margin: 10px 0 0 ; padding: 0 20px 0 0;  text-decoration: none;font-family: 'Roboto Condensed', sans-serif !important; font-weight: normal;letter-spacing:-2px;}
+
+    .national-rightside .search-con{ width:92%!important;}
+    .national-rightside .search-con .search-area{ width:100%!important;}
+    .national-rightside .search-con  h3{ font-size:16px!important;}
+
+    .enrolment-con{ width:98%; float:left; clear:both; margin:15px 0 0;}
+    .enrolment-con2 { margin:5px 0 0 0px!important;}
+    .enrolment-con table tr.enrolment-title{ background:#ffc425;}
+    .enrolment-con table tr.enrolment-title   h3{ color:#272727; font-size:16px; font-family: 'Roboto Condensed', sans-serif !important; font-weight: bold; margin:0; padding:0; text-align:center;}
+
+    .enrolment-con  table tbody tr:nth-child(2n){ background:none!important;}
+    .enrolment-con  table {background: none ;border-bottom: 1px dotted #222222;border-left:0!important;border-right: 0!important;border-top: 0!important;  border-radius:0!important; margin:0!important;}
+
+    .enrolment-con table tr.enrolment-text  h2{ color:#272727; font-size:21px;  font-family: 'Roboto Condensed', sans-serif !important; font-weight: normal; margin:5px 0; padding:0; text-align:center;}
+    .enrolment-con table tr.enrolment-text  h2 span{ color:#272727; font-size:12px;  font-family: 'Roboto Condensed', sans-serif !important; font-weight: normal;margin:0; padding:0; text-align:center; display:block; clear:both;}
+
+    .enrolment-con table tr.enrolment-text td{ border-left:1px dotted #222222;}
+    .enrolment-con table tr.enrolment-text td.last-col{border-right:1px dotted #222222;}
+
+    .enrolment-con2 table {border-bottom:0px;}
+    .enrolment-con2 table tr.enrolment-title{ background:#272727; }
+    .enrolment-con2 table tr.enrolment-title td{ text-align:center; color:#c2c2c2; text-transform:uppercase; font-size:12px; padding:20px 0; }
+    .enrolment-con2 table tr.enrolment-title td span.male {background: url("../images/male.png") no-repeat scroll 0 50% transparent;display: block;margin: 0 auto; width: 65px;}
+    .enrolment-con2 table tr.enrolment-title td span.female {background: url("../images/female.png") no-repeat scroll 0 50% transparent;display: block; margin: 0 auto;width: 80px;}
+    .enrolment-con2 table tr.enrolment-text  h2{ color:#272727; font-size:24px;  font-family: 'Roboto Condensed', sans-serif !important; font-weight: normal; margin:15px 0; padding:0; text-align:center;}
+    .enrolment-con2 table tr.enrolment-text td{ border-bottom:1px dotted #222222;}
+
+    .more{ width:98%; float:left; clear:both; margin:15px 0; overflow:hidden;}
+    .more a{ border-top: 1px solid #999999;  background: url("../images/accro1.png") no-repeat scroll 0 60% transparent; text-decoration:none; color:#acacac; font-size:14px; font-weight:normal;font-family: 'Roboto Condensed', sans-serif !important; font-weight: normal; display:block; width:100%; padding:5px 0 0 25px; text-transform:uppercase; }
+    .national-rightside #accordion2 h3.ui-state-default{ font-size:13px!important;}	
+    .social-title{ width:98%; clear:both; float:left; margin:0px 0 0;} 
+    .social-title h2{ font-size:24px; font-weight:normal; color:#414142;font-family: 'Roboto Condensed', sans-serif; font-weight: bold; margin:0; padding:0; float:left; }
+    .title{ font-size:15px;}
+    #accordion2 { width: 100% !important }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {	
+    .infographics-education  { width: 95%!important; margin: 0 auto;}
+    .infographics-education h2{ font-size:35px; color:#414141; margin:20px 0 0; padding:0; font-family: 'Roboto Condensed', sans-serif !important; font-weight: normal;}
+    .infographics-education h3{ font-size:18px; color:#414141; margin:0 0 20px; padding:0;font-family: 'Roboto Condensed', sans-serif !important; font-weight: bold;}
+    .infographics-education p{ font-size:13px; color:#414141; margin:15px 0 0; padding:0; font-family: 'Roboto Condensed', sans-serif !important; font-weight: normal; line-height:16px; float:left; clear:both;}
+
+    .infographics-education-year-con{ margin:0 20px 0 0;}
+    .infographics-education-year-con span{ float:right; display:block; font-size:13px; color:#414141; margin:35px 0 0;letter-spacing:-1px; padding:0; font-family: 'Roboto Condensed', sans-serif !important; font-weight: normal; }
+
+    .infographics-education-year-con .year{ display:block; clear:both; float:right; } 
+    .infographics-education-year-con .year a{ background: url("../images/year-icon.png") no-repeat scroll 100% 50% transparent;clear: both;color: #414141;display: block;   float: right; font-size: 40px; margin: 10px 0 0 ; padding: 0 20px 0 0;  text-decoration: none;font-family: 'Roboto Condensed', sans-serif !important; font-weight: normal;letter-spacing:-2px;}
+
+    .national-rightside .search-con{ width:95%!important; margin:0 auto; }
+    .national-rightside .search-con .search-area{ width:100%!important;}
+    .national-rightside .search-con  h3{ font-size:16px!important;}
+
+    .enrolment-con{ width:95%; float:none; clear:both; margin: 15px auto 0;}
+    .enrolment-con2 { width:95%!important; margin: 5px auto 0 !important;}
+    .enrolment-con table tr.enrolment-title{ background:#ffc425;}
+    .enrolment-con table tr.enrolment-title   h3{ color:#272727; font-size:14px; font-family: 'Roboto Condensed', sans-serif !important; font-weight: normal; margin:0; padding:5px; text-align:center;}
+
+    .enrolment-con  table tbody tr:nth-child(2n){ background:none!important;}
+    .enrolment-con  table {background: none ;border-bottom: 1px dotted #222222;border-left:0!important;border-right: 0!important;border-top: 0!important;  border-radius:0!important; margin:0!important;}
+
+    .enrolment-con table tr.enrolment-text  h2{ color:#272727; font-size:18px;  font-family: 'Roboto Condensed', sans-serif !important; font-weight: normal; margin:5px 0; padding:0; text-align:center;}
+    .enrolment-con table tr.enrolment-text  h2 span{ color:#272727; font-size:12px; font-family: 'Roboto Condensed', sans-serif !important; font-weight: normal; margin:0; padding:0; text-align:center; display:block; clear:both;}
+
+    .enrolment-con table tr.enrolment-text td{ border-left:1px dotted #222222;}
+    .enrolment-con table tr.enrolment-text td.last-col{border-right:1px dotted #222222;}
+
+    .enrolment-con2 table {border-bottom:0px;}
+    .enrolment-con2 table tr.enrolment-title{ background:#272727; }
+    .enrolment-con2 table tr.enrolment-title td{ text-align:center; color:#c2c2c2; text-transform:uppercase; font-size:11px; padding:20px 0;}
+    .enrolment-con2 table tr.enrolment-title td span.male {background: url("../images/male.png") no-repeat scroll 0 50% transparent;display: block;margin: 0 auto; width: 65px;}
+    .enrolment-con2 table tr.enrolment-title td span.female {background: url("../images/female.png") no-repeat scroll 0 50% transparent;display: block; margin: 0 auto;width: 80px;}
+    .enrolment-con2 table tr.enrolment-text  h2{ color:#272727; font-size:20px;  font-family: 'Roboto Condensed', sans-serif !important; font-weight: normal; margin:15px 0; padding:0; text-align:center;}
+    .enrolment-con2 table tr.enrolment-text td{ border-bottom:1px dotted #222222;}
+
+    .more{ width:95%; float:none; clear:both; margin:15px  auto; overflow:hidden;}
+    .more a{ border-top: 1px solid #999999;  background: url("../images/accro1.png") no-repeat scroll 0 60% transparent; text-decoration:none; color:#acacac; font-size:14px; font-weight:normal;font-family: 'Roboto Condensed', sans-serif; font-weight: bold; display:block; width:100%; padding:5px 0 0 25px; text-transform:uppercase; }
+    .national-rightside #accordion2 h3.ui-state-default{ font-size:13px!important;}	
+    .social-title{ width:95%; clear:both; float:none; margin:0px auto 0;} 
+    .social-title h2{ font-size:20px; font-weight:normal; color:#414142;font-family: 'Roboto Condensed', sans-serif; font-weight: bold; margin:5px 0 0; padding:0; float:left; } 
+
+    .national-rightside #accordion2 {clear: both; display: block; float:none; width: 95%; margin:0 auto;}
+    .dashboard-header { margin-bottom: 25px !important; }
+    .edu-select-year { position: relative !important; }
+    .footer-section .jetpack-image-container { text-align: left !important; }
+    #accordion2 { width: 100% !important }
+}
+
+@media only screen and (min-width: 200px) and (max-width: 479px) {
+    .infographics-education { width:95%!important; margin:0 auto;}
+    .infographics-education h2{ font-size:30px; color:#414141; margin:20px 0 0; padding:0; font-family: 'Roboto Condensed', sans-serif; font-weight: normal;}
+    .infographics-education h3{ font-size:14px; color:#414141; margin:0 0 10px; padding:0; font-family: 'Roboto Condensed', sans-serif; font-weight: bold;}
+    .infographics-education p{ font-size:12px; color:#414141; margin:15px 0 0; padding:0; font-family: 'Roboto Condensed', sans-serif; font-weight: normal; line-height:16px; float:left; clear:both;}
+
+    .infographics-education-year-con{ margin:0 20px 0 0;}
+    .infographics-education-year-con span{ float:right; display:block; font-size:13px; color:#414141; margin:15px 0 0;letter-spacing:-1px; padding:0; font-family: 'Roboto Condensed', sans-serif; font-weight: normal; }
+
+    .infographics-education-year-con .year{ display:block; clear:both; float:right; } 
+    .infographics-education-year-con .year a{ background: url("../images/year-icon.png") no-repeat scroll 100% 50% transparent;clear: both;color: #414141;display: block;   float: right; font-size: 30px; margin: 10px 0 0 ; padding: 0 20px 0 0;  text-decoration: none;font-family: 'Roboto Condensed', sans-serif; font-weight: normal;letter-spacing:-2px;}
+
+    .national-rightside{ margin:0 0!important; padding:0!important;}
+    .national-rightside .search-con{ width:95%!important; margin:0 auto; float:none;}
+    .national-rightside .search-con .search-area{ width:100%!important;}
+    .national-rightside .search-con  h3{ font-size:16px!important;}
+
+    .enrolment-con{ width:95%; float:none; clear:both; margin:15px auto 0;}
+    .enrolment-con2 { width:95%!important; margin:5px auto 0!important;}
+    .enrolment-con table tr.enrolment-title{ background:#ffc425;}
+    .enrolment-con table tr.enrolment-title   h3{ color:#272727; font-size:14px; font-family: 'Roboto Condensed', sans-serif; font-weight: normal; margin:0; padding:0; text-align:center;}
+
+    .enrolment-con  table tbody tr:nth-child(2n){ background:none!important;}
+    .enrolment-con  table {background: none ;border-bottom: 1px dotted #222222;border-left:0!important;border-right: 0!important;border-top: 0!important;  border-radius:0!important; margin:0!important;}
+
+    .enrolment-con table tr.enrolment-text  h2{ color:#272727; font-size:13px;  font-family: 'Roboto Condensed', sans-serif; font-weight: normal; margin:5px 0; padding:0; text-align:center;}
+    .enrolment-con table tr.enrolment-text  h2 span{ color:#272727; font-size:7px;  font-family: 'Roboto Condensed', sans-serif; font-weight: normal;margin:0; padding:0; text-align:center; display:block; clear:both;}
+
+    .enrolment-con table tr.enrolment-text td{ border-left:1px dotted #222222;}
+    .enrolment-con table tr.enrolment-text td.last-col{border-right:1px dotted #222222;}
+
+    .enrolment-con2 table {border-bottom:0px;}
+    .enrolment-con2 table tr.enrolment-title{ background:#272727; }
+    .enrolment-con2 table tr.enrolment-title td{ text-align:center; color:#c2c2c2; text-transform:uppercase; font-size:10px; padding:20px 0;}
+    .enrolment-con2 table tr.enrolment-title td span.male {background: url("../images/male.png") no-repeat scroll 0 50% transparent;display: block;margin: 0 auto; width: 65px;}
+    .enrolment-con2 table tr.enrolment-title td span.female {background: url("../images/female.png") no-repeat scroll 0 50% transparent;display: block; margin: 0 auto;width: 80px;}
+    .enrolment-con2 table tr.enrolment-text  h2{ color:#272727; font-size:14px; font-family: 'Roboto Condensed', sans-serif; font-weight: normal; margin:15px 0; padding:0; text-align:center;}
+    .enrolment-con2 table tr.enrolment-text td{ border-bottom:1px dotted #222222;}
+
+    .more{ width:95%; float:none; clear:both; margin:15px  auto; overflow:hidden;}
+    .more a{ border-top: 1px solid #999999;  background: url("../images/accro1.png") no-repeat scroll 0 60% transparent; text-decoration:none; color:#acacac; font-size:14px; font-family: 'Roboto Condensed', sans-serif; font-weight: bold; display:block; width:100%; padding:5px 0 0 25px; text-transform:uppercase; }
+    .national-rightside #accordion2 h3.ui-state-default{ font-size:13px!important;}	
+    .social-title{ width:95%; clear:both; float:none; margin:0px auto 0;} 
+    .social-title h2{ font-size:16px; font-weight:normal; color:#414142;font-family: 'Roboto Condensed', sans-serif; font-weight: bold; margin:5px 0 0; padding:0; float:none; text-align:center; display:block; } 
+
+    .national-rightside #accordion2 {clear: both; display: block; float:none; width: 95%; margin:0 auto;}
+
+    .enrolment-con table tr.enrolment-text td{ padding:10px 0!important;}
+    .enrolment-con3 table tr td table tr.title-table td h2{ font-size:11px;}
+    .enrolment-con3 table tr td table tr td span{ font-size:10px; padding: 0 2px;}
+    .enrolment-con table tr.enrolment-text h2{ font-size:11px!important;}
+    h4.total{ font-size:20px;}
+    table.count .duble_sigal_text2 h2{ margin:25px 0 0!important;}
+    .social-title .social-icon{ margin:0 auto!important; float:none!important; width:134px;}
+    .dashboard-header { margin-bottom: 12px !important; }
+    .edu-select-year { position: relative !important; }
+    .footer-section .jetpack-image-container { text-align: left !important; }
+    #accordion2 { width: 100% !important }
+}
+

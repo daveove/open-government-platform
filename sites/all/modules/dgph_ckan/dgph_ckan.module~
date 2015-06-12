@@ -1,0 +1,208 @@
+<?php
+	include_once('ext/ckan-client/Ckan_client.php');
+
+	define("CKAN_API_KEY", "62916618-dd10-4037-8368-5e3e129cbc16");
+	define("ROLE_ADMIN", "3");
+	define("ROLE_EDITOR", "4");
+
+    /**
+     * @file
+     * This module provides tools for integrating DataGovPh's Drupal component with the corresponding CKAN instance
+     */
+
+	/**
+     * Implementation of hook_theme().
+     */
+    function dgph_ckan_theme() {
+        return array(
+            'dgph_ckan_publishers' => array()
+        );
+    }
+
+	/**
+     * Implements hook_menu
+     */
+    function dgph_ckan_menu() {
+        $items['dataset/autocomplete'] = array(
+            'page callback' => 'dataset_autocomplete',
+            'access arguments' => array('post comments')
+        );
+		$items['publishers'] = array(
+            'page callback' => 'dgph_ckan_publishers',
+            'access callback' => true
+        );
+        return $items;
+    }
+
+	/**
+	 * Show the list of publishers
+	 */
+	function dgph_ckan_publishers() {
+		$pubs = array();
+		// load information about dataset publishers
+		db_set_active('ckan');
+	  	$res = db_select('public.package', 'p')
+				->fields('p', array('author'))
+				->distinct()
+				->orderBy('author')
+		  		->execute();
+		db_set_active();
+	  	foreach ($res as $row) {
+			$pubs[] = $row->author;
+	  	}
+		return theme('dgph_ckan_publishers', array('publishers' => $pubs));
+	}
+
+	/**
+     * Theme for publishers page
+     */
+    function theme_dgph_ckan_publishers(&$vars) {
+        drupal_set_title('Publishers');
+        $code = "<div class='publishers-container'>".
+					"<div id='publishers-nav' class='listNav'></div>".
+					"<ul id='publishers'>";
+		$pubs = $vars['publishers'];
+		foreach($pubs as $pub) {
+			if (!empty($pub)) {
+				$code .= "<li><a href='/catalogue/dataset?author=$pub'>$pub</a></li>";
+			}
+		}
+		$code .=	"</ul>".
+				"</div>".
+				"<script type='text/javascript'>jQuery(document).ready(dgph_ckan_init)</script>";
+        return $code;
+    }
+
+	/**
+	 * Datasets autocomplete helper
+	 * @param $search the search string
+	 */
+	function dataset_autocomplete($search = null) {
+  		$matches = array();
+		if ($search!=null && strlen($search)>=2) {
+			db_set_active('ckan');
+	  		$res = db_select('public.package', 'p')
+				->fields('p', array('name', 'title'))
+					->condition('state', 'active')
+					->condition('private', false)
+			  		->condition('title', '%'.db_like($search).'%', 'LIKE')
+			  		->execute();
+			db_set_active();
+	  		// gets matches
+	  		foreach ($res as $row) {
+				$matches[$row->name] = check_plain($row->title);
+	  		}
+		}
+  		// return the result to the form in json
+  		drupal_json_output($matches);
+	}
+
+    /**
+     * Implements user_login hook
+     */
+    function dgph_ckan_user_login(&$edit, $account) {
+        // set user login cookie for CKAN
+		setcookie('drupal_username', $account->name, time() + 3600*24*7, '/');
+    }
+
+    /**
+     * Implemets user_logout hook
+     */
+    function dgph_ckan_user_logout($account) {
+        // clear user login cookie for CKAN
+		setcookie('drupal_username', 'guest', time() + 3600*24*7, '/');
+    }
+
+	/**
+     * Implements user_insert hook
+     */
+    function dgph_ckan_user_insert(&$edit, $account, $category) {
+        // gets new user info
+		$uname = $edit['name'];
+		$email = $edit['mail'];
+		$firstName = $edit['field_first_name']['und'][0]['value'];
+		$lastName = $edit['field_last_name']['und'][0]['value'];
+		// creates the corresponding CKAN user
+		watchdog('dgph_ckan', "Creating CKAN user for $uname ...", array(), WATCHDOG_DEBUG);
+		$ckan = new Ckan_client(CKAN_API_KEY);
+		$params = array(
+				'name' => $uname,
+				'email' => $email,
+				'password' => $uname.'_dgph_ckan_12',
+				'fullname' => "$firstName $lastName"
+			);
+		try {
+			$res = $ckan->create_user($params);
+			if ($res) {
+				watchdog('dgph_ckan', "CKAN user for $uname has been created!", array(), WATCHDOG_DEBUG);
+			}
+			else {
+				watchdog('dgph_ckan', "Failed to create CKAN user for $uname!", array(), WATCHDOG_DEBUG);		
+			}
+		}
+		catch(Exception $e) {
+			watchdog('dgph_ckan', "Failed to create CKAN user for $uname: %msg!", 
+				array('%msg' => $e->getMessage()), WATCHDOG_DEBUG);
+		}
+    }
+
+
+    /**
+     * Implements user_update hook
+     */
+    function dgph_ckan_user_update(&$edit, $account, $category) {
+		$orgName = $account->original->name;
+		$uname = $edit['name'];
+		$email = $edit['mail'];
+		$firstName = $edit['field_first_name']['und'][0]['value'];
+		$lastName = $edit['field_last_name']['und'][0]['value'];
+		// updates the corresponding CKAN user
+		watchdog('dgph_ckan', "Updating CKAN user for $uname [formerly $orgName]...", array(), WATCHDOG_DEBUG);
+		$ckan = new Ckan_client(CKAN_API_KEY);
+		$params = array(
+				'id' => $orgName,
+				'name' => $uname,
+				'email' => $email,
+				'password' => $uname.'_dgph_ckan_12',
+				'fullname' => "$firstName $lastName"
+			);
+		try {
+			$res = $ckan->update_user($params);
+			if ($res) {
+				watchdog('dgph_ckan', "CKAN user for $uname has been updated!", array(), WATCHDOG_DEBUG);
+				$roles = $edit['roles'];
+				$sysadmin = 0;
+				watchdog('dgph_ckan', "CKAN user for $uname has been updated!", array(), WATCHDOG_DEBUG);
+				if (in_array(ROLE_ADMIN, $roles, TRUE) || in_array(ROLE_EDITOR, $roles, TRUE)) {
+					$sysadmin = 1;
+				}
+				// updates CKAN user role
+				db_set_active('ckan');
+				db_update('public.user')
+					->fields(array('sysadmin' => $sysadmin))
+					  ->condition('name', $uname)
+					  ->execute();
+				db_set_active();
+				watchdog('dgph_ckan', "CKAN user for $uname is now a ".(($sysadmin) ? "SYSADMIN" : "REGULAR USER")."!", array(), WATCHDOG_DEBUG);
+			}
+			else {
+				watchdog('dgph_ckan', "Failed to update CKAN user for $uname!", array(), WATCHDOG_DEBUG);		
+			}
+		}
+		catch(Exception $e) {
+			watchdog('dgph_ckan', "Failed to update CKAN user for $uname: %msg!", 
+				array('%msg' => $e->getMessage()), WATCHDOG_DEBUG);
+		}
+    }    
+
+	/**
+	 * Alter forms for content types which links to CKAN entities
+	 */
+	function dgph_ckan_form_alter(&$form, &$form_state, $form_id) {
+  		if (isset($form['type']) && $form['type']['#value'] . '_node_form' == $form_id) {
+    		$form['field_uses_dataset']['und'][0]['value']['#autocomplete_path'] = 'dataset/autocomplete';
+  		}
+}
+
+
+

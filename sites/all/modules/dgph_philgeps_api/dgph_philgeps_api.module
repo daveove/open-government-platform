@@ -1,0 +1,433 @@
+<?php
+    /**
+     * @file
+     * This module provides an API for external applications to interact with the PhilGEPS dashboard
+     */
+
+    define('DGPH_PHILGEPS_API_INCLUDE', 'include');
+    define('DGPH_PHILGEPS_PAGE_SIZE', 50);
+    define('HTTP_RESPONSE_OK', 200);
+     
+    include DGPH_PHILGEPS_API_INCLUDE.'/philgeps_api.inc';
+    include DGPH_PHILGEPS_API_INCLUDE.'/philgeps_central_client.inc';
+
+    /**
+     * Implements hook_permission().
+     */
+    function dgph_philgeps_api_permission() {
+        return array(
+                'procurement item create' => array(
+                  'title' => t('Procurement Item: Create new content'),
+                  'description' => t('Create a new procurement item via API.'),
+                ),
+                'procurement item view any item' => array(
+                  'title' => t('Procurement Item: view any item'),
+                  'description' => t('Allow user to fetch any procurement item via API.'),
+                ),
+                'procurement item view own items' => array(
+                  'title' => t('Procurement Item: view own items'),
+                  'description' => t('Allow user to fetch own procurement items via API.'),
+                ),
+                'procurement item edit any item' => array(
+                  'title' => t('Procurement Item: edit any item'),
+                  'description' => t('Allow user to edit any procurement item via API.'),
+                ),
+                'procurement item edit own items' => array(
+                  'title' => t('Procurement Item: edit own items'),
+                  'description' => t('Allow user to edit own procurement items via API.'),
+                ),
+                'procurement item delete any item' => array(
+                  'title' => t('Procurement Item: delete any item'),
+                  'description' => t('Allow user to delete any procurement item via API.'),
+                ),
+                'procurement item delete own items' => array(
+                  'title' => t('Procurement Item: delete own item'),
+                  'description' => t('Allow user to delete own procurement items via API.'),
+                ),
+            );
+    }
+    
+    /**
+     * Implements hook_cron().
+     */
+    function dgph_philgeps_api2_cron() {
+        $lastCron = variable_get('cron_last');
+        if( date('ym', $lastCron)!=date('ym', time())){
+            // updates procurement items for all agencies and previous month
+            $tm = strtotime('first day of previous month');
+            $year = date('Y', $tm);
+            $month = date('n', $tm);
+            /*philgeps_central_api_import_procurement_items($year, $month);*/
+        }
+    }
+
+    /**
+     * Implements elysia_cron().
+     */
+    /*function dgph_philgeps_api_cron($op, $job = NULL) {
+        $year = date('Y');
+        $month = date('n');
+        $day = date('d');
+
+        $items['dgph_philgeps_api_cron'] = array(
+                'description' => 'Send mail with news',
+                'rule' => '* 6 * * *',
+                'callback' => 'philgeps_central_api_import_procurement_items_ckan',
+                'arguments' => array($year, $month, $day),
+            );
+
+        return $items;
+    }*/
+
+    
+    /**
+     * Gets PhilGEPS agencies
+     * @return information about the philgeps agencies
+     */
+    function dgph_philgeps_api_get_agencies() {
+        $agencies = array();
+        $query = new EntityFieldQuery();
+        $query->entityCondition('entity_type', 'node')
+                    ->entityCondition('bundle', 'agency')
+                    ->propertyCondition('status', 1);
+        $res = $query->execute();
+        if (isset($res['node'])) {
+            $nids = array_keys($res['node']);
+            $agencies = entity_load('node', $nids);
+        }
+        return $agencies;
+    }
+    
+    /**
+     * Builds an API item from a procurement node
+     * @param $node the node
+     * @return the API item
+     */
+    function dgph_philgeps_api_build_item($node) {
+        $item = null;
+        if (!empty($node)) {
+            $item = array(
+                            PI_TITLE => $node->title,
+                            PI_AGENCY_ID => $node->field_agency['und'][0]['target_id'],
+                            PI_BID_REFERENCE_NUMBER => $node->field_bid_reference_number['und'][0]['value'],
+                            PI_DATE_POSTED => $node->field_date_posted['und'][0]['value'],
+                            PI_BID_CLASSIFICATION => $node->field_bid_classification['und'][0]['value'],
+                            PI_APPROVED_BUDGET => $node->field_approved_budget['und'][0]['value'],
+                            PI_FUNDING_SOURCE => $node->field_funding_source['und'][0]['value'],
+                            PI_PROCUREMENT_MODE => $node->field_procurement_mode['und'][0]['value'],
+                            PI_BID_STATUS => $node->field_bid_status['und'][0]['value'],
+                            PI_BID_STATUS_DATE => $node->field_bid_status_date['und'][0]['value'],
+                            PI_BID_STATUS_REASON => $node->field_bid_status_reason['und'][0]['value'],
+                            PI_NUMBER_OF_BIDDERS => $node->field_number_of_bidders['und'][0]['value'],
+                            PI_AWARDEE => $node->field_awardee['und'][0]['value'],
+                            PI_CONTRACT_AMOUNT => $node->field_contract_amount['und'][0]['value']
+                        );
+        }
+        return $item;
+    }
+    
+    /**
+     * Gets a procurement item
+     * @param int $id the procurement item identifier
+     * @return object the procurement item, or <code>null</code> if not found
+     */
+    function dgph_philgeps_api_get_item($id) {
+        $item = null;
+        try {
+            $node = node_load($id);
+            if ($node!=null) {
+                // creates the procurement item
+                $item = dgph_philgeps_api_build_item($node);
+            }
+        }
+        catch(Exception $e) {}
+        return $item;
+    }
+    
+    /**
+     * Gets a page of procurement items
+     * @param int $page page number
+     * @param array $params request parameters
+     * @return array the list of procurement items in this page
+     */
+    function dgph_philgeps_api_fetch($page, $params) {
+        $items = array();
+        try {
+            $startIdx = DGPH_PHILGEPS_PAGE_SIZE*($page-1);
+            $query= new EntityFieldQuery();
+            $query->entityCondition('entity_type', 'node')
+                        ->entityCondition('bundle', 'philgeps_procurement_item')
+                        ->range($startIdx, DGPH_PHILGEPS_PAGE_SIZE);
+            $res = $query->execute();
+            if (isset($res['node'])) {
+                $nids = array_keys($res['node']);
+                $nodes = entity_load('node', $nids);
+                foreach($nodes as $node) {
+                    $item = dgph_philgeps_api_build_item($node);
+                    if ($item) {
+                        $items[] = $item;
+                    }
+                }
+            }
+        }
+        catch(Exception $e) {}
+        return $items;
+    }
+    
+    /**
+     * Writes a procurement item to the database
+     * @param object $item the procurement item
+     */
+    function dgph_philgeps_api_write_item($item) {
+        $itemId = isset($item['id']) ? intval($item['id']) : 0;
+        try {
+            unset($item['id']);
+            if ($itemId>0) {
+                // load the node
+                $node = node_load($itemId);
+            }
+            else {
+                // creates a new node
+                $node = new stdClass();
+                $node->type = "philgeps_procurement_item";
+                node_object_prepare($node);
+                global $user;
+                $node->uid = $user->uid;
+                $node->language = LANGUAGE_NONE;
+            }
+            if ($node) {
+                // set node fields
+                if (array_key_exists(PI_AGENCY_ID, $item)) {
+                    $node->field_agency['und'][0]['target_id'] = $item[PI_AGENCY_ID];
+                }
+                if (array_key_exists(PI_APPROVED_BUDGET, $item)) {
+                    $node->field_approved_budget['und'][0]['value'] = intval($item[PI_APPROVED_BUDGET]);
+                }
+                if (array_key_exists(PI_AWARDEE, $item)) {
+                    $node->field_awardee['und'][0]['value'] = $item[PI_AWARDEE];
+                }
+                if (array_key_exists(PI_BID_CLASSIFICATION, $item)) {
+                    $node->field_bid_classification['und'][0]['value'] = $item[PI_BID_CLASSIFICATION];
+                }
+                if (array_key_exists(PI_BID_REFERENCE_NUMBER, $item)) {
+                    $node->field_bid_reference_number['und'][0]['value'] = $item[PI_BID_REFERENCE_NUMBER];
+                }
+                if (array_key_exists(PI_BID_STATUS, $item)) {
+                    $node->field_bid_status['und'][0]['value'] = $item[PI_BID_STATUS];
+                }
+                if (array_key_exists(PI_BID_STATUS_DATE, $item)) {
+                    $node->field_bid_status_date['und'][0]['value'] = $item[PI_BID_STATUS_DATE];
+                }
+                if (array_key_exists(PI_BID_STATUS_REASON, $item)) {
+                    $node->field_bid_status_reason['und'][0]['value'] = $item[PI_BID_STATUS_REASON];
+                }
+                if (array_key_exists(PI_CONTRACT_AMOUNT, $item)) {
+                    $node->field_contract_amount['und'][0]['value'] = is_numeric($item[PI_CONTRACT_AMOUNT]) ? $item[PI_CONTRACT_AMOUNT] : 0;
+                }
+                if (array_key_exists(PI_DATE_POSTED, $item)) {
+                    $tm = strtotime($item[PI_DATE_POSTED]);
+                    $node->field_date_posted['und'][0]['value'] = date("Y-m-d", $tm);
+                    $node->field_date_posted_year['und'][0]['value'] = date("Y", $tm);
+                    $node->field_date_posted_month['und'][0]['value'] = date("m", $tm);
+                }
+                if (array_key_exists(PI_FUNDING_SOURCE, $item)) {
+                    $node->field_funding_source['und'][0]['value'] = $item[PI_FUNDING_SOURCE];
+                }
+                if (array_key_exists(PI_NUMBER_OF_BIDDERS, $item)) {
+                    $node->field_number_of_bidders['und'][0]['value'] = intval($item[PI_NUMBER_OF_BIDDERS]);
+                }
+                if (array_key_exists(PI_PROCUREMENT_MODE, $item)) {
+                    $node->field_procurement_mode['und'][0]['value'] = $item[PI_PROCUREMENT_MODE];
+                }
+                if (array_key_exists(PI_TITLE, $item)) {
+                    $node->title = $item[PI_TITLE];
+                }
+                // saves the node
+                $node = node_submit($node);
+                if($node) {
+                    node_save($node);
+                }
+                $itemId = $node->nid;
+            }
+        }
+        catch(Exception $e) {}
+        return $itemId;
+    }
+    /**
+     * Deletes a procurement item
+     * @param int $id the procurement item identifier
+     */
+    function dgph_philgeps_api_delete_item($id) {
+        try {
+            if ($id>0) {
+                // deletes this node
+                node_delete($id);
+            }
+        }
+        catch(Exception $e) {}
+    }
+    
+    /**
+     * Access callback for procurement items
+     * @param string $op the operation that's going to be performed
+     * @param array $args the arguments that will be passed to the callback
+     * @return bool whether access is given or not
+     */
+    function dgph_philgeps_access($op, $args) {
+        $access = false;
+        switch ($op) {
+            case 'list':
+                $access = user_access('procurement item view any item');
+                break;
+            case 'create':
+                $access = user_access('procurement item create');
+                break;
+            case 'read':
+                $access = user_access('procurement item view own items');
+                break;
+            case 'update':
+                $access = user_access('procurement item edit own items');
+                break;
+            case 'delete':
+                $access = user_access('procurement item delete own items');
+                break;
+        }
+        return $access;
+    }
+    
+    /**
+     * Implements hook_services_resources().
+     */
+    function dgph_philgeps_api_services_resources() {
+        return array(
+                'procurement_item' => array(
+                    'retrieve' => array(
+                                'help' => 'Retrieves a procurement item',
+                                'callback' => '_procurement_item_retrieve',
+                                'access callback' => 'dgph_philgeps_access',
+                                'access arguments' => array('read'),
+                                'access arguments append' => TRUE,
+                                'args' => array(
+                                                array(
+                                                    'name' => 'id',
+                                                    'type' => 'int',
+                                                    'description' => 'The id of the procurement item to retrieve',
+                                                    'source' => array('path' => '0'),
+                                                    'optional' => FALSE
+                                                )
+                                        )
+                            ),
+                    'create' => array(
+                                'help' => 'Creates a procurement item',
+                                'callback' => '_procurement_item_create',
+                                'access callback' => 'dgph_philgeps_access',
+                                'access arguments' => array('create'),
+                                'access arguments append' => TRUE,
+                                'args' => array(
+                                                array(
+                                                    'name' => 'data',
+                                                    'type' => 'struct',
+                                                    'description' => 'The procurement item object',
+                                                    'source' => 'data',
+                                                    'optional' => FALSE
+                                                )
+                                        )
+                            ),
+                    'update' => array(
+                                'help' => 'Updates a procurement item',
+                                'callback' => '_procurement_item_update',
+                                'access callback' => 'dgph_philgeps_access',
+                                'access arguments' => array('update'),
+                                'access arguments append' => TRUE,
+                                'args' => array(
+                                                array(
+                                                    'name' => 'id',
+                                                    'type' => 'int',
+                                                    'description' => 'The id of the procurement item to update',
+                                                    'source' => array('path' => '0'),
+                                                    'optional' => FALSE
+                                                ),
+                                                array(
+                                                    'name' => 'data',
+                                                    'type' => 'struct',
+                                                    'description' => 'The procurement item object',
+                                                    'source' => 'data',
+                                                    'optional' => FALSE
+                                                )
+                                        )
+                            ),
+                    'delete' => array(
+                                'help' => 'Deletes a procurement item',
+                                'callback' => '_procurement_item_delete',
+                                'access callback' => 'dgph_philgeps_access',
+                                'access arguments' => array('delete'),
+                                'access arguments append' => TRUE,
+                                'args' => array(
+                                                array(
+                                                    'name' => 'id',
+                                                    'type' => 'int',
+                                                    'description' => 'The id of the procurement item to delete',
+                                                    'source' => array('path' => '0'),
+                                                    'optional' => FALSE
+                                                )
+                                        )
+                            ),
+                    'index' => array(
+                                'help' => 'Retrives a list of procurement items',
+                                'callback' => '_procurement_item_list',
+                                'access callback' => 'dgph_philgeps_access',
+                                'access arguments' => array('list'),
+                                'access arguments append' => TRUE,
+                                'args' => array(
+                                                array(
+                                                    'name' => 'page',
+                                                    'type' => 'int',
+                                                    'description' => '',
+                                                    'source' => array(
+                                                        'param' => 'page',
+                                                    ),
+                                                    'optional' => TRUE,
+                                                    'default value' => 1,
+                                                  ),
+                                                  array(
+                                                    'name' => 'params',
+                                                    'type' => 'array',
+                                                    'description' => '',
+                                                    'source' => 'param',
+                                                    'optional' => TRUE,
+                                                    'default value' => array(),
+                                                  )
+                                        )
+                            )
+                    )
+            );
+    }
+    
+    /**
+     * Implements hook_menu
+     */
+    function dgph_philgeps_api_menu() {
+        /*
+        $items['philgeps-api/example-client'] = array(
+            'page callback' => 'dgph_philgeps_api_example_client',
+            'access callback' => true,
+            'file' => DGPH_PHILGEPS_API_INCLUDE.'/philgeps_client.inc',
+            'type' => MENU_LOCAL_TASK
+        );
+        $items['philgeps-central-api/import-by-month'] = array(
+            'page callback' => 'philgeps_central_api_import_procurement_items',
+            'access callback' => true,
+            'file' => DGPH_PHILGEPS_API_INCLUDE.'/philgeps_central_client.inc',
+            'type' => MENU_LOCAL_TASK
+        );
+         */
+
+        $items['philgeps-central-api/import-all/%'] = array(
+            'page callback' => 'philgeps_central_api_import_procurement_items_ckan2',
+            'page arguments' => array(2),
+            'access callback' => true,
+            'file' => DGPH_PHILGEPS_API_INCLUDE.'/philgeps_central_client.inc',
+            'type' => MENU_LOCAL_TASK
+        );
+        return $items;
+    }

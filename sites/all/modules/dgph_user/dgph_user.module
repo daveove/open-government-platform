@@ -1,0 +1,125 @@
+<?php
+    /**
+     * @file
+     * This module provides custom tools for managing users
+     */
+
+     require_once(DRUPAL_ROOT.'/includes/password.inc');
+	
+    /**
+     * Implementation of hook_theme().
+     */
+    function dgph_user_theme() {
+        return array();
+    }
+    
+    /**
+     * Implements hook_menu
+     */
+    function dgph_user_menu() {
+        $items['user/update-basic'] = array(
+            'page callback' => 'dgph_user_update_basic',
+            'access arguments' => array('post comments')
+        );
+        $items['user/update-password'] = array(
+            'page callback' => 'dgph_user_update_password',
+            'access arguments' => array('post comments')
+        );
+        $items['user/update-picture'] = array(
+            'page callback' => 'dgph_user_update_picture',
+            'access arguments' => array('post comments')
+        );
+        return $items;
+    }
+    
+    /**
+     * Update basic user information
+     */
+    function dgph_user_update_basic() {
+        // get user information
+        global $user;
+        $userId = $user->uid;
+        $firstName = $_POST['field_first_name']['und'][0]['value'];
+        $lastName = $_POST['field_last_name']['und'][0]['value'];
+        $email = $_POST['mail'];
+        if (empty($firstName)) {
+            // missing first name
+            $_SESSION['dgph_last_error'] = 'missing first name';
+        }
+        else if (empty($lastName)) {
+            // missing last name
+            $_SESSION['dgph_last_error'] = 'missing last name';
+        }
+        else if (!valid_email_address($email)) {
+            // bad email format
+            $_SESSION['dgph_last_error'] = 'mail address format is not valid (expected: <i>name@host.domain</i>)';
+        }
+        else {
+            // check if email already exists
+            $usr = user_load_by_mail($email);
+            if ($usr && ($usr->uid!=$userId)) {
+                // duplicated email address
+                $_SESSION['dgph_last_error'] = 'email address already in use';
+            }
+            else {
+                // updates user account
+                $account = user_load($userId);
+                unset($account->pass);
+                $edit = (array) $account;
+                $edit['field_first_name']['und'][0]['value'] = $firstName;
+                $edit['field_last_name']['und'][0]['value'] = $lastName;
+                $edit['mail'] = $email;
+                user_save($user, $edit);
+            }
+        }
+        // redirects to user profile page
+        drupal_goto('user');
+    }
+    /**
+     * Update user password
+     */
+    function dgph_user_update_password() {
+        // get user information
+        global $user;
+        $userId = $user->uid;
+        $oldPassword = $_POST['old_password'];
+        $newPassword = $_POST['new_password'];
+        $newPasswordConfirm = $_POST['new_password_confirm'];
+        if (empty($newPassword) || empty($newPasswordConfirm) || ($newPassword!=$newPasswordConfirm)) {
+            $_SESSION['dgph_last_error'] = 'new password not properly confirmed';
+        }
+        else {
+            // check old password
+            $account = user_load($userId);
+            if (!user_check_password($oldPassword, $account)) {
+                $_SESSION['dgph_last_error'] = 'old password is incorrect';
+            }
+            else {
+                // updates user account
+                $edit = (array) $account;
+                $edit['pass'] = $newPassword;
+                user_save($user, $edit);
+            }
+        }
+        // redirects to user profile page
+        drupal_goto('user');
+    }
+    
+    /**
+     * Update user picture
+     */
+    function dgph_user_update_picture() {
+        // save the file to temporary folder
+        $pict = file_save_upload('files[picture_upload]', array(), 'temporary://');
+	if ($pict!==0) {
+            // update user account
+            global $user;
+            $userId = $user->uid;
+            $account = user_load($userId);
+            $edit = (array) $account;
+            $edit['picture'] = $pict;
+            user_save($user, $edit);
+	}
+        // redirects to user profile page
+        drupal_goto('user');
+    }

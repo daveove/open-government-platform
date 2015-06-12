@@ -1,0 +1,7 @@
+name = Customs Viz
+description = Customs Visualization for Data.Gov.Ph
+core = 7.x
+package = Insomniac
+dependencies[] = phpexcel
+stylesheets[all][] = css/customs-viz-common.css
+stylesheets[all][] = css/customs-viz-style.css

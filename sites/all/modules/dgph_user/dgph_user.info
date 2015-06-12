@@ -1,0 +1,4 @@
+name = DGPH User
+description = Provides custom tools for managing users
+core = 7.x
+package = Insomniac

@@ -1,0 +1,5 @@
+name = PhilGEPS API
+description = An API for external applications to interact with the PhilGEPS dashboard.
+core = 7.x
+package = Insomniac
+dependencies[] = services

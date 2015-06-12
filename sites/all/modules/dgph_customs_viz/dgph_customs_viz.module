@@ -1,0 +1,286 @@
+<?php
+    /**
+     * @file
+     * Implements the Customs Visualization module for Data.Gov.Ph
+     */
+
+    define("DGPH_CUSTOMS_VIZ_INCLUDE", "include");
+    define("DGPH_CUSTOMS_VIZ_LIBRARY", "library");
+    define("DGPH_CUSTOMS_VIZ_DASHBOARD_ID", 8);
+    
+    // views
+    define('VIEW_TOTAL_BOC', 1);
+    define('VIEW_PORT', 2);
+    define('VIEW_COMMODITY', 3);
+    define('VIEW_BROKERS_IMPORTERS', 4);
+    
+    // general categories
+    define('TOTAL_BOC_CIF_VALUE_VS_COLLECTIONS', 1);
+    define('TOTAL_BOC_COLLECTION_PERFORMANCE', 2);
+    define('TOTAL_BOC_IMPORT_ENTRIES', 3);
+    define('TOTAL_BOC_VOLUME_OF_IMPORTS', 4);
+    define('TOTAL_BOC_YOY_GROWTH', 5);
+    define('PORT_VIEW_CIF_VALUE_VS_COLLECTIONS', 6);
+    define('PORT_VIEW_COLLECTION_PERFORMANCE', 7);
+    define('PORT_VIEW_IMPORT_ENTRIES', 8);
+    define('PORT_VIEW_VOLUME_OF_IMPORTS', 9);
+    define('PORT_VIEW_YOY_GROWTH', 10);
+    define('COMMODITY_VIEW_IRON_AND_STEEL', 11);
+    define('COMMODITY_VIEW_MOTOR_VEHICLES', 12);
+    define('COMMODITY_VIEW_PLASTIC_RESINS', 13);
+    define('COMMODITY_VIEW_RICE', 14);
+    define('COMMODITY_VIEW_TOBACCO', 15);
+    define('BROKERS_IMPORTERS_VIEW', 16);
+    
+    // broker / importer view categories
+    define('BROKERS_IMPORTERS_VIEW_BROKERS', 1);
+    define('BROKERS_IMPORTERS_VIEW_IMPORTERS', 2);
+    
+    /**
+     * Implementation of hook_permission().
+     */
+    function dgph_customs_viz_permission() {
+        return array(
+            'administer customs viz' => array(
+                'title' => t('Administer Customs Viz'),
+                'description' => t('Perform administrative tasks on Customs Visualization Dashboard.'),
+            )
+        );
+    }
+
+    /**
+     * Implementation of hook_theme().
+     */
+    function dgph_customs_viz_theme() {
+        $modPath =  drupal_get_path('module', 'dgph_customs_viz');
+        return array(
+            'customs_viz' => array(
+                'variables' => array('dashb' => NULL),
+                'template' => 'customs-viz',
+                'path' => $modPath.'/theme'
+            ),
+            'port_view' => array(
+                'variables' => array('dashb' => NULL),
+                'template' => 'port-view',
+                'path' => $modPath.'/theme'
+            ),
+            'commodity_view' => array(
+                'variables' => array('dashb' => NULL),
+                'template' => 'commodity-view',
+                'path' => $modPath.'/theme'
+            ),
+            'brokers_importers_view' => array(
+                'variables' => array('dashb' => NULL),
+                'template' => 'brokers-importers-view',
+                'path' => $modPath.'/theme'
+            )
+        );
+    }
+    
+    /**
+     * Implements hook_menu
+     */
+    function dgph_customs_viz_menu() {
+        $items['infographics/customs-viz'] = array(
+            'page callback' => 'dgph_customs_viz_index',
+            'access callback' => true,
+            'file' => DGPH_CUSTOMS_VIZ_INCLUDE.'/dashboard.inc',
+            'type' => MENU_LOCAL_TASK
+        );
+        $items['infographics/customs-viz/import'] = array(
+            'page callback' => 'drupal_get_form',
+            'page arguments' => array('dgph_customs_viz_import_form', NULL),
+            'access arguments' => array('administer infographics'),
+            'file' => DGPH_CUSTOMS_VIZ_INCLUDE.'/import.inc',
+            'type' => MENU_LOCAL_TASK
+        );
+        $items['infographics/cviz-get-port-yoy-chart'] = array(
+            'page callback' => 'cviz_get_port_yoy_chart',
+            'access callback' => true,
+            'file' => DGPH_CUSTOMS_VIZ_INCLUDE.'/dashboard.inc',
+            'type' => MENU_LOCAL_TASK
+        );
+        return $items;
+    }
+    
+    /**
+     * Load supported ports
+     * @return array supported ports
+     */
+    function dgph_customs_viz_load_ports() {
+        $ports = array();
+        $query = db_select('node', 'n')
+                    ->fields('n', array('nid', 'title'))
+                    ->condition('n.status', 1)
+                    ->condition('n.type', 'customs_port')
+                    ->orderBy('n.title');
+        $res = $query->execute();
+        foreach($res as $row) {
+            // add this element to the result
+            $ports[$row->nid] = strtolower($row->title);
+        }
+        return $ports;
+    }
+    
+    /**
+     * Gets name of commodity by identifier
+     * @param int $commodityId commodity identifier
+     * @return commodity name
+     */
+    function dgph_customs_viz_commodity_name($commodityId) {
+        $names = array(
+            COMMODITY_VIEW_IRON_AND_STEEL => 'Iron And Steel',
+            COMMODITY_VIEW_MOTOR_VEHICLES => 'Motor Vehicles',
+            COMMODITY_VIEW_PLASTIC_RESINS => 'Plastic Resins',
+            COMMODITY_VIEW_RICE => 'Rice',
+            COMMODITY_VIEW_TOBACCO => 'Tobacco'
+        );
+        return (array_key_exists($commodityId, $names) ? $names[$commodityId] : '');
+    }
+    
+    /**
+     * Fetches information about Total BOC from the database
+     * @param int $year the target year
+     * @param int $cid the category identifier
+     * @return array monthly performances corresponding to the specified criterias, keyed by month
+     */
+    function dgph_customs_viz_fetch_total_boc($year, $cid) {
+        $perfs = array();
+        $query = db_select('cviz_total_boc', 'b')
+                    ->fields('b', array('month', 'value'))
+                    ->condition('b.year', $year)
+                    ->condition('b.category_id', $cid);
+        $res = $query->execute();
+        foreach($res as $row) {
+            $perfs[$row->month] = floatval($row->value);
+        }
+        return $perfs;
+    }
+    
+    /**
+     * Fetches information about Port View from the database
+     * @param int $year the target year
+     * @param int $portId the port node identifier
+     * @param int $cid the category identifier
+     * @return array monthly performances corresponding to the specified criterias, keyed by month
+     */
+    function dgph_customs_viz_fetch_port_view($year, $portId, $cid) {
+        $perfs = array();
+        $query = db_select('cviz_port_view', 'pv')
+                    ->fields('pv', array('month', 'value'))
+                    ->condition('pv.year', $year)
+                    ->condition('pv.port_nid', $portId)
+                    ->condition('pv.category_id', $cid);
+        $res = $query->execute();
+        foreach($res as $row) {
+            $perfs[$row->month] = floatval($row->value);
+        }
+        return $perfs;
+    }
+    
+    /**
+     * Fetches overall information for a Commodity View
+     * @param int $year the target year
+     * @param int $commodityId the commodity identifier
+     * @return array overall monthly performances corresponding to the commodity
+     */
+    function dgph_customs_viz_fetch_commodity_view_overall($year, $commodityId) {
+        $perfs = array();
+        $query = db_select('cviz_commodity_view_overall', 'cvo')
+                    ->fields('cvo', array('month', 'cif_value', 'volume', 'entries', 'customs_duties'))
+                    ->condition('cvo.year', $year)
+                    ->condition('cvo.category_id', $commodityId);
+        $res = $query->execute();
+        foreach($res as $row) {
+            $perfs[$row->month] = array(
+                                    'cif_value' => floatval($row->cif_value),
+                                    'volume' => floatval($row->volume),
+                                    'entries' => floatval($row->entries),
+                                    'customs_duties' => floatval($row->customs_duties)
+                                );
+        }
+        return $perfs;
+    }
+    
+    /**
+     * Fetches ports information for a Commodity View
+     * @param int $year the target year
+     * @param int $commodityId the commodity identifier
+     * @return array ports information for the view
+     */
+    function dgph_customs_viz_fetch_commodity_view_by_port($year, $commodityId) {
+        $perfs = array();
+        $query = db_select('cviz_commodity_view_by_port', 'cvp')
+                    ->fields('cvp', array('port_nid', 'port_name', 'cif_value', 'volume', 'entries', 'customs_duties'))
+                    ->condition('cvp.year', $year)
+                    ->condition('cvp.category_id', $commodityId);
+        $sort = isset($_GET['sort']) ? $_GET['sort'] : 'duties';
+        if ($sort==='cif') {
+            $query->orderBy('cvp.cif_value', 'desc');
+        }
+        else {
+            $query->orderBy('cvp.customs_duties', 'desc');
+        }
+        $res = $query->execute();
+        foreach($res as $row) {
+            $perfs[$row->port_nid] = array(
+                                    'port_name' => $row->port_name,
+                                    'cif_value' => floatval($row->cif_value),
+                                    'volume' => floatval($row->volume),
+                                    'entries' => floatval($row->entries),
+                                    'customs_duties' => floatval($row->customs_duties)
+                                );
+        }
+        return $perfs;
+    }
+    
+    /**
+     * Fetches top importers information for a Commodity View
+     * @param int $year the target year
+     * @param int $commodityId the commodity identifier
+     * @return array top importers information for the view
+     */
+    function dgph_customs_viz_fetch_commodity_view_top_importers($year, $commodityId) {
+        $perfs = array();
+        $query = db_select('cviz_commodity_view_top_importers', 'cvi')
+                    ->fields('cvi', array('rank', 'importer', 'cif_value', 'volume', 'entries', 'customs_duties'))
+                    ->condition('cvi.year', $year)
+                    ->condition('cvi.category_id', $commodityId)
+                    ->orderBy('cvi.rank');
+        $res = $query->execute();
+        foreach($res as $row) {
+            $perfs[$row->rank] = array(
+                                    'importer' => $row->importer,
+                                    'cif_value' => floatval($row->cif_value),
+                                    'volume' => floatval($row->volume),
+                                    'entries' => floatval($row->entries),
+                                    'customs_duties' => floatval($row->customs_duties)
+                                );
+        }
+        return $perfs;
+    }
+    
+    /**
+     * Fetches top brokers and importers information for a Brokers / Importers View
+     * @param int $year the target year
+     * @param int $typeId the type identifier
+     * @return array top brokers / importers information for the view
+     */
+    function dgph_customs_viz_fetch_brokers_importers_view($year, $typeId) {
+        $perfs = array();
+        $query = db_select('cviz_broker_importer_view', 'cvb')
+                    ->fields('cvb', array('rank', 'name', 'cif_value', 'volume', 'customs_duties'))
+                    ->condition('cvb.year', $year)
+                    ->condition('cvb.category_id', $typeId)
+                    ->orderBy('cvb.rank');
+        $res = $query->execute();
+        foreach($res as $row) {
+            $perfs[$row->rank] = array(
+                                    'name' => $row->name,
+                                    'cif_value' => floatval($row->cif_value),
+                                    'volume' => floatval($row->volume),
+                                    'customs_duties' => floatval($row->customs_duties)
+                                );
+        }
+        return $perfs;
+    }

@@ -1,0 +1,198 @@
+/* Used to alter styles for screens at 800px wide and below. */
+@media only screen and (max-width: 800px) {
+	#banner-container { padding-top: 10px;}
+}
+
+
+/* Used to alter styles for screens more than 1280px wide. */
+@media only screen and (max-width: 1280px) {	
+	.row {max-width: 63em !important;}
+
+		
+}
+/* Used to alter styles for screens more than 1440px wide. */
+@media only screen and (max-width: 1440px) {
+	.row {max-width: 66em !important;}
+	.orbit-container .orbit-slides-container > * .orbit-caption { position: relative !important; max-height: 120px; overflow: hidden;}	
+}
+/* Used to alter styles for screens more than 1680px wide. */
+@media only screen and (min-width: 1680px) {
+		.row {max-width: 90em !important;}
+}
+
+/* Used to alter styles for screens at least 768px wide. This is where the grid changes. */
+@media only screen and (min-width: 768px) {
+    .footer-section .jetpack-image-container { text-align: left; }
+}
+
+/* Used to alter styles for screens at least 1280px wide. */
+@media only screen and (min-width: 1280px) {
+	
+}
+
+/* Used to alter styles for screens at least 1440px wide. */
+@media only screen and (min-width: 1440px) {
+	
+}
+
+/* Apply styles to screens in landscape orientation */
+@media only screen and (orientation: landscape) {
+
+}
+
+/* Apply styles to screens in portrait orientation */
+@media only screen and (orientation: portrait) {
+	
+}
+
+
+/* #Kindle (Landscape)
+
+================================================== */
+
+    /* Note: Design for a width of 1025px */
+
+
+
+/*@media screen and (min-width: 1000px) and (max-width: 1139px) {*/
+
+@media only screen and (min-width: 1000px) and (max-width: 1139px) {
+
+
+
+/* 
+
+======================================================
+
+===================== HEADER TOP =====================
+
+======================================================
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+/* #Tablet (Portrait)
+
+================================================== */
+
+    /* Note: Design for a width of 768px */
+
+
+
+/*@media screen and (min-width: 768px) and (max-width: 1000px) {*/
+
+@media only screen and (min-width: 768px) and (max-width: 1000px) {
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+/* #iPhone 5 (Landscape)
+
+================================================== */
+
+    /* Note: Design for a width of 568px */
+
+
+
+/*@media screen and (min-width: 568px) and (max-width: 767px) {*/
+
+@media only screen and (min-width: 568px) and (max-width: 767px) {
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+/* #Mobile (Landscape)
+
+================================================== */
+
+    /* Note: Design for a width of 480px */
+
+
+
+/*@media screen and (min-width: 480px) and (max-width: 567px) {*/
+
+@media only screen and (min-width: 420px) and (max-width: 567px) {
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+/*  #Mobile (Portrait)
+
+================================================== */
+
+    /* Note: Design for a width of 320px */
+
+
+
+/*@media screen and (min-width: 320px) and (max-width: 419px) {*/
+
+@media only screen and (max-width: 419px) {
+
+
+
+
+
+
+
+
+
+
+}

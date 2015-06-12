@@ -1,0 +1,96 @@
+/** Header */
+
+.header {
+    text-align: left;
+    margin-bottom: 25px !important;
+}
+
+.header h1 {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: normal;
+    font-size: 40px;
+    text-transform: uppercase;
+}
+
+.header p {
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+}
+
+/** Map */
+
+#map {
+    width: 1100px;
+    height: 700px;
+    margin: 20px auto;
+}
+
+.historycal-dropdown {
+    background-color: #c67070;
+    color: #fff;
+    border: none;
+    width: auto;
+}
+
+.leaflet-control-layers-overlays label {
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #333333;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: normal;
+    margin-bottom: 0;
+    line-height: 26px;
+    text-transform: uppercase;
+}
+
+.leaflet-popup-content-wrapper {
+    overflow: auto;
+}
+
+.leaflet-popup-content h3 {
+    font-family: 'Roboto Condensed',sans-serif;
+    color: #5A82B4;
+    font-size: 1em;
+}
+
+.event-type,
+.event-date,
+.event-active-range,
+.event-description {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 16px;
+    margin-left: 100px;
+}
+
+.event-type {
+    text-transform:capitalize;
+}
+
+/** Footer */
+
+.footer {
+    text-align: left;
+    margin-bottom: 25px !important;
+}
+
+.footer h1 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    font-size: 12px;
+    color: #FFFFFF;
+    background-color: #C16A69;
+    width: 160px;
+    text-align: center;
+    padding: 10px;
+}
+
+.footer p {
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    font-size: 12px;
+}
+
+.footer-last {
+    margin-bottom: 150px !important;
+}

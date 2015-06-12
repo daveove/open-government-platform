@@ -1,0 +1,39 @@
+/** PhilGEPS Feedback */
+
+body.page-infographics-philgeps-feedback div.feedback-title {
+    color: #444444;
+    font-family: 'Roboto',sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+
+body.page-infographics-philgeps-feedback div.feedback-stats {
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+body.page-infographics-philgeps-feedback div.feedback-stats div.total {
+    float: left;
+    width: 10%;
+}
+
+body.page-infographics-philgeps-feedback div.feedback-stats div.published {
+    margin-left: 10%;
+}
+
+body.page-infographics-philgeps-feedback div.page-console-links {
+    margin: 0 auto;
+    max-width: 71.2em;
+    width: 100%;
+}
+
+body.page-infographics-philgeps-feedback div.page-console-links ul {
+    list-style-type: none;
+}
+
+body.page-infographics-philgeps-feedback div.page-console-links ul li {
+    list-style-type: none;
+    display: inline;
+}

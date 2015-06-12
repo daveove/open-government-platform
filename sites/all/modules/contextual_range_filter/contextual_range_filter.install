@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Install and uninstall hooks for the Contextual Range Filter module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function contextual_range_filter_install() {
+  return;
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function contextual_range_filter_uninstall() {
+  db_query("DELETE FROM {variable} WHERE name LIKE 'contextual_range_filter%%'");
+}
+

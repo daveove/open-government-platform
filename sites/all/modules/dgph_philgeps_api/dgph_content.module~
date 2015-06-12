@@ -1,0 +1,113 @@
+<?php
+    /**
+     * @file
+     * This module provides content customization tools
+     */
+
+	
+    /**
+     * Implements hook_block_info().
+     */
+    function dgph_content_block_info() {
+        $blocks = array();
+        $blocks['dgph_content_latest_datasets'] = array(
+            'info' => t('DGPH Latest Datasets')
+        );
+        return $blocks;
+    }
+
+    /**
+     * Build content for "latest datasets" block
+     * @return array the block content
+     */
+    function get_latest_datasets_block() {
+		// fetch the latest datasets information from CKAN
+		$host = $_SERVER['SERVER_NAME'];
+		$url = "http://$host/catalogue/api/action/current_package_list_with_resources";
+		$params = 'limit=4&page=1';
+		$options = array(
+        	'method' => 'GET',
+        	'data' => $params
+        );
+		$res = drupal_http_request($url, $options);
+		$entries = array();
+		$errMsg = '';
+		if ($res->code==200) {
+			$jres = drupal_json_decode($res->data);
+			if ($jres['success']) {
+				$entries = $jres['result'];
+			}
+			else {
+				$errMsg = 'Data not available at the moment!';
+			}
+		}
+		else {
+			$errMsg = 'Data not available at the moment!';
+		}
+		$block = array();
+		$block['ld_start'] = array(
+                '#prefix' => '<div class="dgph_latest_datasets_container">',
+                '#type' => 'markup',
+                '#markup' => $errMsg
+            );
+		foreach($entries as $idx=>$entry) {
+			$author = $entry['author'];
+			$title = $entry['title'];
+			$name = $entry['name'];
+			$markup = 	"<p><a href='/catalogue/dataset/$name'>$title</a></p>".
+						"<p>Published by <i>$author</i></p>";
+			$block["ld_entry_$idx"] = array(
+                	'#prefix' => '<div class="dgph_latest_dataset">',
+                	'#type' => 'markup',
+                	'#markup' => $markup,
+					'#suffix' => '</div>'
+            	);
+		}
+		$block['ld_end'] = array(
+                '#type' => 'markup',
+                '#markup' => '<div class="search-data"><a href="#">Search data</a></div>',
+				'#suffix' => '</div>'
+            );
+        return $block;
+	}
+
+    /**
+     * Implements hook_block_view().
+     */
+    function dgph_content_block_view($delta='') {
+		$blockContent = array();
+		switch($delta) {
+            case 'dgph_content_latest_datasets':
+				$blockContent = get_latest_datasets_block();
+            break;
+        }
+        $block = array('content' => $blockContent);
+        return $block;
+    }
+
+    /**
+     * Implements hook_form_alter()
+     */
+    function dgph_content_form_alter(&$form, &$form_state, $form_id) {
+        if ($form_id=='application_node_form') {
+            $user = user_uid_optional_load();
+            $submitterName = '';
+            if (isset($user->field_first_name['und'])) {
+                $submitterName .= $user->field_first_name['und'][0]['value'];
+            }
+            if (isset($user->field_last_name['und'])) {
+                $submitterName .= ' '.$user->field_last_name['und'][0]['value'];
+            }
+            $submitterEmail = $user->mail;
+            $form['field_submitter_name']['und'][0]['value']['#default_value'] = $submitterName;
+            $form['field_submitter_email']['und'][0]['value']['#default_value'] = $submitterEmail;
+        }
+		else if ($form_id=='data_request_node_form') {
+			$nid = $form['nid']['#value'];
+			if (empty($nid)) {
+				// disable status field
+file_put_contents("/tmp/content.txt", print_r($form['field_status'], true));
+				$form['field_status']['#disabled'] = true;
+			}
+        }
+    }

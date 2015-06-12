@@ -1,0 +1,7 @@
+
+name = DGPH Forum
+description = Custom style for DataGovPh forums.
+version = 1.0
+base style = naked
+core = 7.x
+

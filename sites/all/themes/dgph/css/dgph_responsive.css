@@ -1,0 +1,593 @@
+/* #Kindle (Landscape)
+================================================== */
+    /* Note: Design for a width of 1025px */
+
+/*@media screen and (min-width: 1000px) and (max-width: 1139px) {*/
+@media only screen and (min-width: 1000px) and (max-width: 1139px) {
+
+/* 
+======================================================
+===================== HEADER TOP =====================
+======================================================
+*/
+.block-system-main-menu ul.menu li a {
+    font-size:14px;
+    line-height:42px;
+    padding:0px 11px 0px 11px;
+}
+.forum-wrap .forum-headers .columns img,
+.forum-table-topics .forum-topics-headers .columns img{
+    display:none;    
+}
+.block-system-main-menu ul.menu li.first span {
+    padding:12px 0px 11px 11px;
+}
+.block-search-form .form-item .form-text{
+    width:180px;
+}
+
+
+
+
+
+
+}
+
+
+
+/* #Tablet (Portrait)
+================================================== */
+    /* Note: Design for a width of 768px */
+
+/*@media screen and (min-width: 768px) and (max-width: 1000px) {*/
+@media only screen and (min-width: 768px) and (max-width: 1000px) {
+
+/* 
+======================================================
+============ Alter the foundation 4 engine============
+======================================================
+*/
+#header-top .nine.columns{
+    width: 78%;
+}
+#header-top .three.columns{
+    width: 22%;
+}
+/* 
+======================================================
+===================== HEADER TOP =====================
+======================================================
+*/
+.block-system-main-menu ul.menu li a {
+    font-size:12px;
+    line-height:42px;
+    padding:0px 5px 0px 5px;
+}
+.block-system-main-menu ul.menu li.first span {
+    padding:12px 0px 12px 5px;
+}
+.block-search-form .form-item .form-text{
+    width:100px;
+}
+
+
+/* 
+======================================================
+===================== Blog Template ==================
+======================================================
+*/
+.block-views-slide-show-fade-block .views-slideshow-controls-bottom {
+	margin-top:-1px;
+}
+.block-views-slide-show-fade-block .views-field-title{
+    margin-top:-73px;
+    padding:10px 15px 20px 15px;
+}
+.block-views-slide-show-fade-block .views-field-title p{
+    display:none;
+}
+
+
+/* 
+======================================================
+===================== Forum Category =================
+======================================================
+*/
+.forum-wrap .forum-headers .columns,
+.forum-table-topics .forum-topics-headers .columns{
+    font-size:11px;
+}
+.forum-wrap .forum-headers .columns img,
+.forum-table-topics .forum-topics-headers .columns img{
+	display:none;
+}
+.forum-wrap .columns.forum-details .forum-img-icon{
+    width: 22%;            
+}
+.forum-wrap .columns.forum-details .forum-container{
+    width: 78%;   
+}
+
+
+
+
+
+
+}
+
+
+/* #iPhone 5 (Landscape)
+================================================== */
+    /* Note: Design for a width of 568px */
+
+/*@media screen and (min-width: 568px) and (max-width: 767px) {*/
+@media only screen and (min-width: 568px) and (max-width: 767px) {
+
+#main h1.title{   
+    font-size:35px;
+}
+/* 
+======================================================
+===================== HEADER TOP =====================
+======================================================
+*/
+.block-system-main-menu ul.menu li{
+    margin-top:10px;
+}
+.block-system-main-menu ul.menu li a {
+    font-size:13px;
+    line-height:30px;
+    padding:0px 12px 0px 12px;
+    border:1px solid #333;
+    background:none;
+}
+.block-system-main-menu ul.menu li a span{
+    padding:1px 0px 1px 0px;
+}
+.block-system-main-menu ul.menu li.first span {
+    padding:1px 0px 1px 12px;
+    background:none;
+}
+
+
+/* 
+======================================================
+===================== Blog Template ==================
+======================================================
+*/
+.block-views-slide-show-fade-block .views-slideshow-controls-bottom {
+	margin-top:-1px;
+}
+.block-views-slide-show-fade-block .views-field-title{
+    margin-top:-73px;
+    padding:10px 15px 20px 15px;
+}
+.block-views-slide-show-fade-block .views-field-title p{
+    display:none;
+}
+.three.bloglisting{
+    width:50%;
+}
+.blog-detailpage .container{
+    padding-right:0px;
+}
+
+
+/* 
+======================================================
+===================== Forum Category =================
+======================================================
+*/
+.forum-wrap .forum-headers .two.columns,
+.forum-table-topics .forum-topics-headers .two.columns,
+.forum-wrap .odd .two.columns,
+.forum-wrap .even .two.columns,
+.forum-table-topics .odd .two.columns,
+.forum-table-topics .even .two.columns,
+.forum-table-topics .odd .columns.views-field-name,
+.forum-table-topics .even .columns.views-field-name{
+    display:none;
+}
+.forum-table-topics .odd .six.columns,
+.forum-table-topics .even .four.columns,
+.forum-table-topics .odd .four.columns,
+.forum-table-topics .even .six.columns{
+    width:100% !important;  
+}
+.forum-wrap .columns.forum-details .forum-img-icon{
+    width: 12%;
+}
+.forum-wrap .columns.forum-details .forum-container{
+    width: 88%;
+}
+
+
+/* 
+======================================================
+===================== Apps listing view ==============
+======================================================
+*/
+.view-id-application.view-display-id-page .view-header .leftcolumn{
+    padding-right:0px; 
+    border-right:none;  
+    border-bottom:1px solid #272727;     
+}
+.view-id-application.view-display-id-page .view-header .rightcolumn{
+    padding-top:15px;
+}
+.view-id-application.view-display-id-page .views-row.views-row-odd{
+    width:100%;
+    margin-right:0%;
+}
+.view-id-application.view-display-id-page .views-row.views-row-even{
+    width:100%;
+    margin-left:0%;
+}
+/* 
+======================================================
+====================== Apps Forum ====================
+======================================================
+*/
+body.page-node-add-application h1.title,
+body.page-node-edit.node-type-application h1.title,
+body.page-node-edit.node-type-application ul.tabs{
+    margin-left:0px !important;
+}
+#application-node-form{
+    margin-left:0px;
+    padding-top:5px;
+}
+
+/* 
+======================================================
+===================== User Login Page  ===============
+======================================================
+*/
+.login-con-area .two.columns{
+    display:none;    
+}
+.login-con-area .login-left {
+    margin-left:5%;
+    margin-right:5%;
+}
+.login-con-area .login-right {
+    margin: 5%;
+}
+.login-con-area .facebooklogin {
+	margin-right:90px;
+}
+
+
+
+
+
+
+}
+
+
+/* #Mobile (Landscape)
+================================================== */
+    /* Note: Design for a width of 480px */
+
+/*@media screen and (min-width: 480px) and (max-width: 567px) {*/
+@media only screen and (min-width: 420px) and (max-width: 567px) {
+
+#main h1.title{   
+    font-size:30px;
+}
+/* 
+======================================================
+===================== HEADER TOP =====================
+======================================================
+*/
+.block-system-main-menu ul.menu li{
+    margin-top:10px;
+}
+.block-system-main-menu ul.menu li a {
+    font-size:13px;
+    line-height:30px;
+    padding:0px 12px 0px 12px;
+    border:1px solid #333;
+    background:none;
+}
+.block-system-main-menu ul.menu li a span{
+    padding:1px 0px 1px 0px;
+}
+.block-system-main-menu ul.menu li.first span {
+    padding:1px 0px 1px 12px;
+    background:none;
+}
+
+/* 
+======================================================
+===================== Blog Template ==================
+======================================================
+*/
+.block-views-slide-show-fade-block .views-slideshow-controls-bottom {
+	margin-top:-1px;
+}
+.block-views-slide-show-fade-block .views-field-title{
+    display:none;
+}
+.three.bloglisting{
+    width:100%;
+    padding:0px;    
+}
+.blog-detailpage .container{
+    padding-right:0px;
+}
+
+
+/* 
+======================================================
+===================== Forum Category =================
+======================================================
+*/
+.forum-wrap .forum-headers .two.columns,
+.forum-table-topics .forum-topics-headers .two.columns,
+.forum-wrap .odd .two.columns,
+.forum-wrap .even .two.columns,
+.forum-table-topics .odd .two.columns,
+.forum-table-topics .even .two.columns,
+.forum-table-topics .odd .columns.views-field-name,
+.forum-table-topics .even .columns.views-field-name{
+    display:none;
+}
+.forum-table-topics .odd .six.columns,
+.forum-table-topics .even .four.columns,
+.forum-table-topics .odd .four.columns,
+.forum-table-topics .even .six.columns{
+    width:100% !important;  
+}
+.forum-wrap .columns.forum-details .forum-img-icon{
+    width: 16%;            
+}
+.forum-wrap .columns.forum-details .forum-container{
+    width:84%;  
+}
+
+
+/* 
+======================================================
+===================== Apps listing view ==============
+======================================================
+*/
+.view-id-application.view-display-id-page .view-header .leftcolumn{
+    padding-right:0px; 
+    border-right:none;  
+    border-bottom:1px solid #272727;     
+}
+.view-id-application.view-display-id-page .view-header .rightcolumn{
+    padding-top:15px;
+}
+.view-id-application.view-display-id-page .views-row.views-row-odd{
+    width:100%;
+    margin-right:0%;
+}
+.view-id-application.view-display-id-page .views-row.views-row-even{
+    width:100%;
+    margin-left:0%;
+}
+/* 
+======================================================
+====================== Apps Forum ====================
+======================================================
+*/
+body.page-node-add-application h1.title,
+body.page-node-edit.node-type-application h1.title,
+body.page-node-edit.node-type-application ul.tabs{
+    margin-left:0px !important;
+}
+#application-node-form{
+    margin-left:0px;
+    padding-top:5px;
+}
+
+/* 
+======================================================
+===================== User Login Page  ===============
+======================================================
+*/
+.login-con-area .two.columns{
+    display:none;    
+}
+.login-con-area .login-left {
+    margin-left:5%;
+    margin-right:5%;
+}
+.login-con-area .login-right {
+    margin: 5%;
+}
+
+
+
+
+
+
+}
+
+
+
+/*  #Mobile (Portrait)
+================================================== */
+    /* Note: Design for a width of 320px */
+
+/*@media screen and (min-width: 320px) and (max-width: 419px) {*/
+@media only screen and (max-width: 419px) {
+
+#main h1.title{   
+    font-size:30px;
+}
+
+/* 
+======================================================
+===================== HEADER TOP =====================
+======================================================
+*/
+.block-system-main-menu ul.menu li{
+    margin-top:10px;
+}
+.block-system-main-menu ul.menu li a {
+    font-size:13px;
+    line-height:30px;
+    padding:0px 12px 0px 12px;
+    border:1px solid #333;
+    background:none;
+}
+.block-system-main-menu ul.menu li a span{
+    padding:1px 0px 1px 0px;
+}
+.block-system-main-menu ul.menu li.first span {
+    padding:1px 0px 1px 12px;
+    background:none;
+}
+.block-search-form{
+    float:left;
+    min-width:180px;
+}
+.block-search-form .form-item .form-text{
+    width:150px;
+}
+
+/* 
+======================================================
+===================== HEADER =========================
+======================================================
+*/
+#header{
+    background-image:none;
+}
+#header .logo-area{
+    width:150px;
+    padding-top:16px;
+}
+#header .login-profile{    
+    width:115px;
+    padding-top:10px;
+}
+
+/* 
+======================================================
+===================== Blog Template ==================
+======================================================
+*/
+.blog-header .nine{
+    overflow:hidden;
+}
+.block-views-slide-show-fade-block .views-slideshow-controls-bottom {
+	margin-top:-1px;
+}
+.block-views-slide-show-fade-block .views-field-title{
+    display:none;
+}
+.block-views-slide-show-fade-block .views-slideshow-controls-bottom .views-slideshow-pager-field-item {
+	float:left;
+	width:38px;
+	height:25px;
+}
+.three.bloglisting{
+    width:100%;
+    padding:0px;    
+}
+.blog-detailpage .container{
+    padding-right:0px;
+}
+
+
+/* 
+======================================================
+===================== Forum Category =================
+======================================================
+*/
+.forum-wrap .forum-headers .two.columns,
+.forum-table-topics .forum-topics-headers .two.columns,
+.forum-wrap .odd .two.columns,
+.forum-wrap .even .two.columns,
+.forum-table-topics .odd .two.columns,
+.forum-table-topics .even .two.columns,
+.forum-table-topics .odd .columns.views-field-name,
+.forum-table-topics .even .columns.views-field-name,
+.forum-wrap .columns.forum-details .forum-img-icon,
+.forum-table-topics .columns.views-field-title .topic-icon{
+    display:none;
+}
+.forum-table-topics .odd .six.columns,
+.forum-table-topics .even .four.columns,
+.forum-table-topics .odd .four.columns,
+.forum-table-topics .even .six.columns{
+    width:100% !important;  
+}
+.forum-wrap .columns.forum-details .forum-container{
+    width:100%;  
+}
+
+/* 
+======================================================
+===================== Apps listing view ==============
+======================================================
+*/
+.view-id-application.view-display-id-page .view-header .leftcolumn{
+    padding-right:0px; 
+    border-right:none;  
+    border-bottom:1px solid #272727;     
+}
+.view-id-application.view-display-id-page .view-header .rightcolumn{
+    padding-top:15px;
+}
+.view-id-application.view-display-id-page .views-row.views-row-odd{
+    width:100%;
+    margin-right:0%;
+}
+.view-id-application.view-display-id-page .views-row.views-row-even{
+    width:100%;
+    margin-left:0%;
+}
+/* 
+======================================================
+====================== Apps Forum ====================
+======================================================
+*/
+body.page-node-add-application h1.title,
+body.page-node-edit.node-type-application h1.title,
+body.page-node-edit.node-type-application ul.tabs{
+    margin-left:0px !important;
+}
+#application-node-form{
+    margin-left:0px;
+    padding-top:5px;
+}
+
+/* 
+======================================================
+====================== Apps Forum ====================
+======================================================
+*/
+#application-node-form #edit-field-screen-shot{
+    width:210px;
+    overflow:hidden;
+}
+
+
+/* 
+======================================================
+===================== User Login Page  ===============
+======================================================
+*/
+.login-con-area .two.columns{
+    display:none;    
+}
+.login-con-area .login-left {
+    margin-left:5%;
+    margin-right:5%;
+}
+.login-con-area .login-right {
+    margin: 5%;
+}
+
+
+
+
+
+
+
+}

@@ -1,0 +1,7 @@
+name = DGPH Infographics
+description = Infographics setup and management
+core = 7.x
+package = Insomniac
+dependencies[] = phpexcel
+dependencies[] = comment
+dependencies[] = dgph_philgeps_api

@@ -1,0 +1,293 @@
+body.page-infographics-commodity .datarequest {
+    margin-top: 30px;
+}
+
+
+.cd_month label {
+    display: block;
+    width: 9em;
+}
+
+.cd_year label {
+    display: block;
+    width: 6em;
+}
+
+label {
+    display: block;
+    width: 5em;
+}
+
+.dbapc #accordion .ui-state-active {
+    background: url("../images/accro.png") no-repeat scroll 100% 20px transparent !important;
+    height: 35px;
+}
+
+.ui-accordion .ui-accordion-content {
+    background: none repeat scroll 0 0 #FFFFFF !important;
+    top: 2px;
+}
+
+.dbapc #accordion .ui-accordion-content {
+    margin: -12px 0 0;
+}
+
+
+.dbapc .accordion2 div{}
+.dbapc #accordion2 div{ display:block !important;}
+.dbapc .accordion2 h3  {
+    /*background: url("../images/mins-icon.png") no-repeat scroll 100% 50% transparent !important;*/
+    height: auto;
+}
+.dbapc #accordion2 h3  {
+    background: url("../images/mins-icon.png") no-repeat scroll 100% 50% transparent !important;
+    height: auto;
+}
+
+
+
+.background-none{
+	background:none !important;
+}
+#sub,#sub1,#sub2,#sub3,#sub4,#sub5,#sub6,#sub7,#sub8,#sub9 {
+    background: url("../images/mins-icon.png") left top;
+    width:14px;
+    height:14px;
+    float:right;
+    margin-right:10px;
+    position: relative;
+    top: 25%;
+}
+#sub1 { 
+    display: block; 
+}
+#plus,#plus1,#plus2,#plus3,#plus4,#plus5,#plus6,#plus7,#plus8,#plus9 {
+    background:url("../images/plus-icon.png") left top;
+    width:14px;
+    height:14px;
+    float:right;
+    margin-right:10px;
+    position: relative;
+    top: 25%;
+}
+#plus1 { 
+    display: none; 
+} 
+
+.asub{width:14px; height:14px; background:url("../images/mins-icon.png") left top; display:none; float:right; }
+.aplus{width:14px; height:14px; background:url("../images/plus-icon.png") left top; display:block; float:right;}
+
+.asubc{width:14px; height:14px; background:url("../images/mins-icon.png") left top; display:none; float:right;margin-right:10px; }
+.aplusc{width:14px; height:14px; background:url("../images/plus-icon.png") left top; display:block; float:right;margin-right:10px;}
+
+.visible-none{display:none;}
+.dbapc .accordion2 div a.act{background:#ffc425;  padding: 10px ;}
+.dbapc #accordion2 div a.act{background:#ffc425;  padding: 10px ;}
+
+.yellow {
+    background: none repeat scroll 0 0 #ffc425;
+    float: right;
+    height: 3px;
+    margin: 10px -20px 0 0;
+    width: 15px;
+}
+
+.red {
+    background: none repeat scroll 0 0 #d63333;
+    float: right;
+    height: 3px;
+    margin: 10px -20px 0 0;
+    width: 15px;
+}
+
+.blue {
+    background: none repeat scroll 0 0 #333385;
+    float: right;
+    height: 3px;
+    margin: 10px -20px 0 0;
+    width: 15px;
+}
+
+.black {
+    background: none repeat scroll 0 0 #6b6b6b;
+    float: right;
+    height: 3px;
+    margin: 10px -20px 0 0;
+    width: 15px;
+}
+
+.works h2.title {
+    background: none repeat scroll 0 0 transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.weekly-right-con{ width:100%; height:auto; clear:both; float:left; margin:10px 0 0 0;}
+.weekly-right-con h2 {
+    background: url("../images/gas-icon.png") no-repeat scroll 15px 50% #FFC425 !important;
+    color: #272727;
+    display: block;
+    font-size: 30px !important;
+    height: 65px;
+    padding: 15px 0 0 50px !important;
+    width: 100%;
+    margin: 0 !important;
+}
+
+body.page-infographics-commodity .weekly-right-con .ui-accordion h3.ui-state-default {
+    border-left: 1px dotted #000000 !important;
+    border-right: 1px dotted #000000 !important;
+    border-radius: inherit;
+    color: #000000;
+    font-family: 'Roboto',sanf-serif;
+    font-size: 14px !important;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+body.page-infographics-commodity .weekly-right-con .ui-accordion h3.commercial_rice,
+body.page-infographics-commodity .weekly-right-con .ui-accordion h3.canned_sardines,
+body.page-infographics-commodity .weekly-right-con .ui-accordion h3.cardiovascular {
+    border-top: 1px dotted #000000 !important;
+}
+
+body.page-infographics-commodity .weekly-right-con .ui-accordion h3.bread {
+    border-bottom: 1px dotted #000000 !important;
+}
+
+.yearly-con{border-bottom: 1px dotted #222222;  border-right: 1px dotted #222222;width:100%; height:auto; clear:both; float:left; height:141px;}
+.yearly-con-last{ margin-bottom:35px;}
+.yearly-left {
+    background: none repeat scroll 0 0 #666666;
+    border-left: 1px dotted #222222;
+    border-right: 1px dotted #222222;
+    color: #FFFFFF;
+    float: left;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    min-height: 140px;
+    padding: 60px 0 0 20px;
+    width: 25%;
+}
+.yearly-text-left{ padding:50px 0 0 20px;}
+.yearly-right{ width:74%;  float:right;}
+
+.legend-con { width:100%; height:auto; background:#f7f7f7; padding:15px 20px; margin: 15px 0 150px 0; float:left; clear:both;}
+.legend-con h3{ font-family: 'Roboto' !important; font-weight: bold !important; border-bottom: 1px dotted #222222; font-size:17px !important; text-transform:uppercase;  color: #989898; padding:0 0 5px;}
+.legend-con p{ font-family: 'Roboto', sans-serif; font-weight: normal; font-size: 14px; line-height:18px; color:#888888;}
+.legend-con p span.header { font-family: 'Roboto', sans-serif; font-weight: bold; font-size: 14px; }
+
+.separator{ width:100%; height:1px; border-bottom: 2px dotted #222222; float:left; clear:both; margin-top: 30px;}
+
+.weekly-con{}
+.weekly-con h2.title {
+    background: none repeat scroll 0 0 transparent;
+    padding: 0;
+}
+.weekly-con .social-icon {
+    margin: 24px 0 0 !important;
+}
+
+
+.accordion3-con{ margin:20px 0 30px!important;}
+.right-accro {
+    color: #464646 !important;
+    font-size: 14px !important;
+    margin: 0 !important;
+    padding: 5px 5px 5px 40px !important ;
+} 
+
+.right-accro-gray {
+    color: #464646 !important;
+    font-size: 14px !important;
+    margin: 0 !important;
+    padding: 5px 5px 5px 40px !important;
+	 
+} 
+
+.works2 {
+    position: relative !important;
+}
+
+.works2 .social-icon {
+    margin: 0 !important;
+}
+
+.canned_sardines { background:url(../images/m2c1.png) no-repeat 15px 50% #f5f5f5 !important; }
+.instant_noodles { background:url(../images/m2c2.png) no-repeat 15px 50% #ffffff !important; }
+.processed_milk { background:url(../images/m2c3.png) no-repeat 15px 50% #f5f5f5 !important; }
+.bread { background:url(../images/m2c4.png) no-repeat 15px 50% #ffffff !important; }
+
+.commercial_rice { background:url(../images/m3c1.png) no-repeat 15px 50% #f5f5f5 !important; }
+.sugar { background:url(../images/m3c2.png) no-repeat 15px 50% #ffffff !important; }
+.cooking_oil { background:url(../images/m3c3.png) no-repeat 15px 50% #f5f5f5 !important; }
+.meat_and_poultry { background:url(../images/m3c4.png) no-repeat 10px 50% #ffffff !important; }
+.fish { background:url(../images/m3c5.png) no-repeat 10px 50% #f5f5f5 !important; }
+.vegetables { background:url(../images/m3c6.png) no-repeat 10px 50% #ffffff !important; }
+
+
+.cardiovascular { background:url(../images/m4c1.png) no-repeat 10px 50% #f5f5f5! important; }
+.anti-bacterial { background:url(../images/m4c2.png) no-repeat 10px 50% #ffffff !important; }
+.anti-asthma { background:url(../images/m4c3.png) no-repeat 10px 50% #f5f5f5 !important; }
+.anti-diabetes { background:url(../images/m4c4.png) no-repeat 10px 50% #ffffff !important; } 
+.anti-hypercholesterolemia { background:url(../images/m4c5.png) no-repeat 10px 50% #f5f5f5 !important; }
+.anti-cancer { background:url(../images/m4c6.png) no-repeat 10px 50% #ffffff !important; }
+
+.ui-accordion-header-active {
+    background: url("../images/acro-ic-7-big.png") no-repeat scroll 10px 50% #FFC425 !important;
+    font-size: 30px !important;
+    height: 55px;
+    padding: 8px 0 0 0px !important;
+}
+.ui-accordion-header-active span {
+    margin: 13px 17px 0 0 !important;
+}
+
+tr.title-row { background:#000;}
+tr.title-row td.title { border-left: 1px dotted #fff;}
+tr.title-row td {  border-bottom: 1px dotted #fff; border-right: 1px dotted #fff;}
+tr.title-row td h3 { font-family: 'Roboto', sans-serif; font-weight: bold; text-transform:uppercase!important; font-size:18px!important; color:#c2c2c2; text-align:center; margin:20px 0 25px; padding:0;}
+tr.title-row td p { font-family: 'Roboto', sans-serif; font-weight: normal; font-size:15px; color:#c2c2c2; color:#fff; text-align:center;margin:12px 0; padding:0; line-height:20px; }
+tr.title-row td p span { font-family: 'Roboto', sans-serif; font-weight: bold; font-size:21px; text-transform:uppercase; color:#c2c2c2; color:#fff; display:block;}
+
+.text-row{}
+
+.text-row td.text-title-row { background:#666666; border-left: 1px dotted #222222;  }
+.text-row td.text-title-row  h4{ font-family: 'Roboto', sans-serif; font-weight: bold; color:#fff;   margin:20px 0 25px 25px; padding:0;text-transform:capitalize!important;   font-size:18px!important;}
+.text-row td p{ font-family: 'Roboto', sanf-serif; font-size:38px; color:#c2c2c2; color:#464646; text-align:center;margin:12px 0; padding:0; line-height:25px;}
+.text-row td p.range { font-size: 26px !important; }
+.text-row td p.price { }
+.text-row td p span{  font-family: 'Roboto', sans-serif; font-weight: normal; font-size:13px; color:#c2c2c2; color:#b8b8b9; display:block;}
+.text-row td{ background:#f0f0f0; border-bottom: 1px dotted #fff; border-right: 1px dotted #fff;}
+
+
+#accordion3{ margin:30px 0;   clear:both;}
+.category-container table { 
+    margin: 0 !important; 
+}
+.weekly-right-con .ui-widget-content {
+    height: auto !important;
+    padding: 0 !important;
+}
+
+/** Media specific styles */
+
+
+@media only screen and (min-width: 768px) and (max-width: 1076px) {
+    .text-row td p.range { font-size: 20px !important; }
+    #accordion2 { width: 100% !important }
+    .ui-accordion-header-active { padding: 8px 0 0 0px !important; }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    #accordion2 { width: 100% !important }
+    .text-row td p.range { font-size: 20px !important; }
+    .footer-section .jetpack-image-container { text-align: left !important; }
+}
+
+@media only screen and (min-width: 200px) and (max-width: 479px) {
+    #accordion2 { width: 100% !important }
+    .text-row td p.range { font-size: 20px !important; }
+    .footer-section .jetpack-image-container { text-align: left !important; }
+}

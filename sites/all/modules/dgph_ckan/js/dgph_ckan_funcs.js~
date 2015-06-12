@@ -1,0 +1,6 @@
+function dgph_ckan_init() {
+	jQuery('#publishers').listnav({
+			initLetter: 'A',
+			showCounts: false
+		});
+}

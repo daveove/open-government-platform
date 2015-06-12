@@ -1,0 +1,4 @@
+name = DGPH Contact
+description = Provides the application contact form
+core = 7.x
+package = Insomniac

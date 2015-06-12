@@ -1,0 +1,10 @@
+; $Id: dof_import.info,v 1.2 2013/12/11 15:09:12 Sunil Exp $
+name = DOF Dashboard Import
+description = DOF Dashboard import routine.
+core = 7.x
+; Information added by drupal.org packaging script on 2013/12/11
+version = "7.x-1.0"
+core = "7.x"
+project = "DOF Dashboard"
+datestamp = "1251164703"
+package = Insomniac

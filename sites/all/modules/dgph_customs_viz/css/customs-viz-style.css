@@ -1,0 +1,456 @@
+body.page-infographics-customs-viz div.legend {
+    padding: 15px 20px;
+}
+
+body.page-infographics-customs-viz .ui-tooltip, .arrow:after {
+    background: #737372;
+    border-radius: 3px;
+    width: 130px;
+    text-align: center !important;
+ }
+
+body.page-infographics-customs-viz .ui-tooltip {
+    padding: 10px 5px;
+    color:#000;
+    font: bold 14px "Helvetica Neue", Sans-Serif;
+    text-transform: uppercase;
+}
+
+body.page-infographics-customs-viz .arrow {
+    width: 70px;
+    height: 16px;
+    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    margin-left: -35px;
+    bottom: -16px;
+}
+
+body.page-infographics-customs-viz .arrow.top {
+    top: -16px;
+    bottom: auto;
+}
+
+body.page-infographics-customs-viz .arrow.left {
+    left: 20%;
+}
+
+body.page-infographics-customs-viz .arrow:after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: -20px;
+    width: 25px;
+    height: 25px;
+    box-shadow: 6px 5px 9px -9px black;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    tranform: rotate(45deg);
+    background: #737372;
+    border: 1px solid #737372;
+}
+
+body.page-infographics-customs-viz .arrow.top:after {
+    bottom: -20px;
+    top: auto;
+}
+
+body.page-infographics-customs-viz .customs-viz-accordion .ui-accordion-content {
+    background: none repeat scroll 0 0 #FFFFFF !important;
+}
+
+body.page-infographics-customs-viz .ui-corner-bottom {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+body.page-infographics-customs-viz .year-con .ui-accordion .ui-accordion-header {
+    background: url("../images/arrow-down") no-repeat scroll 100% 50% rgba(0, 0, 0, 0) !important;
+}
+
+#view-by { 
+    width:255px; 
+    float:left;
+}
+
+.customs-viz-accordion form.custom label {
+    text-transform: uppercase;
+}
+
+body.page-infographics-customs-viz div.legend .row .field-name, 
+body.page-infographics-customs-viz div.legend .row .field-value {
+    font-weight: normal;
+}
+
+body.page-infographics-customs-viz .view a {
+    background: url("../images/arrow-down-grey.png") no-repeat scroll 0 60% rgba(0, 0, 0, 0);
+    padding-left: 20px;
+}
+
+body.page-infographics-customs-viz .ui-state-active, 
+body.page-infographics-customs-viz .ui-widget-content .ui-state-active, 
+body.page-infographics-customs-viz .ui-widget-header .ui-state-active {
+    background: none !important;
+}
+
+body.page-infographics-customs-viz .left-sidebar h3.ui-accordion-header,
+body.page-infographics-customs-viz h3.ui-state-active {
+    border-bottom: 1px dotted #222222 !important;
+}
+
+body.page-infographics-customs-viz .row .intro-text h3.title{
+    color:#414141;
+    font-size:21px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+}
+
+body.page-infographics-customs-viz .row .year-con .year {    
+    font-family: 'Roboto Condensed', sans-serif; 
+    font-weight: normal;
+    overflow:hidden;
+}
+body.page-infographics-customs-viz .row .year-con .home-cat p { 
+    color: #414141;
+    font-size: 17px;
+    font-family: 'Roboto', sans-serif; 
+    font-weight: bold;
+}
+
+body.page-infographics-customs-viz .left-sidebar .ui-accordion-content {
+    padding: 0;
+}
+
+body.page-infographics-customs-viz .ui-tooltip, .arrow:after {
+    background: #737372;
+    border-radius: 4px;
+    width: 250px;
+    line-height: 16px;
+    text-align: center !important;
+    box-shadow: none;
+    border: 1px solid #737372;
+ }
+body.page-infographics-customs-viz .ui-tooltip {
+    padding: 5px 5px;
+    color: #FFFFFF;
+    font-weight:normal;
+    text-transform: none;
+    font-family: 'Roboto', sans-serif; 
+    font-weight: normal;
+}
+
+/** Left Sidebar Commands */
+
+body.page-infographics-customs-viz .left-sidebar ul.commands {
+    
+}
+
+body.page-infographics-customs-viz .left-sidebar ul.commands li a {
+    color: #252525;
+    display: block;
+    font-family: 'Roboto',sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    padding: 10px 0;
+    text-decoration: none;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+body.page-infographics-customs-viz .left-sidebar ul.commands li a:hover {
+    color: #FFC425;
+}
+
+body.page-infographics-customs-viz .left-sidebar ul.commands li a.active {
+    background: none repeat scroll 0 0 #FFC425;
+    padding: 10px;
+}
+
+body.page-infographics-customs-viz .left-sidebar ul.commands li a.active:hover {
+    color: #252525;
+}
+
+body.page-infographics-customs-viz .left-sidebar ul.commands-submenu {
+    list-style: none;
+}
+
+body.page-infographics-customs-viz .left-sidebar ul.commands-submenu li {
+    line-height: 2em;
+}
+
+body.page-infographics-customs-viz .left-sidebar ul.commands-submenu li a:hover {
+    color: #FFC425;
+}
+
+body.page-infographics-customs-viz .left-sidebar ul.commands-submenu li a {
+    color: #252525;
+    display: block;
+    font-family: 'Roboto',sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    padding: 0;
+    text-decoration: none;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+body.page-infographics-customs-viz .left-sidebar ul.commands-submenu li a.active,
+body.page-infographics-customs-viz .left-sidebar ul.commands-submenu li a.active:hover {
+    color: #FFC425;
+    background: none repeat scroll 0 0 transparent;
+    padding: 0;
+}
+
+/** Dashboard Section */
+
+body.page-infographics-customs-viz h4.section-header {
+    background: #ffc425;
+    border: 1px dotted #acacac;
+    font-size: 20px;
+    margin-bottom: 3px;
+    margin-top: 0;
+    padding: 11px 0 11px 10px;
+}
+
+body.page-infographics-customs-viz h4.section-header-accordion {
+    background: url("../images/plus-icon.png") no-repeat scroll 99% 16px #ffc425;
+}
+
+body.page-infographics-customs-viz h4.section-header-accordion.ui-state-active {
+    background: url("../images/mins-icon.png") no-repeat scroll 99% 16px #ffc425 !important;
+}
+
+body.page-infographics-customs-viz h4.section-header img {
+    float: left;
+}
+
+body.page-infographics-customs-viz h4.section-header .hs-description {
+    padding-left: 35px;
+}
+
+body.page-infographics-customs-viz .section-content {
+    margin-top: 20px;
+}
+
+body.page-infographics-customs-viz .section-content-first {
+    margin-top: 5px;
+} 
+
+body.page-infographics-customs-viz .section-content h5.title {
+    background: none repeat scroll 0 0 #272727;
+    font-family: 'Roboto',sans-serif;
+    font-size: 18px;
+    font-weight: normal;
+    color: #FFFFFF;
+    padding: 10px;
+    margin: 0;
+}
+
+body.page-infographics-customs-viz .section-content .chart-container {
+    background: none repeat scroll 0 0 #E6E7E7;
+    padding: 10px;
+    color: #FFFFFF;
+}
+
+body.page-infographics-customs-viz .section-content #total-boc-cif-value-vs-collections {
+    height: 300px;
+}
+
+body.page-infographics-customs-viz .section-content #total-boc-volume-of-import,
+body.page-infographics-customs-viz .section-content #total-boc-import-entries {
+    height: 150px;
+}
+
+body.page-infographics-customs-viz .section-content .chart-container .chart-configuration {
+    display: none;
+}
+
+body.page-infographics-customs-viz .map-container {
+    margin-bottom: 20px;
+}
+
+body.page-infographics-customs-viz .map-container p.intro {
+    font-size: 13px;
+}
+
+body.page-infographics-customs-viz h4.section-header-next {
+    margin-top: 10px;
+}
+
+body.page-infographics-customs-viz .marker-content .title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #000000;
+    font-weight: bold;
+    margin-left: 10px;
+    text-transform: uppercase;
+}
+
+body.page-infographics-customs-viz .marker-content iframe {
+    padding: 0;
+}
+
+body.page-infographics-customs-viz .marker-content .popup-console {
+    margin-top: 0;
+    padding-left: 10px;
+}
+
+body.page-infographics-customs-viz .marker-content .popup-console a {
+    color: #252525;
+    font-family: 'Roboto',sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+    padding-top: 0px;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+body.page-infographics-customs-viz .marker-content .popup-console a:hover {
+    color: #ffc425;
+}
+
+/** Customs Viz Table */
+
+body.page-infographics-customs-viz table.customs-viz-table {
+    width: 100%;
+    border: none;
+}
+
+body.page-infographics-customs-viz table.customs-viz-table tbody {
+    border-top: none;
+}
+
+body.page-infographics-customs-viz table.customs-viz-table th {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: none repeat scroll 0 0 #272727;
+    border-color: -moz-use-text-color #acacac -moz-use-text-color -moz-use-text-color;
+    border-image: none;
+    border-style: none dotted none none;
+    border-width: medium 1px medium medium;
+    color: #c2c2c2;
+    font-family: 'Roboto',sans-serif;
+    font-size: 11px;
+    padding: 18px 10px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+body.page-infographics-customs-viz table.customs-viz-table th.port {
+}
+
+body.page-infographics-customs-viz table.customs-viz-table th.data-customs-duties,
+body.page-infographics-customs-viz table.customs-viz-table th.data-cif {
+    width: 42%;
+}
+
+body.page-infographics-customs-viz table.customs-viz-table th a {
+    color: #c2c2c2;
+}
+
+body.page-infographics-customs-viz table.customs-viz-table th a.active {
+    color: #ffc425;
+}
+
+body.page-infographics-customs-viz table.customs-viz-table th .sort-icon {
+    width: 12px;
+    height: 10px;
+    cursor: pointer;
+}
+
+body.page-infographics-customs-viz table.customs-viz-table tr {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    max-height: 200px;
+}
+
+body.page-infographics-customs-viz table.customs-viz-table tr.blank-row {
+    border: none;
+}
+
+body.page-infographics-customs-viz table.customs-viz-table tr.blank-row td {
+    line-height: 0.3em;
+    padding: 0.3em;
+}
+
+body.page-infographics-customs-viz table.customs-viz-table tr.data-row {
+    border: 1px dotted #acacac;
+}
+
+body.page-infographics-customs-viz table.customs-viz-table tr.data-row td {
+    border-right: 1px dotted #acacac;
+}
+
+body.page-infographics-customs-viz table.customs-viz-table tr.data-row td.first {
+    border-left: 1px dotted #acacac;
+}
+
+
+body.page-infographics-customs-viz table.customs-viz-table tr.data-row td .table-chart-configuration {
+    display: none;
+}
+
+body.page-infographics-customs-viz table.customs-viz-table tr.data-row td.data-port {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+body.page-infographics-customs-viz table.customs-viz-table tr.data-row td.last {
+    border-right: none;
+}
+
+body.page-infographics-customs-viz table.customs-viz-table th.data-importers-rank {
+    width: 9%;
+}
+
+body.page-infographics-customs-viz table.customs-viz-table th.data-importers-cif,
+body.page-infographics-customs-viz table.customs-viz-table th.data-importers-volume,
+body.page-infographics-customs-viz table.customs-viz-table th.data-importers-customs-duties {
+    width: 18%;
+}
+
+body.page-infographics-customs-viz table.customs-viz-table td.data-importers-rank,
+body.page-infographics-customs-viz table.customs-viz-table td.data-importers-importer {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+body.page-infographics-customs-viz table.customs-viz-table td.data-importers-rank {
+    text-align: center;
+}
+
+#customs-viz-accordion .ui-accordion-content { 
+    width: 100% !important;
+    overflow: hidden;
+    position: relative;
+    background: none repeat scroll 0 0 transparent !important;
+    padding: 1px;
+}
+
+body.page-infographics-customs-viz h3.sub-title {
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    clear: both;
+    margin-bottom: 20px;
+}
+
+/** Media specific styles */
+
+@media only screen and (min-width: 200px) and (max-width: 479px) {
+    div#view-by .ui-accordion{width:100%; height:auto; float:left;}
+}
+
+@media only screen and (max-width: 1200px) {	
+    .left-sidebar #view-by { width: 100% !important }
+}
+
+@media only screen and (max-width: 768px) {
+    .footer-section .jetpack-image-container { text-align: left !important; }
+    .page-infographics-customs-viz .dashboard-header { margin-bottom: 0px !important; }
+}

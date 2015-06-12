@@ -1,0 +1,110 @@
+<?php
+    /**
+     * @file
+     * This module provides custom searching tools
+     */
+
+    /**
+     * Implements hook_block_info().
+     */
+    function dgph_custom_search_block_info() {
+        $blocks = array();
+        $blocks['dgph_custom_search_data_requests'] = array(
+            'info' => t('DGPH Custom Search: Data Requests')
+        );
+        $blocks['dgph_custom_search_apps'] = array(
+            'info' => t('DGPH Custom Search: Apps')
+        );
+        $blocks['dgph_custom_search_blogs'] = array(
+            'info' => t('DGPH Custom Search: Blogs')
+        );
+	$blocks['dgph_custom_search_datasets'] = array(
+            'info' => t('DGPH Custom Search: Datasets')
+        );
+        return $blocks;
+    }
+    
+    /**
+     * Implements hook_block_view().
+     */
+    function dgph_custom_search_block_view($delta='') {
+        $block = array('content' => dgph_search_block_content($delta));
+        return $block;
+    }
+    
+    /**
+     * Build the search block content for a Drupal/Solr search
+     */
+    function search_drupal_solr($delta) {
+	$formCode = '';
+        if (!empty($delta)) {
+            $bundleCode = '';
+            switch($delta) {
+                case 'dgph_custom_search_data_requests' :
+                    $bundleCode = "<input type='hidden' name='f[0]' value='bundle:data_request' />";
+                break;
+                case 'dgph_custom_search_apps' :
+                    $bundleCode = "<input type='hidden' name='f[0]' value='bundle:application' />";
+                break;
+                case 'dgph_custom_search_blogs' :
+                    $bundleCode = "<input type='hidden' name='f[0]' value='bundle:blog' />";
+                break;
+            }
+            $formCode = "<form class='search-form' id='search-form' method='get' accept-charset='UTF-8' action='/search/solr_core'>".
+                            $bundleCode.
+                            "<input type='text' class='form-text' value='' id='edit-keys-header' name='keys' maxlength='255'/>".
+                            "<input id='edit-submit' class='form-submit' type='submit' value='Search' />".
+                        "</form>";
+        }
+        $block = array(
+                'search_form' => array(
+                    '#prefix' => '<div class="dgph_search">',
+                    '#type' => 'markup',
+                    '#markup' => $formCode,
+                    '#suffix' => '</div>'
+                )
+            );
+        return $block;
+    }
+
+    /**
+     * Build the search block content for a CKAN/Solr search
+     */
+    function search_ckan_solr($delta) {
+        $formCode = '';
+        if (!empty($delta)) {
+            $bundleCode = '';
+            switch($delta) {
+                case 'dgph_custom_search_datasets' :
+                    $bundleCode = $formCode = "<form class='search-form' id='search-form' method='get' accept-charset='UTF-8' action='/catalogue/dataset'>".
+                            "<input type='text' class='form-text' value='' id='edit-q-header' placeholder='' autocomplete='off' value='' name='q'/>".
+                            "<input id='edit-submit' class='form-submit' type='submit' value='Search' />".
+                        "</form>";
+                break;
+            }
+        }
+        $block = array(
+            'search_form' => array(
+                '#prefix' => '<div class="dgph_search">',
+                '#type' => 'markup',
+                '#markup' => $formCode,
+                '#suffix' => '</div>'
+            )
+        );
+        return $block;
+    }
+
+    /**
+     * Build the search block content
+     */
+    function dgph_search_block_content($delta) {
+        $block = array();
+        switch($delta) {
+            case 'dgph_custom_search_datasets':
+                $block = search_ckan_solr($delta);
+            break;
+	    default:
+		$block = search_drupal_solr($delta);
+        }
+        return $block;
+    }

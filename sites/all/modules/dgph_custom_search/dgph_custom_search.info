@@ -1,0 +1,4 @@
+name = DGPH Custom Search
+description = Provides custom searching tools based on Apache Solr API
+core = 7.x
+package = Insomniac

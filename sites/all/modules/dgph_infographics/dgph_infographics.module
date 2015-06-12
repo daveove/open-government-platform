@@ -1,0 +1,533 @@
+<?php
+    /**
+     * @file
+     * This module provides infographics for DataGovPh
+     */
+
+    define("INFOGRAPHICS_INCLUDE", "include");
+    define("INFOGRAPHICS_LIBRARY", "library");
+    define("DASHB_APCPI", 1);
+    define("DASHB_NOTICES", 2);
+    define("DASHB_BUDGET", 3);
+    define("DASHB_COMMODITY", 4);
+    define("DASHB_EDUCATION", 5);
+    
+    include INFOGRAPHICS_INCLUDE.'/philgeps.inc';
+
+    /**
+     * Implementation of hook_permission().
+     */
+    function dgph_infographics_permission() {
+        return array(
+            'administer infographics' => array(
+                'title' => t('Administer Infographics'),
+                'description' => t('Perform administrative tasks on Infographics.'),
+            )
+        );
+    }
+
+    /**
+     * Implementation of hook_theme().
+     */
+    function dgph_infographics_theme() {
+        return array(
+            'dgph_infographics_procurement_compliance' => array(),
+            'dgph_infographics_procurement_notices' => array(),
+            'dgph_infographics_dbm_report' => array(),
+            'dgph_infographics_commodity_report' => array(),
+            'dgph_infographics_education_report' => array(),
+            'dgph_infographics_traffic_visualization' => array(),
+            'dgph_infographics_budget_visualization' => array(),
+            'categories_form' => array('file' => INFOGRAPHICS_INCLUDE.'/commodity_categories.inc', 'render element' => 'form'),
+            'dgph_infographics_philgeps_feedback' => array()
+        );
+    }
+    
+    /**
+     * Implements hook_menu
+     */
+    function dgph_infographics_menu() {
+        $items['infographics/apcpi/import'] = array(
+            'page callback' => 'dgph_infographics_import_procurement_data',
+            'access arguments' => array('administer infographics'),
+            'file' => INFOGRAPHICS_INCLUDE.'/import.inc',
+            'type' => MENU_LOCAL_TASK
+        );
+        $items['infographics/procurement-compliance'] = array(
+            'page callback' => 'dgph_infographics_procurement_compliance',
+            'access callback' => true,
+            'file' => INFOGRAPHICS_INCLUDE.'/apcpi_report.inc',
+            'type' => MENU_LOCAL_TASK
+        );
+        $items['infographics/dbm'] = array(
+            'title' => 'Infograhics DBM',
+            'page callback' => 'dgph_infographics_dbm_report',
+            'access callback' => true,
+            'file' => INFOGRAPHICS_INCLUDE.'/dbm_report.inc',
+            'type' => MENU_LOCAL_TASK
+        );
+        $items['infographics/dbm/import'] = array(
+            'title' => 'Import DBM',
+            'page callback' => 'drupal_get_form',
+            'page arguments' => array('dgph_infographics_dbm_import_form',NULL),
+            'access arguments' => array('administer infographics'),
+            'file' => INFOGRAPHICS_INCLUDE.'/import.inc',
+            'type' => MENU_LOCAL_TASK
+        );
+        $items['infographics/commodity'] = array(
+            'title' => 'Infograhics Commodity',
+            'page callback' => 'dgph_infographics_commodity_report',
+            'access callback' => true,
+            'file' => INFOGRAPHICS_INCLUDE.'/commodity_report.inc',
+            'type' => MENU_LOCAL_TASK
+        );
+        $items['infographics/commodity/import'] = array(
+            'title' => 'Import Commodity',
+            'page callback' => 'drupal_get_form',
+            'page arguments' => array('dgph_infographics_commodity_import_form',NULL),
+            'access arguments' => array('administer infographics'),
+            'file' => INFOGRAPHICS_INCLUDE.'/import.inc',
+            'type' => MENU_LOCAL_TASK
+        );
+        $items['infographics/commodity/configure-categories'] = array(
+            'title' => 'Configure Commodity Categories',
+            'page callback' => 'drupal_get_form',
+            'page arguments' => array('categories_form'),
+            'access arguments' => array('administer infographics'),
+            'file' => INFOGRAPHICS_INCLUDE.'/commodity_categories.inc',
+            'type' => MENU_LOCAL_TASK
+          );
+        $items['infographics/education/import'] = array(
+            'title' => 'Import Education',
+            'page callback' => 'drupal_get_form',
+            'page arguments' => array('dgph_infographics_education_import_form',NULL),
+            'access arguments' => array('administer infographics'),
+            'file' => INFOGRAPHICS_INCLUDE.'/import.inc',
+            'type' => MENU_LOCAL_TASK
+        );
+        $items['infographics/education'] = array(
+            'title' => 'Infograhics Education',
+            'page callback' => 'dgph_infographics_education_report',
+            'access callback' => true,
+            'file' => INFOGRAPHICS_INCLUDE.'/education_report.inc',
+            'type' => MENU_LOCAL_TASK
+        );
+        $items['infographics/traffic'] = array(
+            'title' => 'Infographics Traffic',
+            'page callback' => 'dgph_infographics_traffic_visualization',
+            'access callback' => true,
+            'file' => INFOGRAPHICS_INCLUDE.'/traffic/traffic_visualization.inc',
+            'type' => MENU_LOCAL_TASK
+        );
+        $items['infographics/budget'] = array(
+            'title' => 'Infographics Budget',
+            'page callback' => 'dgph_infographics_budget_visualization',
+            'access callback' => true,
+            'file' => INFOGRAPHICS_INCLUDE.'/budget/budget_visualization.inc',
+            'type' => MENU_LOCAL_TASK
+        );
+        $items['infographics/philgeps-import'] = array(
+            'title' => 'Import PhilGEPS',
+            'page callback' => 'drupal_get_form',
+            'page arguments' => array('dgph_infographics_philgeps_import_form',NULL),
+            'access arguments' => array('administer infographics'),
+            'file' => INFOGRAPHICS_INCLUDE.'/philgeps.inc',
+            'type' => MENU_LOCAL_TASK
+        );
+	// link to form
+        $items['infographics/philgeps-agency'] = array(
+            'title' => 'Import Agency',
+            'page callback' => 'drupal_get_form',
+            'page arguments' => array('dgph_infographics_philgeps_agency_form',NULL),
+            'access arguments' => array('administer infographics'),
+            'file' => INFOGRAPHICS_INCLUDE.'/philgeps.inc',
+            'type' => MENU_LOCAL_TASK
+        );
+        $items['infographics/philgeps-feedback'] = array(
+            'title' => 'Manage PhilGEPS Feedback',
+            'page callback' => 'dgph_infographics_philgeps_feedback',
+            'access arguments' => array('administer comments on own philgeps_procurement_item'),
+            'file' => INFOGRAPHICS_INCLUDE.'/philgeps.inc',
+            'type' => MENU_LOCAL_TASK
+        );
+        $items['infographics/philgeps-update-notice-ajax'] = array(
+            'page callback' => 'philgeps_update_notice_ajax',
+            'access callback' => true
+        );
+        $items['infographics/philgeps-post-comment'] = array(
+            'page callback' => 'philgeps_post_comment',
+            'access callback' => true,
+            'file' => INFOGRAPHICS_INCLUDE.'/philgeps.inc',
+            'type' => MENU_LOCAL_TASK
+        );
+        return $items;
+    }
+    
+    /**
+     * Extracts an uploaded KMZ file to KML
+     * @param $kmf information about the uploaded file
+     * @return information about the extracted file
+     */
+    function philgeps_extract_kmz($kmf) {
+        try {
+            $fpath = drupal_realpath($kmf->uri);
+            // extract KML document
+            $zip = new ArchiverZip($fpath);
+            $gid = uniqid();
+            $destDir = drupal_realpath("public://philgeps_documents");
+            $zip->extract($destDir, array('doc.kml'));
+            $gid = uniqid();
+            $destName = "doc_$gid.kml";
+            $destPath = "$destDir/$destName";
+            rename("$destDir/doc.kml", $destPath);
+            // update manage file info
+            $kmf->filename = $destName;
+            $kmf->uri = "public://philgeps_documents/$destName";
+            $kmf->filemime = "application/vnd.google-earth.kml+xml";
+            $kmf->filesize = filesize($destPath);
+        }
+        catch(Exception $e) {
+            watchdog_exception('dgph_infographics', $e);
+        }
+        return $kmf;
+    }
+    
+    
+    
+    /**
+     * Submit handler for PhilGEPS comment forms
+     */
+    function philgeps_comment_submit($form, &$form_state) {
+        $body = $form_state['input']['comment_body'][LANGUAGE_NONE][0]['value'];
+        $photoId = $form_state['input']['field_add_a_photo'][LANGUAGE_NONE][0]['fid'];
+        $videoUri = $form_state['input']['field_add_a_photo'][LANGUAGE_NONE][0]['video_url'];
+        $kmlId = $form_state['input']['field_add_kml_file'][LANGUAGE_NONE][0]['fid'];
+        if (!$kmlId) {
+            $kmlId = $form['field_add_a_kml_file'][LANGUAGE_NONE][0]['fid']['#value'];
+        }
+        $agree = array_key_exists('und', $form_state['input']['field_agree_to_terms']) ? intval($form_state['input']['field_agree_to_terms']['und']) : 0;
+        if (empty($body) && empty($photoId) && 
+            empty($videoUri) && empty($kmlId)) {
+            drupal_set_message('Cannot post an empty comment!', 'error');
+        }
+        else if ($agree==0) {
+            drupal_set_message('You must agree to terms and conditions to go on!', 'error');
+        }
+        else {
+            if ($kmlId>0) {
+                // check KML file
+                $kmf = file_load($kmlId);
+                if ($kmf->filemime=='application/vnd.google-earth.kmz') {
+                    // extracts the KMZ file to KML
+                    $kmf = philgeps_extract_kmz($kmf);
+                    file_save($kmf);
+                }
+            }
+            // continue processing
+            commentaccess_form_submit($form, $form_state);
+        }
+        $form_state['redirect'] = 'infographics/philgeps';
+    }
+    
+    /**
+     * Implements hook_form_FORM_ID_alter
+     */
+    function dgph_infographics_form_comment_form_alter(&$form, &$form_state) {
+        if ($form['#entity']->node_type=='comment_node_philgeps_procurement_item') {
+            $form['actions']['submit']['#submit'] = array('philgeps_comment_submit');
+            $nid = $form['#node']->nid;
+            $form['#action'] = "/infographics/philgeps-post-comment/$nid";
+        }
+    }
+  
+    /**
+     * Implements hook preprocess_views_view
+     */
+    function dgph_infographics_preprocess_views_view(&$vars) {
+        $view = $vars['view'];
+        if($view->name == 'philgeps_procurement_items') {
+            $modPath = drupal_get_path('module', 'dgph_infographics');
+            drupal_add_css($modPath.'/css/dgph_infographics_common.css');
+            drupal_add_css($modPath.'/css/philgeps-dashboard.css');
+            drupal_add_js($modPath.'/js/dgph_infographics_scripts.js');
+            drupal_add_js($modPath.'/js/philgeps-dashboard.js');
+        }
+    }
+    
+    /**
+     * Alters the procurement items selection query by adding a condition on the bid reference number
+     * @param $bidNumber the bid reference number value
+     * @param $query the source query
+     */
+    function dgph_infographics_views_query_alter_bid_reference_number($bidNumber, &$query) {
+        // add bid number field
+        $query->fields['field_data_field_bid_reference_number_value'] = array( 
+                'field' => 'field_bid_reference_number_value',
+                'table' => 'field_data_field_bid_reference_number',
+                'alias' => 'field_data_field_bid_reference_number_value' );
+        // create join
+        $join = new views_join;
+        $join->table = 'field_data_field_bid_reference_number';
+        $join->left_table = 'node';
+        $join->field = 'id';
+        $join->left_table = 'node';
+        $join->left_field = 'nid';
+        $join->field = 'entity_id';
+        $join->type = "LEFT";
+        $query->table_queue['field_data_field_bid_reference_number'] = array (
+                'alias' => 'field_data_field_bid_reference_number',
+                'table' => 'field_data_field_bid_reference_number',
+                'relationship' => 'node',
+                'num' => 1,
+                'join' => $join,
+            );
+        // add to tables list
+        $query->tables['node']['field_data_field_bid_reference_number'] = array( 'count' => 1, 'alias' => 'field_data_field_bid_reference_number_value' );
+        // add condition
+        $query->where[0]['conditions'][] = array( 
+                    'field' => "field_data_field_bid_reference_number.field_bid_reference_number_value",
+                    'value' => $bidNumber,
+                    'operator' => '=' 
+                );
+    }
+    
+    /**
+     * Alters the procurement items selection query by adding a condition on the funding source
+     * @param $fundingSource the funding source value
+     * @param $query the source query
+     */
+    function dgph_infographics_views_query_alter_funding_source($fundingSource, &$query) {
+        // add bid number field
+        $query->fields['field_data_field_funding_source_value'] = array( 
+                'field' => 'field_funding_source_value',
+                'table' => 'field_data_field_funding_source',
+                'alias' => 'field_data_field_funding_source_value' );
+        // create join
+        $join = new views_join;
+        $join->table = 'field_data_field_funding_source';
+        $join->left_table = 'node';
+        $join->field = 'id';
+        $join->left_table = 'node';
+        $join->left_field = 'nid';
+        $join->field = 'entity_id';
+        $join->type = "LEFT";
+        $query->table_queue['field_data_field_funding_source'] = array (
+                'alias' => 'field_data_field_funding_source',
+                'table' => 'field_data_field_funding_source',
+                'relationship' => 'node',
+                'num' => 1,
+                'join' => $join,
+            );
+        // add to tables list
+        $query->tables['node']['field_data_field_funding_source'] = array( 'count' => 1, 'alias' => 'field_data_field_funding_source_value' );
+        // add condition
+        $query->where[0]['conditions'][] = array( 
+                    'field' => "field_data_field_funding_source.field_funding_source_value",
+                    'value' => $fundingSource,
+                    'operator' => '=' 
+                );
+    }
+    
+    /**
+     * Alters the procurement items selection query by adding a free search condition
+     * @param $searchText the free search text
+     * @param $query the source query
+     */
+    function dgph_infographics_views_query_alter_free_search($searchText, &$query) {
+        // add condition
+        $query->where[1]['conditions'][] = array( 
+                    'field' => "node.title",
+                    'value' => "%$searchText%",
+                    'operator' => 'like' 
+                );
+    }
+    
+    /**
+     * Implements hook views_query_alter
+     */
+    function dgph_infographics_views_query_alter(&$view, &$query) {
+        if($view->name == 'philgeps_procurement_items') {
+            $params = drupal_get_query_parameters();
+            if (array_key_exists('bid_number', $params)) {
+                dgph_infographics_views_query_alter_bid_reference_number($params['bid_number'], $query);
+            }
+            else if (array_key_exists('funding_source', $params)) {
+                dgph_infographics_views_query_alter_funding_source($params['funding_source'], $query);
+            }
+            else if (array_key_exists('free_search', $params)) {
+                dgph_infographics_views_query_alter_free_search($params['free_search'], $query);
+            }
+        }
+    }
+    
+    /**
+     * Gets the supported departments
+     * @param $typeSet departments type set
+     * @return the list of supported departments
+     */
+    function get_departments($typeSet = 'all') {
+        $depts = array();
+        $query = db_select('t_departments', 'd')
+                    ->fields('d');
+        if ($typeSet=='exec') {
+            // loads the executive departments
+            $or = db_or();
+            $or->condition('code', 'D%', 'like');
+            $or->condition('code', 'NEDA');
+            $query->condition($or);
+        }
+        else if ($typeSet=='apcpi') {
+            // load the departments participating to APCPI
+            $query->condition('code', 'D%', 'like')
+                  ->condition('code', 'DOTC', '<>');
+        }
+        $res = $query->execute();
+        foreach($res as $row) {
+            $depts[] = array(
+                        'id' => $row->id,
+                        'code' => $row->code,
+                        'name' => $row->name
+                    );
+        }
+        return $depts;
+    }
+    
+    /**
+     * Gets a department name
+     * @param deptId the department identifier
+     * @return the department name, or an empty string if not found
+     */
+    function get_department_name($deptId) {
+        $deptName = db_select('t_departments', 'd')
+                        ->fields('d', array('name'))
+                        ->condition('id', $deptId)
+                        ->execute()->fetchField();
+        return (!empty($deptName) ? $deptName : '');
+    }
+   
+    /**
+     * Build a bar chart
+     * @param $data chart data
+     * @param $labels x-axis labels
+     * @param $opts the chart options
+     * @return the chart code
+     */
+    function dgph_build_bar_chart($data, $labels, $opts = array()) {
+        $chart = array(
+                '#type' => 'chart',
+                '#chart_type' => 'column',
+                '#legend_position' => 'top',
+                '#colors' => array('#ff9e1d'),
+                '#height' => 300,
+                '#font' => 'Roboto',
+                '#chart_library' => 'highcharts'
+            );
+        $chart['chart_xaxis'] = array(
+            '#type' => 'chart_xaxis',
+            '#title' => '',
+            '#labels' => $labels,
+            '#labels_rotation' => 0,
+            '#labels_font_size' => '10px',
+            '#labels_font_weight' => 'normal',
+            '#labels_font_style' => 'normal'
+        );
+        $chart['chart_yaxis'] = array(
+            '#type' => 'chart_yaxis',
+        );
+        if (array_key_exists('max', $opts)) {
+            $chart['chart_yaxis']['#max'] = $opts['max'];
+        }
+        $title = '';
+        $legend = array_key_exists('legend', $opts) ? $opts['legend'] : null;
+        if ($legend!=null) {
+            if (is_array($legend)) {
+                $title = strval($legend[0]);
+            }
+            else {
+                $title = strval($legend);
+            }
+        }
+        $chart['chart_data'] = array(
+            '#type' => 'chart_data',
+            '#title' => $title,
+            '#data' => $data
+        );
+        return drupal_render($chart);
+    }
+    /**
+     * Gets the link to the download file for a Dashboard
+     * @param $dashId the dashboard identifier
+     * @param $year the year to get the data file for
+     * @return URL to the data file, or <code>null</code> if the file is not available
+     */
+    function infographics_get_dashboard_datafile($dashbId, $year) {
+        $url = null;
+        $query= new EntityFieldQuery();
+        $query->entityCondition('entity_type', 'node')
+                    ->entityCondition('bundle', 'dashboard_data')
+                    ->propertyCondition('status', 1)
+                    ->fieldCondition('field_year', 'value', $year)
+                    ->fieldCondition('field_dashboard', 'value', $dashbId)
+                    ->range(0, 1);
+        $res = $query->execute();
+        if (isset($res['node'])) {
+            $nids = array_keys($res['node']);
+            $dashbs = entity_load('node', $nids);
+            $dashb = $dashbs[$nids[0]];
+            $uri = $dashb->field_data_file['und'][0]['uri'];
+            $url = file_create_url($uri);
+        }
+        return $url;
+    }
+
+    /**
+     * Load procurement notices information
+     * @param $params the operation parameters
+     */
+    function load_procurement_notices($params) {
+        $nts = array();
+        $query = db_select('t_procurement_notices', 'p')
+                    ->fields('p');
+        $query->addExpression("str_to_date(p.date_posted, '%b %d, %Y')", 'item_date');
+        $query->orderBy('item_date', 'desc');
+        $year = $params['year'];
+        $deptId = $params['department_id'];
+        if ($deptId!=null) {
+            $query->condition('department_id', $deptId);
+        }
+        if ($year!=null) {
+            $query->where("extract(year from str_to_date(date_posted, '%b %d, %Y')) = $year");
+        }
+        $sname = $params['search_name'];
+        $svalue = $params['search_value'];
+        if (!empty($sname) && !empty($svalue)) {
+            if ($sname=='approved_budget') {
+                $costs = explode(' ', $svalue);
+                $min = !empty($costs[0]) ? floatval($costs[0])*1000 : 0;
+                $max = !empty($costs[1]) ? floatval($costs[1])*1000 : 9999999999;
+                $query->condition($sname, $min, '>=')
+                      ->condition($sname, $max, '<');
+            }
+            else if ($sname=='keyword') {
+                $fields = array('bid_reference_no', 'bid_classification', 'procurement_mode', 'bid_title',
+                                'bid_status', 'awardee', 'funding_source', 'bid_status_reason');
+                $or = db_or();
+                foreach($fields as $field) {
+                    $or->condition($field, "%$svalue%", 'like');
+                }
+                $query->condition($or);
+            }
+            else {
+                $query->condition($sname, "%$svalue%", 'like');
+            }
+        }
+        $itemsCount = $params['items_count'];
+        if ($itemsCount>0) {
+            $query->range(0, $itemsCount);
+        }
+        $res = $query->execute();
+        foreach($res as $row) {
+            $nts[] = $row;
+        }
+        return $nts;
+    }

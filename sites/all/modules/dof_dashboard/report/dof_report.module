@@ -1,0 +1,178 @@
+<?php
+// $Id: dof_report.module,v 1.3 2013/12/25 15:09:12 Sunil Exp $
+
+/**
+ * Contains:
+ * - All the fields, and machine name with language.
+ */
+
+ define("DASHB_DOF", 7);
+
+include dirname(__FILE__) . '/dof_report_d1_desc.inc';
+include dirname(__FILE__) . '/dof_report_trade_activity_desc.inc';
+include dirname(__FILE__) . '/dof_report_brokers_importers_desc.inc';
+include dirname(__FILE__) . '/dof_report_commodity_report_rice_desc.inc';
+include dirname(__FILE__) . '/dof_report_commodity_report_rice_top_desc.inc';
+include dirname(__FILE__) . '/dof_report_commodity_report_motor_desc.inc';
+include dirname(__FILE__) . '/dof_report_commodity_report_motor_type_desc.inc';
+include dirname(__FILE__) . '/dof_report_commodity_report_motor_importers_desc.inc';
+
+
+/**
+* Implementation of hook_menu()
+*/
+function dof_report_menu() {
+$items = array();
+
+  $items['infographics/commodity-import'] = array(
+    'title' => 'Infograhics',
+    'page callback' => 'dof_commodity_import',
+    'access callback' => true,
+    'file' => 'dof_report_d1.inc',
+    'type' => MENU_LOCAL_TASK
+  );
+
+  $items['infographics/commodity-report-rice'] = array(
+    'title' => 'Infograhics',
+    'page callback' => 'dof_commodity_report_rice',
+    'access callback' => true,
+    'file' => 'dof_report_commodity_report_rice.inc',
+    'type' => MENU_LOCAL_TASK
+  );
+
+  $items['infographics/commodity-report-top-rice'] = array(
+    'title' => 'Infograhics',
+    'page callback' => 'dof_commodity_report_rice_top',
+    'access callback' => true,
+    'file' => 'dof_report_commodity_report_rice_top.inc',
+    'type' => MENU_LOCAL_TASK
+  );
+
+  $items['infographics/commodity-report-motor'] = array(
+    'title' => 'Infograhics',
+    'page callback' => 'dof_commodity_report_motor',
+    'access callback' => true,
+    'file' => 'dof_report_commodity_report_motor.inc',
+    'type' => MENU_LOCAL_TASK
+  );
+
+  $items['infographics/commodity-report-motor-by-type'] = array(
+    'title' => 'Infograhics',
+    'page callback' => 'dof_commodity_report_motor_type',
+    'access callback' => true,
+    'file' => 'dof_report_commodity_report_motor_type.inc',
+    'type' => MENU_LOCAL_TASK
+  );
+
+  $items['infographics/commodity-report-motor-importers'] = array(
+    'title' => 'Infograhics',
+    'page callback' => 'dof_commodity_report_motor_importers',
+    'access callback' => true,
+    'file' => 'dof_report_commodity_report_motor_importers.inc',
+    'type' => MENU_LOCAL_TASK
+  );
+  
+  $items['infographics/commodities/plasticresins/ports'] = array(
+    'title' => 'Infograhics',
+    'page callback' => 'dof_plasticresins_ports',
+    'access callback' => true,
+    'file' => 'dof_report_plasticresins.inc',
+    'type' => MENU_LOCAL_TASK
+  );
+  
+  $items['infographics/commodities/plasticresins/types'] = array(
+    'title' => 'Infograhics',
+    'page callback' => 'dof_plasticresins_types',
+    'access callback' => true,
+    'file' => 'dof_report_plasticresins.inc',
+    'type' => MENU_LOCAL_TASK
+  );
+  
+  $items['infographics/commodities/plasticresins/importers'] = array(
+    'title' => 'Infograhics',
+    'page callback' => 'dof_plasticresins_importers',
+    'access callback' => true,
+    'file' => 'dof_report_plasticresins.inc',
+    'type' => MENU_LOCAL_TASK
+  );
+  
+  $items['infographics/commodities/tobacco/ports'] = array(
+    'title' => 'Infograhics',
+    'page callback' => 'dof_tobacco_ports',
+    'access callback' => true,
+    'file' => 'dof_report_tobacco.inc',
+    'type' => MENU_LOCAL_TASK
+  );
+  
+  $items['infographics/commodities/tobacco/types'] = array(
+    'title' => 'Infograhics',
+    'page callback' => 'dof_tobacco_types',
+    'access callback' => true,
+    'file' => 'dof_report_tobacco.inc',
+    'type' => MENU_LOCAL_TASK
+  );
+  
+  $items['infographics/commodities/tobacco/importers'] = array(
+    'title' => 'Infograhics',
+    'page callback' => 'dof_tobacco_importers',
+    'access callback' => true,
+    'file' => 'dof_report_tobacco.inc',
+    'type' => MENU_LOCAL_TASK
+  );
+  
+  $items['infographics/commodities/ironandsteel/ports'] = array(
+    'title' => 'Infograhics',
+    'page callback' => 'dof_ironandsteel_ports',
+    'access callback' => true,
+    'file' => 'dof_report_ironandsteel.inc',
+    'type' => MENU_LOCAL_TASK
+  );
+  
+  $items['infographics/commodities/ironandsteel/types'] = array(
+    'title' => 'Infograhics',
+    'page callback' => 'dof_ironandsteel_types',
+    'access callback' => true,
+    'file' => 'dof_report_ironandsteel.inc',
+    'type' => MENU_LOCAL_TASK
+  );
+  
+  $items['infographics/commodities/ironandsteel/importers'] = array(
+    'title' => 'Infograhics',
+    'page callback' => 'dof_ironandsteel_importers',
+    'access callback' => true,
+    'file' => 'dof_report_ironandsteel.inc',
+    'type' => MENU_LOCAL_TASK
+  );
+
+  $items['infographics/trade-activity'] = array(
+    'title' => 'Infograhics',
+    'page callback' => 'dof_trade_activity',
+    'access callback' => true,
+    'file' => 'dof_report_trade_activity.inc',
+    'type' => MENU_LOCAL_TASK
+  );
+
+  $items['infographics/brokers-importers'] = array(
+    'title' => 'Infograhics',
+    'page callback' => 'dof_brokers_importers',
+    'access callback' => true,
+    'file' => 'dof_report_brokers_importers.inc',
+    'type' => MENU_LOCAL_TASK
+  );
+
+  return $items;
+
+}
+
+
+/**
+* DOF Dashboard description.
+*/
+function dof_dashboard_description(){
+    $result = "
+                <p>The Customs dashboard, launched amid ongoing reforms, features information never previously published with the goal of increasing transparency of trade and revenue collection activity. The data in this dashboard is from the improved BOC Electronic to Mobile (E2M) System, which gives the public easier access to BOC's services.</p>
+                <p>Use the filters to view trade activity, reports on rice, motor vehicles, tobacco, plastic resin, and iron and steel imports and importers; top commodities imported; and, top BOC brokers and importers.</p>";
+    return $result;
+}
+
+

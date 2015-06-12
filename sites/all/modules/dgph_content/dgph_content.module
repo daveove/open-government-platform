@@ -1,0 +1,179 @@
+<?php
+    /**
+     * @file
+     * This module provides content customization tools
+     */
+
+    /**
+     * Implements hook_menu
+     */
+    function dgph_content_menu() {
+        $items['request-new-data/submit'] = array(
+            'page callback' => 'dgph_content_request_new_data',
+            'access arguments' => array('post comments')
+        );
+        return $items;
+    }
+	
+    /**
+     * Implements hook_block_info().
+     */
+    function dgph_content_block_info() {
+        $blocks = array();
+        $blocks['dgph_content_latest_datasets'] = array(
+            'info' => t('DGPH Latest Datasets')
+        );
+        return $blocks;
+    }
+
+    /**
+     * Build content for "latest datasets" block
+     * @return array the block content
+     */
+    function get_latest_datasets_block() {
+        $block = array();
+        // fetch the latest datasets information from the CKAN database
+        $entries = array();
+        db_set_active('ckan');
+        $query = db_select('public.package', 'p')
+                    ->fields('p', array('name', 'title', 'notes'))
+                    ->condition('p.state', 'active')
+                    ->condition('p.private', false);
+        $query->join('public.package_revision', 'r', 'p.id=r.id');
+        $query->condition('r.state', 'active')
+              ->condition('r.current', true);
+        $res = $query->execute();
+        db_set_active();
+        foreach ($res as $row) {
+            $entries[] = array(
+                    'name' => $row->name,
+                    'title' => $row->title,
+                    'notes' => $row->notes
+                );
+        }
+        if (!empty($entries)) {
+            $idx = 0;
+            while(($idx<4) && !empty($entries)) {
+                $entry = array_shift($entries);
+                $title = $entry['title'];
+                $notes = $entry['notes'];
+                $name = $entry['name'];
+                $markup = "<h2><a href='/catalogue/dataset/$name'>$title</a></h2>";
+                if (!empty($notes)) {
+                    if (strlen($notes)>70) {
+                        $notes = substr($notes, 0, 70).'...';
+                    }
+                    $markup .= "<p>$notes</p>";
+                }
+                $postClass = ($idx<3) ? 'post' : 'post post-last';
+                $block["ld_entry_$idx"] = array(
+                    '#prefix' => "<div class='$postClass'>",
+                    '#type' => 'markup',
+                    '#markup' => $markup,
+                    '#suffix' => '</div>'
+                );
+                $idx++;
+            }
+        }
+        else {
+            $block["no_data"] = array(
+                    '#prefix' => '<div class="post">',
+                    '#type' => 'markup',
+                    '#markup' => 'Data not available at the moment!',
+                    '#suffix' => '</div>'
+                );
+        }
+        return $block;
+    }
+
+    /**
+     * Implements hook_block_view().
+     */
+    function dgph_content_block_view($delta='') {
+		$blockContent = array();
+		switch($delta) {
+            case 'dgph_content_latest_datasets':
+				$blockContent = get_latest_datasets_block();
+            break;
+        }
+        $block = array('content' => $blockContent);
+        return $block;
+    }
+
+    /**
+     * Implements hook_form_alter()
+     */
+    function dgph_content_form_alter(&$form, &$form_state, $form_id) {
+        if ($form_id=='application_node_form') {
+            $user = user_uid_optional_load();
+            $submitterName = '';
+            if (isset($user->field_first_name['und'])) {
+                $submitterName .= $user->field_first_name['und'][0]['value'];
+            }
+            if (isset($user->field_last_name['und'])) {
+                $submitterName .= ' '.$user->field_last_name['und'][0]['value'];
+            }
+            $submitterEmail = $user->mail;
+            $form['field_submitter_name']['und'][0]['value']['#default_value'] = $submitterName;
+            $form['field_submitter_email']['und'][0]['value']['#default_value'] = $submitterEmail;
+        }
+        else if ($form_id=='data_request_node_form') {
+            $nid = $form['nid']['#value'];
+            if (empty($nid)) {
+                    // disable status field
+                    $form['field_status']['#disabled'] = true;
+            }
+        }
+    }
+
+    /**
+     * Handler for new data request
+     */
+    function dgph_content_request_new_data() {
+        // check input data
+        unset($_SESSION['request_new_data_form']);
+        $form['error'] = false;
+        $form['field_requested_by_name'] = $_POST['field_requested_by_name'];
+        $form['field_requested_by_email'] = $_POST['field_requested_by_email'];
+        $form['field_title'] = $_POST['field_title'];
+        $form['field_data_holder'] = $_POST['field_data_holder'];
+        $form['field_data_description'] = $_POST['field_data_description'];
+        $form['field_details_of_expected_use'] = $_POST['field_details_of_expected_use'];
+        $form['field_organization'] = isset($_POST['field_organization']) ? $_POST['field_organization'] : 1;
+        $form['field_publication_preference'] = isset($_POST['field_publication_preference']) ? $_POST['field_publication_preference'] : 1;
+        $form['field_suggested_use'] = isset($_POST['field_suggested_use']) ? $_POST['field_suggested_use'] : 1;
+        $form['field_status'] = isset($_POST['field_status']) ? $_POST['field_status'] : 1;
+        if (empty($form['field_requested_by_name']) || empty($form['field_requested_by_email'])) {
+            $form['error'] = true;
+            drupal_set_message('Please enter the requestor full name and email address', 'error');
+        }
+        else if (empty($form['field_title'])) {
+            $form['error'] = true;
+            drupal_set_message('Please enter the title of requested data', 'error');
+        }
+        if ($form['error']) {
+            $_SESSION['request_new_data_form'] = $form;
+        }
+        else {
+            // creates the new node
+            $node = new stdClass();
+            $node->type = "data_request";
+            node_object_prepare($node);
+            $node->title = $form['field_title'];
+            $node->language = LANGUAGE_NONE;
+            $node->field_your_name['und'][0]['value'] = $form['field_requested_by_name'];
+            $node->field_your_email_address['und'][0]['value'] = $form['field_requested_by_email'];
+            $node->field_data_holder['und'][0]['value'] = $form['field_data_holder'];
+            $node->field_data_description['und'][0]['value'] = $form['field_data_description'];
+            $node->field_details_of_expected_use['und'][0]['value'] = $form['field_details_of_expected_use'];
+            $node->field_organization_type['und'] = $form['field_organization'];
+            $node->field_publication_preference['und'] = $form['field_publication_preference'];
+            $node->field_intended_use['und'] = $form['field_suggested_use'];
+            $node->field_status['und'] = $form['field_status'];
+            if($node = node_submit($node)) {
+                node_save($node);
+                drupal_set_message('Data request has been submitted!');
+            }
+        }
+        drupal_goto('/request-new-data');
+    }

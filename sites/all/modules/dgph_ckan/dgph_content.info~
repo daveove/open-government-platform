@@ -1,0 +1,4 @@
+name = DGPH Content
+description = Customizes web site content before rendering
+core = 7.x
+package = Diginnova

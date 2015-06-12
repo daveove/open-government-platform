@@ -1,0 +1,154 @@
+<?php
+    /**
+     * @file
+     * This module provides the DataGovPh contact form
+     */
+
+    /**
+     * Implementation of hook_init().
+     */
+    function dgph_contact_init() {
+        drupal_add_css(drupal_get_path('module', 'dgph_contact') . '/css/style.css', 'theme');
+    }
+    
+    /**
+     * Implementation of hook_theme().
+     */
+    function dgph_contact_theme() {
+        return array(
+            'dgph_contact_show_form' => array()
+        );
+    }
+    
+    /**
+     * Implements hook_menu
+     */
+    function dgph_contact_menu() {
+        $items['contact-us'] = array(
+            'page callback' => 'dgph_contact_show_form',
+            'access callback' => true
+        );
+        return $items;
+    }
+    
+    /**
+     * Show the contact form
+     */
+    function dgph_contact_show_form() {
+        return theme('dgph_contact_show_form');
+    }
+    
+    /**
+     * Common theme for showing forms
+     */
+    function theme_dgph_contact_show_form(&$vars) {
+        drupal_set_title('Contact Us');
+        $code = "<div class='row'>".
+		  "<div class='large-12 columns'>".
+		    "<div class='row subpage'>".
+			  "<div class='large-4 columns'>".
+				"<p>Please use this form to provide feedback and suggestions. Please inform us if you find any inconsistencies or errors in the data, bugs, or broken links.</p>
+				 <p>For related queries or concerns that do not involve this website, please visit <a href='#' >the link</a>.</p>".
+			   "</div>".
+			   "<div class='large-8 columns contact-form'>".drupal_render(drupal_get_form('dgph_contact_form'))."</div>".			  
+		     "</div>".
+		   "</div>".
+                "</div>";
+        return $code;
+    }
+    
+    /**
+     *  Create the contact form
+     */
+    function dgph_contact_form($form, &$form_state) {
+        $form['#attributes'] = array('class' => array('contact-form'));
+        $form['name'] = array(
+                '#type' => 'textfield',
+                '#title' => t('Name')
+              );
+        $form['email'] = array(
+                '#type' => 'textfield',
+                '#title' => t('Email')
+              );
+        $form['message'] = array(
+                '#type' => 'textarea',
+                '#title' => t('Message'),
+                '#attributes' => array('rows' => 15, 'maxlength' => 200)
+              );
+        // Submit button
+        $form['submit'] = array(
+            '#type' => 'submit',
+            '#value' => 'Send',
+            '#attributes' => array('class' => array('button'))
+        );
+        return $form;
+    }
+    
+    /**
+     *  Validator for contact form
+     */
+    function dgph_contact_form_validate($form, &$form_state) {
+        $name = $form_state['input']['name'];
+        $email = $form_state['input']['email'];
+        $message = $form_state['input']['message'];
+        if (empty($name)) {
+            form_set_error($name, t("Missing recipient name."));
+        }
+        else if (!valid_email_address($email)) {
+            form_set_error($name, t("Missing or invalid recipient email address (expected: <i>name@host.domain</i>)."));
+        }
+        else if (empty($message)) {
+            form_set_error($name, t("Missing message text."));
+        }
+    }
+    
+    /**
+     * Implements hook_mail
+     */
+    function dgph_contact_mail($key, &$message, $params) {
+        $options = array(
+            'langcode' => $message['language']->language,
+        );
+        switch ($key) {
+            // Send a simple message from the contact form.
+            case 'contact_message':
+                $message['subject'] = t('E-mail sent from @site-name', array('@site-name' => variable_get('site_name', 'Drupal')), $options);
+                // Note that the message body is an array, not a string.
+                $message['body'][] = t('@name sent you the following message: ', array('@name' => $params['name']), $options);
+                $message['body'][] = check_plain($params['message']);
+                break;
+        }
+}
+    
+    /**
+     * Send an email based on contact form values
+     * @param type $form_values the contact form value
+     */
+    function send_contact_email($form_values) {
+        // specify module and email template
+        $module = 'dgph_contact';
+        $key = 'contact_message';
+        // get mail parameters
+        $fromEmail = $form_values['email'];
+        $toEmail = variable_get('site_mail', ini_get('sendmail_from'));
+        $params = $form_values;
+        $lang = language_default();
+        // send the email
+        $res = drupal_mail($module, $key, $toEmail, $lang, $params, $fromEmail, true);
+        if ($res['result'] == TRUE) {
+            drupal_set_message(t('Your contact request has been sent and will be processed shortly.'));
+        }
+        else {
+            drupal_set_message(t('There was a problem sending your message and it was not sent.'), 'error');
+        }
+    }
+    
+    /**
+     * Submit handler for contact form
+     */
+    function dgph_contact_form_submit($form, &$form_state) {
+        // send the email
+        send_contact_email($form_state['values']);
+    }
+   
+   

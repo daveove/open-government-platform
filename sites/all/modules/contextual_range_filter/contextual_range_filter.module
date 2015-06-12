@@ -1,0 +1,124 @@
+<?php
+/**
+ * @file
+ * contextual_range_filter.module
+ *
+ * Adds to Views an option to contextually filter by range.
+ * For instance, if you have a View with a float field (eg Price or Distance)
+ * and have added this field as the first contextual filter, then you can filter
+ * your View page like so:
+ *
+ *   http://yoursite.com/yourview/100--199.99
+ *
+ * Integer, float, string and list types are supported.
+ * The OR ('+') operator is supported.
+ * The negate operator ("Exclude" tick box) is supported.
+ * "Glossary mode" (match on first N characters of a string) is supported.
+ */
+
+define('CONTEXTUAL_RANGE_FILTER_SEPARATOR1', '--'); // same as used for dates
+define('CONTEXTUAL_RANGE_FILTER_SEPARATOR2', ':');  // alternative delimiter
+
+/**
+ * Implements hook_help().
+ */
+function contextual_range_filter_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#contextual_range_filter':
+      $t = t('Configuration and usage instructions are in this <a href="@README">README</a> file.<br/>Known issues and solutions may be found on the <a href="@contextual_range_filter">Contextual Range Filter</a> project page.', array(
+        '@README' => url(drupal_get_path('module', 'contextual_range_filter') . '/README.txt'),
+        '@contextual_range_filter' => url('http://drupal.org/project/contextual_range_filter')));
+      break;
+  }
+  return empty($t) ? '' : '<p>' . $t . '</p>';
+}
+
+/**
+ * Split a filter range string into an array containing "from" and "to" values.
+ *
+ * @param string $range, format "from--to", "from--" or "--to".
+ *   A single value is also allowed. A single colon is accepted instead of --
+ *
+ * @return array of length 2, the 2nd value equals FALSE when no separator was found
+ */
+function contextual_range_filter_split($range) {
+  if (is_array($range)) { // defensive programming to make sure we have a string
+    $range = reset($range);
+  }
+  $range = trim($range);
+  $from_to = explode(CONTEXTUAL_RANGE_FILTER_SEPARATOR1, $range);
+  if (count($from_to) < 2) {
+    $from_to = explode(CONTEXTUAL_RANGE_FILTER_SEPARATOR2, $range);
+  }
+  return count($from_to) == 1 ? array(reset($from_to), FALSE) : $from_to;
+}
+
+/**
+ * Return values of a list range as an array.
+ *
+ * @param string $range, in format parseable by contextual_range_filter()
+ * @param array $allowed_values
+ * @return array of keys into $allowed_values array, or FALSE when range 'from'
+ *   was not found
+ */
+function contextual_range_filter_explode_list_range($range, $allowed_values) {
+  list($from, $to) = contextual_range_filter_split($range);
+  $from = strtolower($from);
+  if ($to === FALSE) {
+    $to = $from;
+  }
+  else {
+    $to = strtolower($to);
+  }
+  foreach ($allowed_values as $key => $value) {
+    $value = strtolower($value);
+    if (empty($from) || $key == $from || $value == $from) {
+      // Found the from value, start collecting keys.
+      $keys = array();
+    }
+    if (isset($keys)) {
+      $keys[] = $key;
+    }
+    if (!empty($to) && ($key == $to || $value == $to)) {
+      return $keys;
+    }
+  }
+  return isset($keys) ? $keys : FALSE;
+}
+
+/**
+ * Implements hook_menu().
+ */
+function contextual_range_filter_menu() {
+  $items['admin/config/content/contextual_range_filter'] = array(
+    'title' => 'Contextual Range Filters',
+    'description' => 'Select which contextual filters need to be converted to contextual <em>range</em> filters.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('contextual_range_filter_admin_config'),
+    'access arguments' => array('administer contextual range filters'),
+    'file' => 'contextual_range_filter.admin.inc'
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function contextual_range_filter_permission() {
+  return array(
+    'administer contextual range filters' => array(
+      'title' => t('Administer contextual range filters'),
+      'description' => t('Allow access the Contextual Range Filter configuration page.'),
+    )
+  );
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function contextual_range_filter_views_api() {
+  return array(
+    'api'  => views_api_version(),
+    'path' => drupal_get_path('module', 'contextual_range_filter') . '/views',
+  );
+}

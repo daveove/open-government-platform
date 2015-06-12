@@ -1,0 +1,217 @@
+@charset "UTF-8";
+/* CSS Document */
+body{
+	font-family: 'Roboto', sans-serif;
+}
+
+#sector, #year, #allotment, #top10, #regional{
+	min-height:400px;
+	margin-top:140px;
+}
+
+.row .offset-by-four { margin-left: 33.33333%; }
+
+.chart{
+	min-height:200px;
+	padding-bottom:90px;
+}
+
+#page-nav ul{
+	margin:0;
+	padding:0;
+}
+
+#page-nav ul li{
+	float:left;
+	list-style-type:none;
+	margin-right:9.8%;
+}
+
+#page-nav ul li:last-child{
+	margin-right:0;
+}
+
+#page-nav ul li a{
+	text-transform:uppercase;
+	color:#888;
+	font-weight:500;
+	font-size:18px;
+}
+
+#page-nav ul li a:hover{
+	border-bottom:4px solid #888;
+}
+
+#intro{
+	margin-top:20px;
+}
+
+#year{
+	
+}
+
+#intro p{
+	font-size:14px;
+	color:#999;
+	line-height:21px;
+        font-family: 'Roboto', sans-serif;
+}
+
+.header{
+	text-align:center;
+	font-family: 'Roboto', sans-serif;
+	text-transform:uppercase;
+	margin-bottom: 15px;
+}
+
+.header h1{
+	color:#444;
+	font:inherit;
+	text-transform:inherit;
+	font-size:32px;
+	font-weight:500;
+}
+
+.header p, .header span{
+	color:#888;
+	font:inherit;
+	text-transform:inherit;
+	font-size:16px;
+}
+
+.header select{
+	margin-right:15px;
+	font-size:18pt;
+        font-family: 'Roboto Condensed', sans-serif;
+	text-transform:uppercase;
+	border:none;
+        letter-spacing:-2px;
+	outline:none;
+	background-color:#faf6f2;
+	color:#888;
+	border-radius:8px;
+	padding:3px;
+        z-index: 9999;
+}
+
+.header .large-2 {
+	float:left !important;
+}
+
+.million{
+	text-align:left;
+	margin-top:15px;
+}
+
+.blurb{
+	color:#888;
+}
+
+.blurb h3{
+	font-family: 'Roboto', sans-serif;
+	text-transform:uppercase;
+	font-size:22px;
+	color:inherit;
+	font-weight:500;
+	margin-bottom:30px;
+}
+
+.blurb p{
+	margin:0;
+	color:inherit;
+}
+
+.blurb b{
+	font-weight:700;
+}
+
+#yeartoyear-chart{
+	height:400px;
+	width:80%;
+	margin:0 auto;
+}
+
+#topten-chart{
+	height: 850px;
+	width:100%;
+	margin:0 auto;
+}
+
+#sector-chart{
+	position:relative;
+	z-index:100;
+}
+
+#sector-chart, #sector-chart-ecserv, #sector-chart-socserv, #sector-chart-domsec, #sector-chart-genpubserv, #sector-chart-debt{
+	height:200px;
+	width:100%;
+	margin:0 auto;
+}
+
+#sector-chart-ecserv, #sector-chart-domsec, #sector-chart-genpubserv, #sector-chart-debt, #sector-chart-socserv{
+	opacity:0;
+	position:absolute;
+	top:0;
+	z-index:0;
+	transition:all 1s;
+}
+
+
+/*#perserv-chart-2010, #perserv-chart-2011, #perserv-chart-2012, #perserv-chart-2013, #perserv-chart-2014{
+	min-height:400px;
+	width:100%;
+	/*position:absolute;
+	top:0;
+}*/
+
+#maint-chart-2010, #maint-chart-2011, #maint-chart-2012, #maint-chart-2013, #maint-chart-2014, #capout-chart, #capout-chart-2010, #capout-chart-2011,  #capout-chart-2012,  #capout-chart-2013,  #capout-chart-2014{
+	height:120px;
+	width:100%;
+	position:absolute;
+}
+
+
+#capout-chart-2010 {
+	top:0px;
+    height:450px;
+}
+
+
+
+#regional-chart,#regional-ncr-chart, #regional-luzon-chart, #regional-mindanao-chart, #regional-regionalized-chart, #regional-visayas-chart{
+	height:630px;
+	width:100%;
+	position:absolute;
+    opacity:0;
+    transition:all 3s;
+	
+}
+
+
+#test_close{
+    z-index:999;
+    opacity:1; margin:0 auto; 
+    transition:all 3s; position:absolute;}
+
+#regional-chart{opacity:0; left:-20px; right:0px; top:-20px; margin:0 auto;z-index:1;}
+
+#whole-pies {
+	width:365px;
+	height:337px;
+        margin:100px auto 0;
+}
+
+#totals{
+	width:487px;
+	height:144px;
+        /* background: transparent url(../images/img-totals.png) no-repeat 0 0; */
+	position:absolute;
+	top:320px;
+	right:40px;
+}
+
+.AmBalloon{
+	position:absolute;
+	z-index:1000;
+}
+

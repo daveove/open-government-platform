@@ -1,0 +1,46 @@
+<?php
+// $Id: ched_import.module,v 1.3 2013/03/07 15:09:12 Anil Exp $
+
+/**
+ * Contains:
+ * - All the fields, and machine name with language.
+ */
+include dirname(__FILE__) . '/ched_import.page.inc';
+
+
+/**
+* Implementation of hook_menu()
+*/
+function ched_import_menu() {
+$items = array();
+
+$access = array('administer chedimport');
+
+  $items['infographics/ched/import'] = array(
+    'title' => 'Import CHED data',
+    'page callback' => 'dgph_infographics_import_ched_data',
+    'access arguments' => array('access content'),
+    'access arguments' => $access,
+    'file' => 'ched_import.page.inc',
+    'type' => MENU_LOCAL_TASK
+  );
+
+
+  return $items;
+
+}
+
+
+/**
+ * Implements hook_permission().
+ */
+function ched_import_permission() {
+  return array(
+    'administer chedimport' => array(
+      'title' => t('Access CHED Import'),
+      'restrict access' => TRUE,
+    ),
+  );
+}
+
+

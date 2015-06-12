@@ -1,0 +1,124 @@
+body.page-infographics-dbm .agency p {
+    font-family: 'Roboto' !important;
+    font-size: 14px;
+    font-weight: normal;
+    width: 100%;
+}
+
+.page-infographics-dbm .works h4 {
+    margin: 0;
+}
+
+body.page-infographics-dbm .graph-no-data {
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #c60f13;
+}
+
+.page-infographics-dbm div.legend {
+    margin: 10px 0;
+}
+
+.page-infographics-dbm div.graph-legend {
+    border-bottom: 2px dotted #a9a9a9;
+}
+
+.page-infographics-dbm .graph-legend p {
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    color: #989898;
+}
+
+.page-infographics-dbm .graph-legend p span.header {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+
+.page-infographics-dbm .icg-con {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.page-infographics-dbm .icg-con ul.compliance {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: normal;
+    font-size: 70px;
+    color: #a0a0a0;
+    margin-bottom: 40px;
+}
+
+.page-infographics-dbm .icg-con ul.compliance li {
+    display: inline-block;
+    width: 180px;
+    height: 100px;
+    border: 1px solid #a2a2a2;
+    border-radius: 8px;
+    line-height: 1.31em;
+    margin-right: 20px;
+}
+
+.page-infographics-dbm .icg-con ul.compliance li.compliant {
+    background: url('../images/compliant-big.png') no-repeat scroll 92% 45% rgba(0, 0, 0, 0);
+}
+
+.page-infographics-dbm .icg-con ul.compliance li.partial-compliant {
+    background: url('../images/partial-compliant-big.png') no-repeat scroll 92% 48% rgba(0, 0, 0, 0);
+}
+
+.page-infographics-dbm .icg-con ul.compliance li.non-compliant {
+    background: url('../images/non-compliant-big.png') no-repeat scroll 92% 45% rgba(0, 0, 0, 0);
+}
+
+.page-infographics-dbm .icg-con ul.compliance li.non-available {
+    background: none;
+}
+
+.page-infographics-dbm .icg-con ul.compliance li span {
+    padding-left: 12px;
+}
+
+.page-infographics-dbm div.graph-legend {
+    padding-bottom: 40px;
+}
+
+.page-infographics-dbm div.graph-legend ul.compliance-legend {
+    list-style-type: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    color: #a5a5a5;
+}
+
+.page-infographics-dbm div.graph-legend ul.compliance-legend li {
+    padding-left: 30px;
+}
+
+.page-infographics-dbm div.graph-legend ul.compliance-legend li.compliant {
+    background: url('../images/compliant-small.png') no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+.page-infographics-dbm div.graph-legend ul.compliance-legend li.partial-compliant {
+    background: url('../images/partial-compliant-small.png') no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+.page-infographics-dbm div.graph-legend ul.compliance-legend li.non-compliant {
+    background: url('../images/non-compliant-small.png') no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+.page-infographics-dbm div.graph-legend ul.compliance-legend li span {
+    font-weight: 500;
+}
+
+/** Media specific styles */
+
+@media only screen and (max-width: 1200px) {	
+    .accordion2, .procurement, .rightside #accordion2 { width: 100% !important }
+}
+
+@media only screen and (max-width: 768px) {
+    .footer-section .jetpack-image-container { text-align: left !important; }
+}

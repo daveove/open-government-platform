@@ -1,0 +1,152 @@
+<?php
+
+/**
+ * @file ched_import.install
+ *
+ * Handles the install, uninstall and updating of WP
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function ched_import_schema() {
+  $schema['ched_mini_dashb1_pillar1'] = array(
+    'fields' => array(      
+      'id'		    => array('type' => 'serial', 'unsigned' => TRUE,  'not null' => TRUE,),
+      'financial_year'      => array('type' => 'varchar', 'length' => 128, 'not null' => TRUE,),      
+      'sector_type'         => array('type' => 'text', 'size' => 'medium', 'not null' => TRUE,),
+      'score'		    => array('type' => 'varchar', 'length' => 256,),
+    ),
+    'primary key' => array('id'),
+  );
+
+  $schema['ched_mini_dashb1_pillar2'] = array(
+    'fields' => array(      
+      'id'		    => array('type' => 'serial', 'unsigned' => TRUE,  'not null' => TRUE,),
+      'financial_year'      => array('type' => 'varchar', 'length' => 128, 'not null' => TRUE,),      
+      'region'		    => array('type' => 'text', 'size' => 'medium', 'not null' => TRUE,),
+      'main_sucs'	    => array('type' => 'varchar', 'length' => 256,),
+      'satellite_sucs'	    => array('type' => 'varchar', 'length' => 256,),
+      'lucs'		    => array('type' => 'varchar', 'length' => 256,),
+      'ogs'		    => array('type' => 'varchar', 'length' => 256,),
+      'phels'		    => array('type' => 'varchar', 'length' => 256,),
+      'grand_total'	    => array('type' => 'varchar', 'length' => 256,),     
+    ),
+    'primary key' => array('id'),
+  );
+
+  $schema['ched_mini_dashb1_pillar3'] = array(
+    'fields' => array(      
+      'id'		    => array('type' => 'serial', 'unsigned' => TRUE,  'not null' => TRUE,),
+      'financial_year'      => array('type' => 'varchar', 'length' => 128, 'not null' => TRUE,),      
+      'region'		    => array('type' => 'text', 'size' => 'medium', 'not null' => TRUE,),
+      'state_university_and_colleges'	    => array('type' => 'varchar', 'length' => 256,),
+      'local_university_and_colleges'	    => array('type' => 'varchar', 'length' => 256,),
+      'other_govt_heis'	    => array('type' => 'varchar', 'length' => 256,),
+      'private'		    => array('type' => 'varchar', 'length' => 256,),
+      'grand_total'	    => array('type' => 'varchar', 'length' => 256,),     
+    ),
+    'primary key' => array('id'),
+  );
+
+  $schema['ched_mini_dashb1_pillar4'] = array(
+    'fields' => array(      
+      'id'		    => array('type' => 'serial', 'unsigned' => TRUE,  'not null' => TRUE,),
+      'financial_year'      => array('type' => 'varchar', 'length' => 128, 'not null' => TRUE,),      
+      'region'		    => array('type' => 'text', 'size' => 'medium', 'not null' => TRUE,),
+      'state_university_and_colleges'	    => array('type' => 'varchar', 'length' => 256,),
+      'local_university_and_colleges'	    => array('type' => 'varchar', 'length' => 256,),
+      'other_govt_heis'	    => array('type' => 'varchar', 'length' => 256,),
+      'private'		    => array('type' => 'varchar', 'length' => 256,),
+      'grand_total'	    => array('type' => 'varchar', 'length' => 256,),     
+    ),
+    'primary key' => array('id'),
+  );
+
+  $schema['ched_mini_dashb2_pillar1'] = array(
+    'fields' => array(      
+      'id'		    => array('type' => 'serial', 'unsigned' => TRUE,  'not null' => TRUE,),
+      'financial_year'      => array('type' => 'varchar', 'length' => 128, 'not null' => TRUE,),      
+      'discipline_group'    => array('type' => 'varchar', 'length' => 256,),
+      'enrolment'	    => array('type' => 'varchar', 'length' => 256,),
+      'graduates'	    => array('type' => 'varchar', 'length' => 256,),
+    ),
+    'primary key' => array('id'),
+  );
+
+  $schema['ched_mini_dashb2_pillar2'] = array(
+    'fields' => array(      
+      'id'		    => array('type' => 'serial', 'unsigned' => TRUE,  'not null' => TRUE,),
+      'financial_year'      => array('type' => 'varchar', 'length' => 128, 'not null' => TRUE,),      
+      'oversubscribed_program'	    => array('type' => 'varchar', 'length' => 256,),
+      'enrolment'	    => array('type' => 'varchar', 'length' => 256,),
+      'graduates'	    => array('type' => 'varchar', 'length' => 256,),      
+    ),
+    'primary key' => array('id'),
+  );
+
+  $schema['ched_mini_dashb2_pillar3'] = array(
+    'fields' => array(      
+      'id'		    => array('type' => 'serial', 'unsigned' => TRUE,  'not null' => TRUE,),
+      'financial_year'      => array('type' => 'varchar', 'length' => 128, 'not null' => TRUE,),      
+      'undersubscribed_program'	    => array('type' => 'varchar', 'length' => 256,),
+      'enrolment'	    => array('type' => 'varchar', 'length' => 256,),
+      'graduates'	    => array('type' => 'varchar', 'length' => 256,),      
+    ),
+    'primary key' => array('id'),
+  );
+
+  $schema['ched_mini_dashb3_pillar1'] = array(
+    'fields' => array(      
+      'id'		    => array('type' => 'serial', 'unsigned' => TRUE,  'not null' => TRUE,),
+      'financial_year'      => array('type' => 'varchar', 'length' => 128, 'not null' => TRUE,),      
+      'discipline'	    => array('type' => 'varchar', 'length' => 256,),
+      'passing_precentage'  => array('type' => 'varchar', 'length' => 256,),      
+    ),
+    'primary key' => array('id'),
+  );
+
+  $schema['ched_mini_dashb3_pillar2'] = array(
+    'fields' => array(      
+      'id'		    => array('type' => 'serial', 'unsigned' => TRUE,  'not null' => TRUE,),
+      'financial_year'      => array('type' => 'varchar', 'length' => 128, 'not null' => TRUE,),      
+      'region'		    => array('type' => 'varchar', 'length' => 256,),
+      'public'		    => array('type' => 'varchar', 'length' => 256,),      
+      'private'		    => array('type' => 'varchar', 'length' => 256,),      
+      'both_sector'	    => array('type' => 'varchar', 'length' => 256,),      
+    ),
+    'primary key' => array('id'),
+  );
+
+  $schema['ched_mini_dashb4_pillar1'] = array(
+    'fields' => array(      
+      'id'		    => array('type' => 'serial', 'unsigned' => TRUE,  'not null' => TRUE,),
+      'financial_year'      => array('type' => 'varchar', 'length' => 128, 'not null' => TRUE,),      
+      'region'		    => array('type' => 'varchar', 'length' => 256,),
+      'suc_name'	    => array('type' => 'varchar', 'length' => 256,),      
+      'ps'		    => array('type' => 'varchar', 'length' => 256,),      
+      'mood'	    => array('type' => 'varchar', 'length' => 256,),   
+      'co'	    => array('type' => 'varchar', 'length' => 256,),      
+      'total'	    => array('type' => 'varchar', 'length' => 256,),      
+      'psc'	    => array('type' => 'varchar', 'length' => 256,),      
+      'ba_bs'	    => array('type' => 'varchar', 'length' => 256,),      
+      'ma_ms'	    => array('type' => 'varchar', 'length' => 256,),      
+      'phd'	    => array('type' => 'varchar', 'length' => 256,),      
+
+    ),
+    'primary key' => array('id'),
+  );
+
+  return $schema;
+}
+
+
+
+
+/**
+ * Implements hook_uninstall().
+ */
+function ched_import_uninstall() {
+  // Drop wp_download tables.
+  drupal_uninstall_schema('ched_import');
+}

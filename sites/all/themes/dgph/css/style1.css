@@ -1,0 +1,265 @@
+/* top bar mandatory CSS */
+.nav-main {
+width: 100%;
+background-color: #111;
+height: 45px;
+}
+
+.top-bar > ul .name h1 a {
+display: block;
+width: 36px;
+height: 36px;
+overflow: hidden;
+font-size: 1%;
+text-indent: -9999px;
+background: url(../images/updated/seal-govph.png) no-repeat center center;
+margin: 5px 10px 4px 0;
+}
+
+.top-bar-section ul li > a {
+font-size: 0.8125em;
+font-weight: normal !important;
+}
+
+#search-block-form .form-submit{
+    display:none;
+}
+#search-block-form .form-item label {
+    margin-top:10px;
+    padding-left:5px;
+}
+body.firefox #search-block-form .form-item label {
+	margin-top:25px !important;
+}
+#search-block-form .form-item .form-text{
+    line-height:16px;   
+}
+/* masthead */
+#masthead {
+	background: #ffc425;
+}
+
+#masthead #logo {
+    height: 110px;
+    margin-bottom: 10px;
+}
+
+#masthead .login-profile{    
+    width:125px;
+    float:right;
+    color:#ffffff;
+    margin-right:14px;
+    padding-top:3px;
+}
+#masthead .login-profile h2.login{
+    margin:0px;
+    color:#000000;
+    font-size:13px;
+    text-align:right;
+    padding:10px 0px 2px 0px;
+    border-bottom:5px solid #000000; 
+    background:url(../images/login-icon.png) no-repeat 52px top;   
+}
+#masthead .login-profile h2.my-account{
+    margin:0px;
+    color:#000000;
+    font-size:13px;
+    text-align:center;
+    padding:10px 0px 2px 0px;
+    border-bottom:5px solid #000000;   
+}
+#masthead .login-profile a{
+    color:#000000;    
+}
+#masthead .login-profile p{
+    text-align:right;
+    line-height:17px;
+    margin-top:3px;
+}
+
+
+/* banner */
+#banner-container { padding-top: 45px;}
+#banner-content { background: #ffc425;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+}
+
+#banner-content .orbit-caption h2, #banner-content .orbit-caption h3 { color: #fff;}
+#banner { padding: 0;}
+#search-tool {	background: #ffc425; padding-left: 1.175em;	}
+
+/* featured */
+#featured-container { padding-top: 35px;}
+#featured-box { background: #f3f3f1;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+}
+
+/* others */
+#content-main { padding-top: 35px;}
+
+.column.no-gutter, .columns.no-gutter { padding: 0;}
+.left-gutter-x2 { padding-left: 1.875em;}
+
+
+/* footer area mandatory CSS */
+.footer-aux1 {
+margin-top: 45px;
+padding: 90px 0 30px 0;
+background-color: #e9e9e9;
+border-top: 1px solid #e1e1e1;
+}
+.footer-govph {
+padding: 30px 0;
+background: #e9e9e9;
+color: #666;
+margin-bottom: -200px;
+}
+.footer-section h6 {
+text-shadow: 1px 1px 1px rgba(94,94,94,0.2);
+color: #666;
+}
+.footer-section ul, .footer-section ol {
+margin-left: 1.25em;
+}
+.footer-section p, .footer-section li, .footer-section ol {
+font-size: 13px;
+font-weight: normal;
+color: #666;
+}
+.footer-section a {
+color: #666;
+}
+.footer-section ul li{  
+    margin-left:0px;
+    list-style-type:disc;
+}
+
+
+
+
+
+.search-home-con .search-area{ 
+    width:100%!important;  
+    background:#ffff url("../images/searchicon.png") no-repeat 100% 50%;
+}
+.search-home-con h2{ 
+    font-size:17px; 
+    text-transform:uppercase; 
+    font-weight:bold; 
+    color:#414142;
+}
+.search-area{ 
+	height:42px; 
+	width:255px; 
+	border:1px solid #CCC; 
+	background:url(../images/searchicon.png) no-repeat 100% 50% #fff;
+}
+.search-area .clander-btn,
+.search-area .clander-btn-auto { 
+    float:left;
+}
+.search-area .clander-search {
+    background: none repeat scroll 0 0 transparent !important;
+    border: medium none;
+    box-shadow: none;
+    height: 40px;
+    width: 175px;
+}
+div.search-button input,
+input.form-submit {
+    background: none repeat scroll 0 0 #272727;
+    border: medium none;
+    color: #FFC425;
+    display: block;
+    font-family:'Roboto', sanf-serif;
+    font-weight: normal;
+    font-size: 12px;
+    height: 35px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    text-transform: uppercase;
+    width: 110px;
+    font-weight: bold;
+    float: right;
+}
+
+
+
+
+
+
+
+.activities{
+    padding-top:0px;
+}
+.activities h1{
+    background: url("../images/icon-2.png") no-repeat scroll 0 0 transparent;   
+    font-size: 26px;
+    font-weight: normal;
+    padding: 0px 0px 0px 30px;
+    text-transform: uppercase;
+	margin:0px 0px 0px 0px;
+	border-bottom:1px solid #000;
+}
+.activities h2, .news-video h2{      
+    font-size: 19px;
+    font-weight:bold;
+    padding: 0 0 0;
+ 	margin:35px 0 10px;
+ }
+.activities p, .news-video p{
+   font-family:'Roboto', sanf-serif;
+    font-weight: normal;
+    font-size: 14px;
+    padding: 0 0 0;
+ 	margin:0 0 10px;
+	line-height:18px;
+ }
+ 
+.view{ width:100%; height:auto; border-top:1px solid #999999; padding:6px 0 0; margin: 55px 0 20px ; overflow:hidden;}
+.view a{ font-family:'Roboto', sanf-serif; font-weight: normal; font-size:14px; text-transform:uppercase; color:#999; text-decoration:none; font-weight:bold;}
+
+.community-row .forums,
+.community-row .latestnews,
+.community-row .activities,
+.community-row .latestdata {
+    min-height: 700px;
+}
+.community-row .forums .view,
+.community-row .latestnews .view,
+.community-row .activities .view,
+.community-row .latestdata .view {
+    width: 90%;
+    min-height: auto;
+    position: absolute;
+    bottom: 0;
+}
+
+
+.conntent-area h1{
+    display: block;     
+    font-size: 26px;
+    font-weight: normal;
+    padding: 0 0 0 30px;
+    text-transform: uppercase;
+	margin:0 0 30px;
+	border-bottom:1px solid #000;
+}
+
+.latestnews{ padding:0 5px 0 30px}
+.latestdata{padding:0 0 0 35px}
+.latestnews h1	{ background: url("../images/icon-3.png") no-repeat scroll 0 3px transparent;}
+.latestdata h1	{ background: url("../images/icon-4.png") no-repeat scroll 0 3px transparent;}
+
+.post{ font-family:'Roboto', sanf-serif; font-weight: normal; color:#464646; width:100%; height:auto; overflow:hidden; clear:both; float:left; border-bottom:1px solid #999; padding:0 0 20px; margin:0 0 20px;}
+.post-last{ border-bottom:none;}
+.post h2{   font-size:17px; text-transform:uppercase;  margin:0 0 5px; padding:0;}
+.post h3{font-family:'Roboto', sanf-serif !important; font-weight: normal; font-weight:normal!important; font-size:11px; text-transform:uppercase; color:#464646; margin:0 0 10px; padding:0; font-style:italic;}
+.post p{   font-size:14px; text-transform:none; color:#464646; margin:0; padding:0; line-height:18px;}
+
+
+
+

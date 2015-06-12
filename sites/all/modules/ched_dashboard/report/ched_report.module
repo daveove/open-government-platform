@@ -1,0 +1,470 @@
+<?php
+// $Id: ched_report.module,v 1.3 2013/03/07 15:09:12 Anil Exp $
+
+/**
+ * Contains:
+ * - All the fields, and machine name with language.
+ */
+
+ define("DASHB_CHED", 6);
+
+include dirname(__FILE__) . '/ched_report_d1_desc.inc';
+include dirname(__FILE__) . '/ched_report_d2_desc.inc';
+include dirname(__FILE__) . '/ched_report_d3_desc.inc';
+include dirname(__FILE__) . '/ched_report_d4_desc.inc';
+
+/**
+* Implementation of hook_menu()
+*/
+function ched_report_menu() {
+$items = array();
+
+$access = array('administer chedimport');
+
+  $items['infographics/ched-higher-education/d1'] = array(
+    'title' => 'Infograhics',
+    'page callback' => 'ched_infographics_higher_education_d1',
+    'access callback' => true,
+    'file' => 'ched_report_d1.inc',
+    'type' => MENU_LOCAL_TASK
+  );
+
+  $items['infographics/ched-higher-education/d2'] = array(
+    'title' => 'Infograhics',
+    'page callback' => 'ched_infographics_higher_education_d2',
+    'access callback' => true,
+    'file' => 'ched_report_d2.inc',
+    'type' => MENU_LOCAL_TASK
+  );
+
+  $items['infographics/ched-higher-education/d3'] = array(
+    'title' => 'Infograhics',
+    'page callback' => 'ched_infographics_higher_education_d3',
+    'access callback' => true,
+    'file' => 'ched_report_d3.inc',
+    'type' => MENU_LOCAL_TASK
+  );
+
+  $items['infographics/ched-higher-education/d4'] = array(
+    'title' => 'Infograhics',
+    'page callback' => 'ched_infographics_higher_education_d4',
+    'access callback' => true,
+    'file' => 'ched_report_d4.inc',
+    'type' => MENU_LOCAL_TASK
+  );
+
+
+  return $items;
+
+}
+
+
+
+/**
+* Build a bar chart
+* @param $data chart data
+* @param $labels x-axis labels
+* @param $opts the chart options
+* @return the chart code
+* Dashboard One, Pillar One
+*/
+function ched_d1_p1_build_bar_chart($data, $labels, $opts = array()) {
+
+       $chart = array(
+            '#type' => 'chart',
+            '#chart_type' => 'column',
+            '#legend_position' => 'top',
+            '#colors' => array('#048600'),
+            '#height' => 400,
+            '#font' => 'Roboto',
+            '#chart_library' => 'highcharts'
+        );
+        $chart['chart_xaxis'] = array(
+            '#type' => 'chart_xaxis',
+            '#title' => '',
+            '#labels' => $labels,
+            '#labels_rotation' => 0,
+            '#labels_font_size' => '10px',
+            '#labels_font_weight' => 'normal',
+            '#labels_font_style' => 'normal'
+        );
+        $chart['chart_yaxis'] = array(
+            '#type' => 'chart_yaxis',
+	    '#title' => '#of HEIs',
+        );
+        if (array_key_exists('max', $opts)) {
+            $chart['chart_yaxis']['#max'] = $opts['max'];
+        }
+        $title = '';
+        $legend = array_key_exists('legend', $opts) ? $opts['legend'] : null;
+        if ($legend!=null) {
+            if (is_array($legend)) {
+                $title = strval($legend[0]);
+            }
+            else {
+                $title = strval($legend);
+            }
+        }
+        $chart['chart_data'] = array(
+            '#type' => 'chart_data',
+            '#title' => '2012/13',
+            '#data' => $data
+        );
+
+	$colors = array();
+
+	if(arg(5)=='2011') $colors[] = '#1984c7';
+	if(arg(5)=='2012') $colors[] = '#ff9e1d';
+	if(arg(5)=='2013') $colors[] = '#048600';
+
+	if(arg(6)=='cmp'){
+
+	$compare_year = arg(7).'/'.(arg(7)+1);
+	$comp_data    = ched_collect_data_dashb1_pillar1_compare($compare_year);
+
+		$chart['chart_data_cmp'] = array(
+		    '#type' => 'chart_data',
+		    '#title' => $compare_year,
+		    '#data' => $comp_data
+		);
+		if(arg(7)=='2010') $colors[] = '#1984c7';
+		if(arg(7)=='2011') $colors[] = '#ff9e1d';
+		if(arg(7)=='2012') $colors[] = '#048600';
+
+	}
+
+	if(arg(8)=='cmp'){
+
+	$compare_year = arg(9).'/'.(arg(9)+1);
+	$comp_data    = ched_collect_data_dashb1_pillar1_compare($compare_year);
+
+		$chart['chart_data_cmp1'] = array(
+		    '#type' => 'chart_data',
+		    '#title' => $compare_year,
+		    '#data' => $comp_data
+		);
+		if(arg(9)=='2010') $colors[] = '#1984c7';
+		if(arg(9)=='2011') $colors[] = '#ff9e1d';
+		if(arg(9)=='2012') $colors[] = '#048600';
+	}
+
+	//$chart['#colors'] = array('#048600', '#ff9e1d', '#1984c7');
+
+	$chart['#colors'] = $colors;
+
+    return drupal_render($chart);
+}
+
+
+
+/**
+* Build a bar chart
+* @param $data chart data
+* @param $labels x-axis labels
+* @param $opts the chart options
+* @return the chart code
+* Dashboard Two, Pillar One
+*/
+function ched_d2_p1_build_bar_chart($data, $labels, $opts = array()) {
+$y_title = 'Enrollment';
+if(arg(6)=='graduates'){ 
+   $y_title = 'Graduates';
+}
+       $chart = array(
+            '#type' => 'chart',
+            '#chart_type' => 'column',
+            '#legend_position' => 'top',
+            '#colors' => array('#1984c8'),
+	    '#width' => 3000,
+            '#height' => 600,
+            '#font' => 'Roboto',
+            '#chart_library' => 'highcharts'
+        );
+        $chart['chart_xaxis'] = array(
+            '#type' => 'chart_xaxis',
+            '#title' => '',
+            '#labels' => $labels,
+            '#labels_rotation' => 0,
+            '#labels_font_size' => '10px',
+            '#labels_font_weight' => 'normal',
+            '#labels_font_style' => 'normal'
+        );
+        $chart['chart_yaxis'] = array(
+            '#type' => 'chart_yaxis',
+	    '#title' => $y_title,
+        );
+        if (array_key_exists('max', $opts)) {
+            $chart['chart_yaxis']['#max'] = $opts['max'];
+        }
+        $title = '';
+        $legend = array_key_exists('legend', $opts) ? $opts['legend'] : null;
+        if ($legend!=null) {
+            if (is_array($legend)) {
+                $title = strval($legend[0]);
+            }
+            else {
+                $title = strval($legend);
+            }
+        }
+        $chart['chart_data'] = array(
+            '#type' => 'chart_data',
+            '#title' => 'Discipline',
+            '#data' => $data
+        );
+    return drupal_render($chart);
+}
+
+
+
+/**
+* Build a bar chart
+* @param $data chart data
+* @param $labels x-axis labels
+* @param $opts the chart options
+* @return the chart code
+* Dashboard Two, Pillar Two
+*/
+function ched_d2_p2_build_bar_chart($data, $labels, $opts = array()) {
+
+$y_title = 'Enrollment';
+if(arg(6)=='graduates'){ 
+   $y_title = 'Graduates';
+}
+       $chart = array(
+            '#type' => 'chart',
+            '#chart_type' => 'column',
+            '#legend_position' => 'top',
+            '#colors' => array('#048600'),
+            '#height' => 600,
+            '#font' => 'Roboto',
+            '#chart_library' => 'highcharts'
+        );
+        $chart['chart_xaxis'] = array(
+            '#type' => 'chart_xaxis',
+            '#title' => '',
+            '#labels' => $labels,
+            '#labels_rotation' => 0,
+            '#labels_font_size' => '10px',
+            '#labels_font_weight' => 'normal',
+            '#labels_font_style' => 'normal'
+        );
+        $chart['chart_yaxis'] = array(
+            '#type' => 'chart_yaxis',
+	    '#title' => $y_title,
+        );
+        if (array_key_exists('max', $opts)) {
+            $chart['chart_yaxis']['#max'] = $opts['max'];
+        }
+        $title = '';
+        $legend = array_key_exists('legend', $opts) ? $opts['legend'] : null;
+        if ($legend!=null) {
+            if (is_array($legend)) {
+                $title = strval($legend[0]);
+            }
+            else {
+                $title = strval($legend);
+            }
+        }
+
+        $chart['chart_data'] = array(
+            '#type' => 'chart_data',
+            '#title' => '2012/13',
+            '#data' => $data
+        );
+
+	$colors = array();
+	$colors[] = '#048600';
+
+	if(arg(7)=='cmp'){
+
+	$compare_year = arg(8).'/'.(arg(8)+1);
+	$comp_data    = ched_collect_data_dashb2_pillar2_compare($compare_year);
+
+		$chart['chart_data_cmp'] = array(
+		    '#type' => 'chart_data',
+		    '#title' => $compare_year,
+		    '#data' => $comp_data
+		);
+
+		if(arg(8)=='2010') $colors[] = '#1984c7';
+		if(arg(8)=='2011') $colors[] = '#ff9e1d';
+		
+	}
+
+	if(arg(9)=='cmp'){
+
+	$compare_year = arg(10).'/'.(arg(10)+1);
+	$comp_data    = ched_collect_data_dashb2_pillar2_compare($compare_year);
+
+		$chart['chart_data_cmp1'] = array(
+		    '#type' => 'chart_data',
+		    '#title' => $compare_year,
+		    '#data' => $comp_data
+		);
+
+		if(arg(10)=='2010') $colors[] = '#1984c7';
+		if(arg(10)=='2011') $colors[] = '#ff9e1d';
+	}
+
+	//$chart['#colors'] = array('#048600', '#ff9e1d', '#1984c7');
+
+	$chart['#colors'] = $colors;
+
+    return drupal_render($chart);
+}
+
+
+
+/**
+* Build a bar chart
+* @param $data chart data
+* @param $labels x-axis labels
+* @param $opts the chart options
+* @return the chart code
+* Dashboard Two, Pillar THREE
+*/
+function ched_d2_p3_build_bar_chart($data, $labels, $opts = array()) {
+$y_title = 'Enrollment';
+if(arg(6)=='graduates'){ 
+   $y_title = 'Graduates';
+}
+       $chart = array(
+            '#type' => 'chart',
+            '#chart_type' => 'column',
+            '#legend_position' => 'top',
+            '#colors' => array('#048600'),
+            '#height' => 600,
+            '#font' => 'Roboto',
+            '#chart_library' => 'highcharts'
+        );
+        $chart['chart_xaxis'] = array(
+            '#type' => 'chart_xaxis',
+            '#title' => '',
+            '#labels' => $labels,
+            '#labels_rotation' => 0,
+            '#labels_font_size' => '10px',
+            '#labels_font_weight' => 'normal',
+            '#labels_font_style' => 'normal'
+        );
+        $chart['chart_yaxis'] = array(
+            '#type' => 'chart_yaxis',
+	    '#title' => $y_title,
+        );
+        if (array_key_exists('max', $opts)) {
+            $chart['chart_yaxis']['#max'] = $opts['max'];
+        }
+        $title = '';
+        $legend = array_key_exists('legend', $opts) ? $opts['legend'] : null;
+        if ($legend!=null) {
+            if (is_array($legend)) {
+                $title = strval($legend[0]);
+            }
+            else {
+                $title = strval($legend);
+            }
+        }
+        $chart['chart_data'] = array(
+            '#type' => 'chart_data',
+            '#title' => arg(4).'/'.arg(5),
+            '#data' => $data
+        );
+
+	$colors = array();
+
+	if(arg(5)=='2011') $colors[] = '#1984c7';
+	if(arg(5)=='2012') $colors[] = '#ff9e1d';
+	if(arg(5)=='2013') $colors[] = '#048600';
+
+	if(arg(7)=='cmp'){
+
+	$compare_year = arg(8).'/'.(arg(8)+1);
+	$comp_data    = ched_collect_data_dashb2_pillar3_compare($compare_year);
+
+		$chart['chart_data_cmp'] = array(
+		    '#type' => 'chart_data',
+		    '#title' => $compare_year,
+		    '#data' => $comp_data
+		);
+
+		if(arg(8)=='2010') $colors[] = '#1984c7';
+		if(arg(8)=='2011') $colors[] = '#ff9e1d';
+		if(arg(8)=='2012') $colors[] = '#048600';
+	}
+
+	if(arg(9)=='cmp'){
+
+	$compare_year = arg(10).'/'.(arg(10)+1);
+	$comp_data    = ched_collect_data_dashb2_pillar3_compare($compare_year);
+
+		$chart['chart_data_cmp1'] = array(
+		    '#type' => 'chart_data',
+		    '#title' => $compare_year,
+		    '#data' => $comp_data
+		);
+		if(arg(10)=='2010') $colors[] = '#1984c7';
+		if(arg(10)=='2011') $colors[] = '#ff9e1d';
+		if(arg(10)=='2012') $colors[] = '#048600';
+	}
+
+	//$chart['#colors'] = array('#048600', '#ff9e1d', '#1984c7');
+
+	$chart['#colors'] = $colors;
+
+    return drupal_render($chart);
+}
+
+
+
+
+/**
+* Build a bar chart
+* @param $data chart data
+* @param $labels x-axis labels
+* @param $opts the chart options
+* @return the chart code
+* Dashboard Three, Pillar One
+*/
+function ched_d3_p1_build_bar_chart($data, $labels, $opts = array()) {
+
+       $chart = array(
+            '#type' => 'chart',
+            '#chart_type' => 'column',
+            '#legend_position' => 'top',
+            '#colors' => array('#1984c8'),
+	    '#width' => 4000,
+            '#height' => 600,
+            '#font' => 'Roboto',
+            '#chart_library' => 'highcharts'
+        );
+        $chart['chart_xaxis'] = array(
+            '#type' => 'chart_xaxis',
+            '#title' => '',
+            '#labels' => $labels,
+            '#labels_rotation' => 0,
+            '#labels_font_size' => '10px',
+            '#labels_font_weight' => 'normal',
+            '#labels_font_style' => 'normal'
+        );
+        $chart['chart_yaxis'] = array(
+            '#type' => 'chart_yaxis',
+        );
+        if (array_key_exists('max', $opts)) {
+            $chart['chart_yaxis']['#max'] = $opts['max'];
+        }
+        $title = '';
+        $legend = array_key_exists('legend', $opts) ? $opts['legend'] : null;
+        if ($legend!=null) {
+            if (is_array($legend)) {
+                $title = strval($legend[0]);
+            }
+            else {
+                $title = strval($legend);
+            }
+        }
+        $chart['chart_data'] = array(
+            '#type' => 'chart_data',
+            '#title' => 'Discipline',
+            '#data' => $data
+        );
+    return drupal_render($chart);
+}

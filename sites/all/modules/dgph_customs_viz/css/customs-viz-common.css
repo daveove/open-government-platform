@@ -1,0 +1,298 @@
+/** Common */
+
+h1.title {
+    display: block;
+    margin-left: 14px;
+    color: #414142;
+    font-family: 'Roboto Condensed',sans-serif !important;
+    font-size: 40px;
+    font-weight: 500 !important;
+    margin: 0 0 5px;
+    padding: 0;
+    text-transform: uppercase;
+}
+
+.clear { 
+    display:block;
+    clear:both;
+    width:100%;
+}
+
+body.page-infographics-customs #page-title {
+    display: none;
+}
+
+body.page-infographics-customs-viz-import #page-title {
+    display: block;
+}
+
+form.custom label {
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+form.custom label span.checkbox {
+    margin-right: 20px;
+}
+
+form.custom span.custom.checkbox:before {
+    left: 40% !important;
+    padding-left: 2px;
+}
+
+.dropdown .dropdown-menu, .dropdown .dropdown-panel {
+    max-width: 370px;
+}
+
+.dropdown .dropdown-menu LI > A, 
+.dropdown .dropdown-menu LABEL {
+    font-size: 14px;
+}
+
+body.page-infographics-customs-viz .row .row {
+    margin: 0 auto;
+}
+
+body.page-infographics-customs-viz .ui-accordion-header-icon,
+body.page-infographics-customs-viz .ui-icon-triangle-1-s,
+body.page-infographics-customs-viz .ui-icon-triangle-1-e {
+    display: none;
+}
+
+/** Header */
+
+body.page-infographics-customs-viz h3.left-ui-accordion-header {
+    background-position: right 4px;
+    font-family: 'Roboto',sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    margin-top: 7px;
+    padding-bottom: 10px;
+    padding-right: 20px;
+    text-transform: uppercase;
+    color: #555555;
+}
+
+body.page-infographics-customs-viz .intro-text {
+    margin: 0 0 30px;
+}
+
+body.page-infographics-customs-viz .intro-text h2{ font-size:40px; color:#414141; margin:20px 0 0; padding:0; font-family: 'Roboto Condensed' !important;font-weight: normal; line-height: 1em;}
+body.page-infographics-customs-viz .intro-text h3{ font-size:21px; color:#414141; margin:0 0 15px; padding:0; font-family: 'Roboto' !important;font-weight: bold; line-height: 1.1em; }
+body.page-infographics-customs-viz .intro-text p{ font-size:14px; color:#414141; margin:15px 0 0; padding:0; font-family: 'Roboto' !important;font-weight: normal; line-height:19px; float:left; clear:both; width: 91%;}
+
+
+body.page-infographics-customs-viz .year-con #accordion h3 .title-line {
+    border-bottom: 1px solid #000000;
+}
+
+body.page-infographics-customs-viz .year-con {
+    display: block;
+    overflow: hidden;
+}
+
+body.page-infographics-customs-viz .year-con #accordion{ width:100%;}
+body.page-infographics-customs-viz .year-con #accordion h3{ border-bottom:none!important; margin:0!important;}
+body.page-infographics-customs-viz .year-con #accordion h3 .title-line {
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;   
+    font-size: 13px;
+    border-bottom: 1px solid #000;
+}
+
+body.page-infographics-customs-viz .year-con .ui-accordion .ui-accordion-header { 
+     background: url("../images/arrow-down.png") no-repeat scroll rgba(0, 0, 0, 0) !important;
+     background-position: 100% 80% !important;
+}
+
+body.page-infographics-customs-viz .year-con .ui-accordion .ui-accordion-content { 
+    padding: 0 0 10px!important;
+    margin-top: 10px;
+}
+
+body.page-infographics-customs-viz .year {
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+body.page-infographics-customs-viz .year a { 
+    display: block; 
+    background: url(../images/arrow-down.png) no-repeat 100% 50%; 
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 50px;
+    color:#414141;
+    text-decoration:none;
+    clear:both;
+    float:right;
+    padding: 0 30px 0 0;
+    margin:50px 0 10px;
+}
+
+body.page-infographics-customs-viz .year-con #accordion h3 .title-line {
+    border-bottom: 1px solid #000000;
+    font-family: 'Roboto',sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+body.page-infographics-customs-viz .dashboard-header {
+    position: relative;
+    margin-bottom: 35px !important;
+}
+
+body.page-infographics-customs-viz .works h1 {
+    font-family: 'Roboto', sanf-serif;
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+}
+
+body.page-infographics-customs-viz .works h2 {
+    background: none;
+    display: block;
+    float: left;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 26px;
+    margin: 0px 0 15px;
+    padding: 0px;
+    text-transform: uppercase;
+}
+
+body.page-infographics-customs-viz .works h4 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    margin: 15px 0 0;
+    padding: 0;
+    text-transform: uppercase;
+}
+
+/** Sidebar */
+
+body.page-infographics-customs-viz h3.ui-accordion-header,
+body.page-infographics-customs-viz h3.ui-state-active {
+    border-bottom: 1px dotted #000000 !important;
+    border-radius: inherit;
+    color: #555555;
+    font-family:'Roboto', sanf-serif;
+    font-weight: bold;
+    font-size: 17px !important;
+    text-transform: uppercase;
+}
+
+body.page-infographics-customs-viz .left-sidebar .ui-state-default {
+    background: url("../images/plus-icon.png") no-repeat scroll 100% 30% rgba(0, 0, 0, 0);
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+body.page-infographics-customs-viz .left-sidebar .ui-state-active {
+    background: url("../images/mins-icon.png") no-repeat scroll 100% 30% rgba(0, 0, 0, 0) !important;
+    font-family: 'Roboto',sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    height: auto !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+body.page-infographics-customs-viz .left-sidebar .ui-accordion-content {
+    padding: 0 0 30px;
+}
+
+/** Content */
+
+body.page-infographics-customs-viz .dashboard-content {
+    margin-bottom: 150px;
+}
+
+/** Legend */
+
+body.page-infographics-customs-viz div.legend {
+    background-color: #F7F7F7;
+    border: medium none;
+    margin-bottom: 60px;
+    padding: 15px 20px;
+}
+
+body.page-infographics-customs-viz div.legend h1 {
+    border-bottom: 1px dotted #000000;
+    color: #989898;
+    font-family: 'Roboto',sans-serif;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: bold !important;
+    margin: 0;
+    padding-bottom: 5px;
+    text-transform: uppercase;
+}
+
+body.page-infographics-customs-viz div.legend .row {
+    padding-top: 10px;
+    padding-bottom: 0px;
+    margin: 0 !important;
+}
+
+body.page-infographics-customs-viz div.legend .row .field-name,
+body.page-infographics-customs-viz div.legend .row .field-value {
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: #888888;
+    line-height: 2em;
+}
+
+body.page-infographics-customs-viz div.legend .row .field-value ul {
+    margin-bottom: 0px;
+}
+
+body.page-infographics-customs-viz div.legend .row .field-value ul li {
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    list-style-type: none;
+    line-height: 1.2em;
+}
+
+body.page-infographics-customs-viz div.legend .row h2 {
+    background: none !important;
+    float: none !important;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 0 0 0;
+    text-transform: none;
+    margin: 10px 0 0 0;
+
+}
+
+body.page-infographics-customs-viz div.legend .row p {
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    padding: 0 0 5px;
+    margin: 0;
+}
+
+body.page-infographics-customs-viz div.graph-legend {
+    border-bottom: 2px solid #888888;
+    margin-bottom: 20px !important;
+    padding-bottom: 10px;
+}
+
+
+/** Media specific styles */
+
+@media only screen and (max-width: 860px) {
+    body.page-infographics-customs-viz .left-sidebar .ui-state-default,
+    body.page-infographics-customs-viz .left-sidebar .ui-state-active {
+        padding-right: 10px !important;
+    }
+}
