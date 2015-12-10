@@ -1,3 +1,11 @@
+# Release Notes
+
+This web platform was developed in 2013-2014 by multiple development firms and is now being released as an open source initiative to help other countries or providers looking to build Open Data initiatives throughout the world. As technology continues to move at a rapid base, there are numerous updates and fixes available for this platform. Likewise, hindsight is perfect and there are countless improvements that we would make to this project, much of which was a previous development firm's work. That said, we abide by the aphorism "Perfect is the enemy of good", and we release this with the hope that it is a good (not perfect) starting point for others to learn from and improve in their Open Data initiatives as well as contribute back to this repository.
+
+# Site Audit
+
+Prior to release a site audit was perfromed by a third-party to assess the structure, issues and recommendations for future development. It is available here:
+
 # User Guides and Features
 
 User Guides and Features: https://opengovt.github.io/open-government-platform/
