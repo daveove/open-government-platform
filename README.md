@@ -1,6 +1,10 @@
 # Release Notes
 
-The initial development of this platform was in Jaunary 2013. Development was likewise done by multiple development firms and is now being released as an open source initiative to help other countries or providers looking to build Open Data initiatives throughout the world. As technology continues to move at a rapid release pace, there are numerous updates and fixes available for this platform. Further, hindsight is perfect and looking back now, nearly 3 years from the initial development there are countless improvements that we would now make to this project. These changes, some within our own work and some within the other developer's work, would be beneficial and would improve this platform. That said, we abide by the aphorism "Perfect is the enemy of good", and we release this with the hope that it is a good (not perfect) starting point for others to learn from and improve in their Open Data initiatives as well as to contribute back to this repository so that the greater community can continue to benefit.
+This Open Government Platform was developed and launched in January 2014. The development of the platform, visualizations and dashboards was conducted by multiple development firms based in the United States and in the Philippines. This Open Government Platform ("white-label version") is being released via GitHub under an Open Source initiative to assist other countries and providers to advance the discussion in building the practice of Open Data. 
+
+The Open Government Platform while sufficiently advanced in terms of programming and design in 2013 the pace of technology is rapid and there are numerous updates and fixes available for this platform. To this end there are many opportunities to further develop the platform with functional and aesthetic enhancements. 
+
+That said, the initiative abides by the aphorism "Perfect is the enemy of good", and the code is released with the hope that it is a good (not perfect) starting point for others to learn from and improve in their Open Data initiatives as well as to contribute back to this repository so that the greater community can continue to benefit. 
 
 # Site Audit
 
